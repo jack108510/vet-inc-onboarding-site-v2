@@ -3,44 +3,82 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Clinic IQ — Price Analyzer v3</title>
+<title>Clinic IQ — Price Analyzer</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#05050a;color:#f0f0f8;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px}
-.container{width:100%;max-width:680px}
-.header{text-align:center;margin-bottom:40px}
-.logo{display:inline-flex;align-items:center;gap:10px;margin-bottom:16px}
+body{background:#05050a;color:#f0f0f8;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;min-height:100vh;padding:40px 20px}
+.container{width:100%;max-width:760px;margin:0 auto}
+.header{text-align:center;margin-bottom:36px}
+.logo{display:inline-flex;align-items:center;gap:10px;margin-bottom:12px}
 .logo-icon{width:44px;height:44px;background:linear-gradient(135deg,#d4a843,#f0c060);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px}
 .logo-text{font-size:1.5rem;font-weight:800}
 .logo-text span{color:#d4a843}
-h1{font-size:1.1rem;font-weight:600;color:#888;margin-bottom:4px}
-.clinic-row{margin-bottom:24px}
+.subtitle{font-size:.95rem;color:#555}
+
+.field-row{margin-bottom:16px}
 .label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#555;margin-bottom:6px}
-.clinic-input{width:100%;background:#0d0d14;border:1px solid #1c1c2e;color:#f0f0f8;padding:12px 16px;border-radius:10px;font-size:.9rem;outline:none;transition:border-color .2s}
-.clinic-input:focus{border-color:#d4a843}
-.drops{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
-.drop{border:2px dashed #1c1c2e;border-radius:14px;padding:28px 16px;text-align:center;cursor:pointer;transition:all .2s;background:#0d0d14;position:relative}
+.input{width:100%;background:#0d0d14;border:1px solid #1c1c2e;color:#f0f0f8;padding:12px 16px;border-radius:10px;font-size:.9rem;outline:none;transition:border-color .2s}
+.input:focus{border-color:#d4a843}
+
+.drop{border:2px dashed #1c1c2e;border-radius:14px;padding:40px 20px;text-align:center;cursor:pointer;transition:all .2s;background:#0d0d14;margin-bottom:16px}
 .drop:hover{border-color:#2a2a3e}
 .drop.over{border-color:#d4a843;background:rgba(212,168,67,.05)}
 .drop.has-file{border-color:rgba(212,168,67,.5);background:rgba(212,168,67,.04)}
-.drop-icon{font-size:1.8rem;margin-bottom:8px;opacity:.6}
+.drop-icon{font-size:2.2rem;margin-bottom:10px;opacity:.5}
 .drop.has-file .drop-icon{opacity:1}
-.drop-title{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:#888;margin-bottom:4px}
-.drop-hint{font-size:.7rem;color:#444}
-.drop-name{font-size:.72rem;color:#d4a843;margin-top:8px;word-break:break-all;line-height:1.3}
+.drop-title{font-size:.85rem;font-weight:700;color:#888;margin-bottom:4px}
+.drop-hint{font-size:.75rem;color:#444;margin-bottom:8px}
+.drop-name{font-size:.8rem;color:#d4a843;margin-top:8px;word-break:break-all}
 input[type=file]{display:none}
-.analyze-btn{width:100%;background:linear-gradient(135deg,#d4a843,#f0c060);color:#000;border:none;padding:15px;border-radius:12px;font-size:1rem;font-weight:800;cursor:pointer;transition:all .2s;letter-spacing:.3px}
-.analyze-btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 4px 20px rgba(212,168,67,.3)}
-.analyze-btn:disabled{background:#1c1c2e;color:#444;cursor:not-allowed;transform:none;box-shadow:none}
-.status-box{margin-top:16px;padding:14px 16px;border-radius:10px;font-size:.85rem;text-align:center;background:#0d0d14;border:1px solid #1c1c2e;color:#666;min-height:48px;display:flex;align-items:center;justify-content:center;gap:8px}
+
+.btn{width:100%;background:linear-gradient(135deg,#d4a843,#f0c060);color:#000;border:none;padding:15px;border-radius:12px;font-size:1rem;font-weight:800;cursor:pointer;transition:all .2s;letter-spacing:.3px;margin-bottom:16px}
+.btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 4px 20px rgba(212,168,67,.3)}
+.btn:disabled{background:#1c1c2e;color:#444;cursor:not-allowed;transform:none;box-shadow:none}
+
+.status-box{padding:14px 16px;border-radius:10px;font-size:.85rem;text-align:center;background:#0d0d14;border:1px solid #1c1c2e;color:#666;min-height:48px;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:16px}
 .status-box.loading{color:#d4a843;border-color:rgba(212,168,67,.3)}
 .status-box.success{color:#22c55e;border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.05)}
 .status-box.error{color:#ef4444;border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.05)}
 .spinner{width:16px;height:16px;border:2px solid rgba(212,168,67,.2);border-top-color:#d4a843;border-radius:50%;animation:spin .8s linear infinite;flex-shrink:0}
 @keyframes spin{to{transform:rotate(360deg)}}
-.steps{display:flex;gap:8px;margin-top:24px;flex-direction:column}
-.step{display:flex;align-items:center;gap:10px;font-size:.78rem;color:#444;padding:8px 12px;border-radius:8px;background:#0d0d14;border:1px solid #121212}
-.step-num{width:22px;height:22px;border-radius:50%;background:#1c1c2e;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;flex-shrink:0;color:#666}
+
+/* Results */
+#results{display:none;margin-top:24px}
+.results-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px}
+.results-title{font-size:1.1rem;font-weight:700}
+.stats-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.stat{background:#0d0d14;border:1px solid #1c1c2e;border-radius:8px;padding:12px 16px;flex:1;min-width:130px}
+.stat-val{font-size:22px;font-weight:700;color:#d4a843}
+.stat-label{font-size:11px;color:#666;text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
+
+.filter-bar{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;align-items:center}
+.filter-btn{background:#0d0d14;border:1px solid #1c1c2e;color:#666;padding:5px 14px;border-radius:20px;cursor:pointer;font-size:12px;transition:all .15s}
+.filter-btn:hover{border-color:#444;color:#aaa}
+.filter-btn.active{background:rgba(212,168,67,.15);border-color:#d4a843;color:#d4a843}
+.export-btn{background:#0d0d14;border:1px solid #1c1c2e;color:#888;padding:6px 14px;border-radius:8px;cursor:pointer;font-size:12px;margin-left:auto;transition:all .15s}
+.export-btn:hover{border-color:#d4a843;color:#d4a843}
+
+.table-wrap{overflow-x:auto;border-radius:10px;border:1px solid #1c1c2e}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{background:#0d0d14;padding:10px 12px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#555;border-bottom:1px solid #1c1c2e;white-space:nowrap}
+td{padding:10px 12px;border-bottom:1px solid #0d0d14;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(255,255,255,.02)}
+.name-cell strong{color:#f0f0f8;display:block;margin-bottom:2px}
+.name-cell small{color:#444;font-size:11px}
+.pill{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600}
+.pill-red{background:rgba(239,68,68,.15);color:#ef4444}
+.pill-amber{background:rgba(245,158,11,.15);color:#f59e0b}
+.pill-green{background:rgba(34,197,94,.15);color:#22c55e}
+.inf{color:#f59e0b}
+.sug{font-weight:700;color:#f0f0f8}
+.rec{color:#22c55e;font-weight:700}
+
+.note{margin-top:16px;padding:14px;background:#0d0d14;border:1px solid #1c1c2e;border-radius:8px;font-size:12px;color:#444;line-height:1.6}
+
+.step-list{margin-top:20px;display:flex;flex-direction:column;gap:8px}
+.step{display:flex;align-items:flex-start;gap:10px;font-size:.78rem;color:#444;padding:8px 12px;border-radius:8px;background:#0d0d14;border:1px solid #0d0d14}
+.step-num{width:22px;height:22px;border-radius:50%;background:#1c1c2e;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;flex-shrink:0;color:#666;margin-top:1px}
 </style>
 </head>
 <body>
@@ -50,134 +88,291 @@ input[type=file]{display:none}
       <div class="logo-icon">🏥</div>
       <div class="logo-text">Clinic <span>IQ</span></div>
     </div>
-    <h1>Price Inflation Analyzer</h1>
+    <div class="subtitle">Stale Price Detector — powered by Canadian CPI</div>
   </div>
 
-  <div class="clinic-row">
+  <div class="field-row">
     <div class="label">Clinic Name</div>
-    <input class="clinic-input" id="clinicName" placeholder="e.g. Rosslyn Veterinary Clinic" />
+    <input class="input" id="clinicName" placeholder="e.g. River Valley Veterinary Wellness Clinic"/>
   </div>
 
-  <div class="clinic-row">
-    <div class="label">Send Report To</div>
-    <input class="clinic-input" id="reportEmail" type="email" placeholder="clinic@email.com" />
+  <div class="drop" id="dropzone"
+    onclick="document.getElementById('fileInput').click()"
+    ondragover="dv(event)" ondragleave="dl()" ondrop="df(event)">
+    <div class="drop-icon">📂</div>
+    <div class="drop-title">Drop Price History CSV here</div>
+    <div class="drop-hint">Cornerstone: Reports → Invoice Item → Invoice Item Price Information → Save to File</div>
+    <div class="drop-name" id="fname"></div>
+    <input type="file" id="fileInput" accept=".csv,.txt" onchange="loadFile(this)"/>
   </div>
 
-  <div class="drops">
-    <div class="drop" id="drop1" onclick="document.getElementById('f1').click()"
-      ondragover="dv(event,this)" ondragleave="dl(this)" ondrop="df(event,'f1',this,'n1')">
-      <div class="drop-icon">📋</div>
-      <div class="drop-title">Invoice Item Setup</div>
-      <div class="drop-hint">Current price list CSV</div>
-      <div class="drop-name" id="n1"></div>
-      <input type="file" id="f1" accept=".csv" onchange="sf('f1','n1','drop1')"/>
+  <div class="field-row">
+    <div class="label">Filter — Item type to include</div>
+    <select class="input" id="filterType">
+      <option value="all">All items</option>
+      <option value="service" selected>Services only (no inventory/drugs)</option>
+    </select>
+  </div>
+
+  <button class="btn" id="btn" onclick="run()" disabled>Analyze Prices</button>
+  <div class="status-box" id="status">Upload the Price History CSV to begin</div>
+
+  <div id="results">
+    <div class="results-header">
+      <div class="results-title">📊 Price Review Results</div>
     </div>
-    <div class="drop" id="drop2" onclick="document.getElementById('f2').click()"
-      ondragover="dv(event,this)" ondragleave="dl(this)" ondrop="df(event,'f2',this,'n2')">
-      <div class="drop-icon">📊</div>
-      <div class="drop-title">Invoice Item Sales</div>
-      <div class="drop-hint">Historical sales CSV</div>
-      <div class="drop-name" id="n2"></div>
-      <input type="file" id="f2" accept=".csv" onchange="sf('f2','n2','drop2')"/>
+    <div class="stats-row" id="stats-row"></div>
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="setAgeFilter('all',this)">All</button>
+      <button class="filter-btn" onclick="setAgeFilter('8',this)">8+ years 🔴</button>
+      <button class="filter-btn" onclick="setAgeFilter('4',this)">4–7 years 🟡</button>
+      <button class="filter-btn" onclick="setAgeFilter('1',this)">1–3 years 🟢</button>
+      <button class="export-btn" onclick="exportCSV()">⬇ Export CSV</button>
     </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Current $</th>
+            <th>Price Since</th>
+            <th>Age</th>
+            <th>Inflation</th>
+            <th>Suggested $</th>
+            <th>Difference</th>
+          </tr>
+        </thead>
+        <tbody id="results-body"></tbody>
+      </table>
+    </div>
+    <div class="note" id="results-note"></div>
   </div>
 
-  <button class="analyze-btn" id="btn" onclick="run()" disabled>Analyze & Email Report</button>
-
-  <div class="status-box" id="status">Upload both CSV files to begin</div>
-
-  <div id="debug-log" style="margin-top:12px;background:#0d0d14;border:1px solid #1c1c2e;border-radius:8px;padding:10px;font-size:.72rem;font-family:monospace;color:#666;white-space:pre-wrap;max-height:160px;overflow-y:auto;display:block;min-height:24px"></div>
-
-  <div class="steps">
-    <div class="step"><div class="step-num">1</div>Export Invoice Item Setup from Cornerstone: Reports → Invoice Item → Invoice Item Setup → Save as CSV</div>
-    <div class="step"><div class="step-num">2</div>Export Invoice Item Sales: Reports → Invoice Item → Invoice Item Sales Information → set date range to last 5 years → Save as CSV</div>
-    <div class="step"><div class="step-num">3</div>Enter the clinic email, upload both files, and click Analyze — report lists every service not reviewed in the past year</div>
+  <div class="step-list">
+    <div class="step"><div class="step-num">1</div><span>In Cornerstone: <strong>Reports → Invoice Item → Invoice Item Price Information</strong> → set date range to all available → Save to File → CSV</span></div>
+    <div class="step"><div class="step-num">2</div><span>Drop the CSV on the box above, choose filter type, click <strong>Analyze</strong></span></div>
+    <div class="step"><div class="step-num">3</div><span>Results show every item with stale pricing and the inflation-adjusted suggested price based on Canadian CPI</span></div>
   </div>
 </div>
 
 <script>
-const N8N = 'https://n8n.wildeautomations.com/webhook/OmsvzDOE4T0PWFSc/webhook/clinic-iq-analyze';
-const files = { f1: null, f2: null };
+// ── Canadian CPI ─────────────────────────────────────────────────────────────
+const CPI = {2005:2.2,2006:2.0,2007:2.1,2008:2.4,2009:0.3,2010:1.8,2011:2.9,
+             2012:1.5,2013:0.9,2014:2.0,2015:1.1,2016:1.4,2017:1.6,2018:2.3,
+             2019:1.9,2020:0.7,2021:3.4,2022:6.8,2023:3.9,2024:2.7,2025:2.3};
+const CURRENT_YEAR = 2026;
 
-function dv(e,el){e.preventDefault();el.classList.add('over')}
-function dl(el){el.classList.remove('over')}
-function df(e,fid,el,nid){
-  e.preventDefault();el.classList.remove('over');
-  const f=e.dataTransfer.files[0];
-  if(f){files[fid]=f;document.getElementById(nid).textContent=f.name;el.classList.add('has-file');check()}
-}
-function sf(fid,nid,did){
-  const f=document.getElementById(fid).files[0];
-  if(f){files[fid]=f;document.getElementById(nid).textContent=f.name;document.getElementById(did).classList.add('has-file');check()}
-}
-function check(){
-  document.getElementById('btn').disabled=!(files.f1&&files.f2);
-}
-function setStatus(msg,cls){
-  const el=document.getElementById('status');
-  el.className='status-box '+(cls||'');
-  el.innerHTML=cls==='loading'?`<div class="spinner"></div><span>${msg}</span>`:msg;
+function cumInflation(fromYear) {
+  let m = 1.0;
+  for (let y = fromYear + 1; y <= CURRENT_YEAR; y++) m *= 1 + (CPI[y] || 0.02) / 100;
+  return m;
 }
 
-function log(msg){
-  const el=document.getElementById('debug-log');
-  if(el){el.textContent+='['+new Date().toLocaleTimeString()+'] '+msg+'\n'; el.scrollTop=el.scrollHeight;}
-  console.log('[ClinicIQ]',msg);
+// ── Known service keywords (to filter out inventory/drugs) ───────────────────
+const INV_KEYWORDS = ['tablet','capsule',' mg ',' mg,','mg/ml','ml/','per ml','/ml',
+  ' mcg',' iu ',' g ','shampoo','food','treats','collar','leash','toy','litter',
+  'vial','bottle','bag ','tube ','kit ','chip ','band ','bandage mat',
+  'hills ','royal canin','purina','medi-cal','science diet','insert ','disk ',
+  'slide ','reagent','sensor','strip ','suture','syringe','needle '];
+
+function looksLikeInventory(desc) {
+  const d = desc.toLowerCase();
+  return INV_KEYWORDS.some(k => d.includes(k));
 }
 
-async function run(){
-  const clinic=document.getElementById('clinicName').value.trim()||'Unknown Clinic';
-  const email=document.getElementById('reportEmail').value.trim()||'wildejack1010@gmail.com';
-  document.getElementById('btn').disabled=true;
-  document.getElementById('debug-log').textContent='';
-
-  try{
-    log('Reading files...');
-    log('File 1: '+(files.f1?files.f1.name+' ('+files.f1.size+' bytes)':'MISSING'));
-    log('File 2: '+(files.f2?files.f2.name+' ('+files.f2.size+' bytes)':'MISSING'));
-
-    if(!files.f1||!files.f2){setStatus('❌ Both files required','error');document.getElementById('btn').disabled=false;return;}
-
-    setStatus('Reading CSV files...','loading');
-    const [setupText,salesText]=await Promise.all([files.f1.text(),files.f2.text()]);
-    log('Setup CSV: '+setupText.split('\n').length+' rows, first line: '+setupText.split('\n')[0].slice(0,80));
-    log('Sales CSV: '+salesText.split('\n').length+' rows, first line: '+salesText.split('\n')[0].slice(0,80));
-
-    setStatus('Sending to analyzer...','loading');
-    const payload={clinic_name:clinic,email:email,setup_csv:setupText,sales_csv:salesText};
-    log('Sending to: '+N8N);
-    log('Payload size: '+JSON.stringify(payload).length+' bytes');
-
-    const resp=await fetch(N8N,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(payload)
-    });
-
-    log('Response status: '+resp.status);
-
-    if(!resp.ok){
-      const err=await resp.text();
-      log('Error body: '+err.slice(0,300));
-      throw new Error(`Server error ${resp.status}: ${err.slice(0,200)}`);
+// ── CSV parser (handles tab or comma delimited) ──────────────────────────────
+function parseCSV(text) {
+  const lines = text.replace(/\r/g, '').trim().split('\n').filter(l => l.trim());
+  if (lines.length < 2) return [];
+  // Detect delimiter
+  const delim = lines[0].includes('\t') ? '\t' : ',';
+  const headers = lines[0].split(delim).map(h => h.replace(/['"]/g,'').trim().toLowerCase());
+  return lines.slice(1).map(line => {
+    const vals = []; let cur = '', inQ = false;
+    for (const c of line) {
+      if (c === '"') { inQ = !inQ; }
+      else if (c === delim && !inQ) { vals.push(cur.trim()); cur = ''; }
+      else { cur += c; }
     }
+    vals.push(cur.trim());
+    const obj = {};
+    headers.forEach((h, i) => obj[h] = (vals[i] || '').replace(/^["']|["']$/g,'').trim());
+    return obj;
+  });
+}
 
-    const result=await resp.json();
-    log('Result: '+JSON.stringify(result).slice(0,200));
+// ── State ─────────────────────────────────────────────────────────────────────
+let fileText = null;
+let allResults = [];
+let ageFilterMin = 0;
 
-    if(result.error){
-      setStatus('❌ '+result.error,'error');
-    } else if(result.success){
-      setStatus(`✅ Done! ${result.active_stale||0} services flagged for review. Report sent to ${email}`,'success');
-    } else {
-      setStatus('⚠️ Response: '+JSON.stringify(result).slice(0,100),'');
+// ── Drop zone ─────────────────────────────────────────────────────────────────
+function dv(e) { e.preventDefault(); document.getElementById('dropzone').classList.add('over'); }
+function dl()  { document.getElementById('dropzone').classList.remove('over'); }
+function df(e) {
+  e.preventDefault(); dl();
+  const f = e.dataTransfer.files[0];
+  if (f) processFile(f);
+}
+function loadFile(input) { if (input.files[0]) processFile(input.files[0]); }
+function processFile(f) {
+  document.getElementById('fname').textContent = f.name;
+  document.getElementById('dropzone').classList.add('has-file');
+  const reader = new FileReader();
+  reader.onload = e => {
+    fileText = e.target.result;
+    document.getElementById('btn').disabled = false;
+    setStatus(`✓ Loaded: ${f.name} (${Math.round(f.size/1024)} KB)`, 'success');
+  };
+  reader.readAsText(f);
+}
+
+function setStatus(msg, cls) {
+  const el = document.getElementById('status');
+  el.className = 'status-box ' + (cls || '');
+  el.innerHTML = cls === 'loading' ? `<div class="spinner"></div><span>${msg}</span>` : msg;
+}
+
+// ── Main analysis ─────────────────────────────────────────────────────────────
+function run() {
+  if (!fileText) return;
+  setStatus('Analyzing…', 'loading');
+
+  setTimeout(() => {
+    try {
+      const rows = parseCSV(fileText);
+      if (!rows.length) { setStatus('❌ Could not parse CSV — check the file format', 'error'); return; }
+
+      const filterType = document.getElementById('filterType').value;
+
+      // Group by invoiceitemid — collect all price change dates
+      const byId = {};
+      for (const row of rows) {
+        const id   = (row['invoiceitemid'] || '').trim();
+        const desc = (row['description'] || row['invoicedescription'] || '').trim();
+        const dateStr = (row['mod_date'] || row['date'] || '').trim();
+        const priceStr = (row['quanitytunitprice'] || row['base price'] || row['baseprice'] || row['price'] || '0').trim();
+
+        if (!id || !dateStr) continue;
+        const price = parseFloat(priceStr);
+        if (isNaN(price) || price <= 0) continue;
+
+        let d;
+        try { d = new Date(dateStr); if (isNaN(d)) continue; } catch { continue; }
+
+        if (!byId[id]) byId[id] = { id, desc, rows: [] };
+        byId[id].rows.push({ price, date: d });
+      }
+
+      const results = [];
+      for (const [id, item] of Object.entries(byId)) {
+        if (filterType === 'service' && looksLikeInventory(item.desc)) continue;
+
+        // Sort by date desc → most recent = current price
+        const sorted = item.rows.sort((a, b) => b.date - a.date);
+        const currentPrice = sorted[0].price;
+        const currentDate  = sorted[0].date;
+
+        // Find the oldest record with the same price (±2%) = when this price was set
+        const tol = Math.max(0.10, currentPrice * 0.02);
+        const samePrice = sorted.filter(r => Math.abs(r.price - currentPrice) <= tol);
+        const oldest = samePrice.reduce((min, r) => r.date < min.date ? r : min, samePrice[0]);
+
+        const priceSetYear = oldest.date.getFullYear();
+        const yearsSince = CURRENT_YEAR - priceSetYear;
+        if (yearsSince < 1) continue;
+
+        const mult = cumInflation(priceSetYear);
+        const inflationPct = Math.round((mult - 1) * 1000) / 10;
+        const suggested = Math.ceil(currentPrice * mult * 100) / 100;
+        const diff = Math.round((suggested - currentPrice) * 100) / 100;
+        if (diff <= 0) continue;
+
+        results.push({
+          id, desc: item.desc, currentPrice, priceSetDate: oldest.date,
+          priceSetYear, yearsSince, inflationPct, suggested, diff,
+          lastSeen: currentDate
+        });
+      }
+
+      // Sort by years since change desc, then by inflation impact desc
+      results.sort((a, b) => b.yearsSince - a.yearsSince || b.diff - a.diff);
+      allResults = results;
+
+      setStatus(`✅ Analysis complete — ${results.length} items with stale prices`, 'success');
+      renderResults();
+    } catch(e) {
+      setStatus('❌ Error: ' + e.message, 'error');
+      console.error(e);
     }
-  }catch(e){
-    log('EXCEPTION: '+e.message+' | '+e.stack);
-    setStatus('❌ Error: '+e.message,'error');
+  }, 50);
+}
+
+function setAgeFilter(min, btn) {
+  ageFilterMin = parseInt(min) || 0;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderResults();
+}
+
+function renderResults() {
+  const clinic = document.getElementById('clinicName').value.trim() || 'Clinic';
+  let rows = allResults;
+  if (ageFilterMin > 0) rows = rows.filter(r => r.yearsSince >= ageFilterMin && (ageFilterMin < 8 ? r.yearsSince < ageFilterMin + 4 : true));
+
+  // Stats
+  const r8 = allResults.filter(r => r.yearsSince >= 8).length;
+  const r4 = allResults.filter(r => r.yearsSince >= 4 && r.yearsSince < 8).length;
+  const r1 = allResults.filter(r => r.yearsSince >= 1 && r.yearsSince < 4).length;
+
+  document.getElementById('stats-row').innerHTML = `
+    <div class="stat"><div class="stat-val">${allResults.length}</div><div class="stat-label">Items to Review</div></div>
+    <div class="stat"><div class="stat-val" style="color:#ef4444">${r8}</div><div class="stat-label">🔴 8+ Years</div></div>
+    <div class="stat"><div class="stat-val" style="color:#f59e0b">${r4}</div><div class="stat-label">🟡 4–7 Years</div></div>
+    <div class="stat"><div class="stat-val" style="color:#22c55e">${r1}</div><div class="stat-label">🟢 1–3 Years</div></div>`;
+
+  const tbody = document.getElementById('results-body');
+  if (!rows.length) {
+    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;color:#444;padding:24px">No items match this filter</td></tr>`;
+  } else {
+    tbody.innerHTML = rows.map(r => {
+      const pillCls = r.yearsSince >= 8 ? 'pill-red' : r.yearsSince >= 4 ? 'pill-amber' : 'pill-green';
+      const dateStr = r.priceSetDate.toLocaleDateString('en-CA');
+      return `<tr>
+        <td class="name-cell"><strong>${esc(r.desc)}</strong><small>${esc(r.id)}</small></td>
+        <td>$${r.currentPrice.toFixed(2)}</td>
+        <td style="color:#555;font-size:12px">${dateStr}</td>
+        <td><span class="pill ${pillCls}">${r.yearsSince}yr</span></td>
+        <td class="inf">+${r.inflationPct}%</td>
+        <td class="sug">$${r.suggested.toFixed(2)}</td>
+        <td class="rec">+$${r.diff.toFixed(2)}</td>
+      </tr>`;
+    }).join('');
   }
 
-  document.getElementById('btn').disabled=false;
+  document.getElementById('results-note').innerHTML =
+    `<strong>Methodology:</strong> "Price Since" = oldest record with the current price (±2% tolerance). ` +
+    `Suggested price = current × cumulative Canadian CPI inflation from that year to ${CURRENT_YEAR}. ` +
+    `Source: Statistics Canada. Red = 8+ years unchanged · Amber = 4–7 years · Green = 1–3 years.`;
+
+  document.getElementById('results').style.display = 'block';
+  document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function exportCSV() {
+  const rows = ageFilterMin > 0 ? allResults.filter(r => r.yearsSince >= ageFilterMin) : allResults;
+  let csv = 'Item ID,Description,Current Price,Price Since,Years Unchanged,Inflation %,Suggested Price,Difference\n';
+  for (const r of rows) {
+    csv += `"${r.id}","${r.desc}","$${r.currentPrice.toFixed(2)}","${r.priceSetDate.toLocaleDateString('en-CA')}","${r.yearsSince}","${r.inflationPct}%","$${r.suggested.toFixed(2)}","$${r.diff.toFixed(2)}"\n`;
+  }
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+  a.download = `clinic-iq-price-review-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+}
+
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 </script>
 </body>
