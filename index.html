@@ -13,7 +13,7 @@ body{background:#05050a;color:#f0f0f8;font-family:-apple-system,BlinkMacSystemFo
 .logo-icon{width:42px;height:42px;background:linear-gradient(135deg,#d4a843,#f0c060);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
 .logo-text{font-size:1.4rem;font-weight:800}.logo-text span{color:#d4a843}
 .subtitle{font-size:.9rem;color:#555}
-.top-row{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;margin-bottom:14px}
+.top-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
 @media(max-width:700px){.top-row{grid-template-columns:1fr 1fr}}
 .field-row{margin-bottom:0}
 .label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#555;margin-bottom:5px}
@@ -72,7 +72,7 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.015
 
   <div class="top-row">
     <div class="field-row"><div class="label">Clinic Name</div><input class="input" id="clinicName" placeholder="River Valley Veterinary…"/></div>
-    <div class="field-row"><div class="label">Email Report To</div><input class="input" id="reportEmail" type="email" placeholder="clinic@email.com"/></div>
+
     <div class="field-row"><div class="label">Min Years Stale</div>
       <select class="input" id="minYears">
         <option value="1" selected>1+ year (all stale)</option>
@@ -81,12 +81,7 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.015
         <option value="5">5+ years</option>
       </select>
     </div>
-    <div class="field-row"><div class="label">AgentMail Inbox</div>
-      <select class="input" id="inbox">
-        <option value="jack">jack</option><option value="lena">lena</option><option value="brad">brad</option>
-        <option value="kate">kate</option><option value="cole">cole</option><option value="emma">emma</option>
-      </select>
-    </div>
+
   </div>
 
   <div class="drops">
@@ -199,18 +194,24 @@ function run(){
       const itemRows = parseCSV(files[1]);
       const histRows = parseCSV(files[2]);
 
-      if(!itemRows.length){setStatus('Could not parse Invoice Item List','error');document.getElementById('btn').disabled=false;return;}
+      if(!itemRows.length){setStatus('Could not parse Invoice Item List. Headers: '+(files[1].split('\n')[0].slice(0,80)),'error');document.getElementById('btn').disabled=false;return;}
       if(!histRows.length){setStatus('Could not parse Price History','error');document.getElementById('btn').disabled=false;return;}
 
       // Build active services map
       const services={};
       for(const row of itemRows){
-        const id=(row['item id']||row['invoiceitemid']||'').trim();
-        const type=(row['type']||row['itemtype']||'').trim().toUpperCase();
-        const status=(row['item status']||row['status']||'').trim().toLowerCase();
-        const desc=(row['item id description']||row['description']||'').trim();
-        const price=parseFloat(row['pricing info - price']||row['price']||row['quanitytunitprice']||0);
-        if(!id||type!=='S'||!status.includes('active')||status.includes('inactive')||price<=0)continue;
+        // Flexible column matching for different Cornerstone export formats
+        const keys=Object.keys(row);
+        const get=(...names)=>{for(const n of names){const k=keys.find(k=>k.toLowerCase().replace(/[^a-z]/g,'').includes(n.replace(/[^a-z]/g,'')));if(k)return row[k]||'';}return '';};
+        const id=get('itemid','invoiceitemid','id').trim();
+        const type=get('type','itemtype').trim().toUpperCase();
+        const status=get('itemstatus','status').trim().toLowerCase();
+        const desc=get('itemiddescription','description','invoicedescription','desc').trim();
+        const price=parseFloat(get('pricinginfoiprice','baseprice','price','quanitytunitprice','unitprice')||0);
+        // Accept S type, active status; if status column missing assume active
+        const isActive=!status||status.includes('active')&&!status.includes('inactive');
+        const isService=!type||type==='S';
+        if(!id||!isService||!isActive||price<=0)continue;
         services[id]={id,desc,price};
       }
 
@@ -225,6 +226,8 @@ function run(){
         if(!lastChanged[id]||d>lastChanged[id])lastChanged[id]=d;
       }
 
+      const svcCount=Object.keys(services).length;
+      if(!svcCount){setStatus('0 active services found. Item list headers: '+Object.keys(itemRows[0]||{}).join(', ').slice(0,120),'error');document.getElementById('btn').disabled=false;return;}
       const today=new Date();
       const cutoff=new Date(today-minYrs*365*24*60*60*1000);
       const results=[];
@@ -252,9 +255,9 @@ function run(){
       });
       allResults=results;
 
-      setStatus('Analysis complete — '+results.length+' services flagged. Emailing report…','loading');
+      setStatus('Done! '+results.length+' active services with stale prices.','success');
       renderResults();
-      sendEmail(results);
+      document.getElementById('btn').disabled=false;
     }catch(e){
       setStatus('Error: '+e.message,'error');
       document.getElementById('btn').disabled=false;
@@ -331,76 +334,7 @@ function exportCSV(){
   a.click();
 }
 
-// ── Send HTML report via AgentMail ────────────────────────────────────────────
-async function sendEmail(results){
-  const clinic=document.getElementById('clinicName').value.trim()||'Clinic';
-  const email=document.getElementById('reportEmail').value.trim();
-  const inbox=document.getElementById('inbox').value;
-  if(!email){setStatus('Done! '+results.length+' services flagged (no email — enter address to send report)','success');document.getElementById('btn').disabled=false;return;}
 
-  const r8=results.filter(r=>r.yrs>=8).length;
-  const r5=results.filter(r=>r.yrs>=5&&r.yrs<8).length;
-
-  function pillStyle(yrs){
-    if(!yrs)return'background:#f3e8ff;color:#7c3aed';
-    if(yrs>=8)return'background:#fee2e2;color:#dc2626';
-    if(yrs>=5)return'background:#fef3c7;color:#d97706';
-    if(yrs>=2)return'background:#fef3c7;color:#d97706';
-    return'background:#dcfce7;color:#16a34a';
-  }
-
-  const tableRows=results.map(r=>`<tr>
-    <td><strong>${r.desc}</strong> <span style="color:#999;font-size:11px">${r.id}</span></td>
-    <td style="text-align:right">$${r.price.toFixed(2)}</td>
-    <td style="color:#888;font-size:12px">${r.lastChanged}</td>
-    <td><span style="display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;${pillStyle(r.yrs)}">${r.yrs?r.yrs+'yr':'No record'}</span></td>
-    <td style="color:#d97706">${r.inf!=null?'+'+r.inf+'%':'—'}</td>
-    <td style="font-weight:700">${r.sug!=null?'$'+r.sug.toFixed(2):'—'}</td>
-    <td style="color:#16a34a;font-weight:700">${r.diff!=null?'+$'+r.diff.toFixed(2):'—'}</td>
-  </tr>`).join('');
-
-  const html=`<!DOCTYPE html><html><head><meta charset="UTF-8">
-<style>body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f5f5f5;margin:0;padding:20px;color:#1a1a1a}
-.w{max-width:980px;margin:0 auto;background:#fff;border-radius:12px;padding:28px;box-shadow:0 2px 10px rgba(0,0,0,.08)}
-h1{margin:0 0 4px;font-size:22px}.s{color:#666;font-size:13px;margin-bottom:20px}
-.stats{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap}
-.stat{background:#f9f9f9;border:1px solid #eee;border-radius:8px;padding:12px 16px;flex:1;min-width:110px;text-align:center}
-.sv{font-size:26px;font-weight:700;color:#d4a843}.sl{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th{background:#f4f4f4;padding:9px 10px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#555;border-bottom:2px solid #e0e0e0}
-td{padding:9px 10px;border-bottom:1px solid #f0f0f0}tr:hover td{background:#fafafa}
-.note{margin-top:18px;padding:13px;background:#f9f9f9;border-radius:8px;font-size:12px;color:#666;line-height:1.5}</style>
-</head><body><div class="w">
-<h1>&#x1F3E5; Clinic IQ &mdash; Stale Price Report</h1>
-<div class="s">${clinic} &nbsp;&middot;&nbsp; ${new Date().toLocaleDateString('en-CA')}</div>
-<div class="stats">
-  <div class="stat"><div class="sv">${results.length}</div><div class="sl">To Review</div></div>
-  <div class="stat"><div class="sv" style="color:#dc2626">${r8}</div><div class="sl">8+ Years</div></div>
-  <div class="stat"><div class="sv" style="color:#d97706">${r5}</div><div class="sl">5-7 Years</div></div>
-  <div class="stat"><div class="sv" style="color:#a78bfa">${results.filter(r=>!r.yrs).length}</div><div class="sl">No Record</div></div>
-</div>
-<table><tr><th>Service</th><th style="text-align:right">Current $</th><th>Last Changed</th><th>Age</th><th>Inflation</th><th>Suggested $</th><th>Gap</th></tr>
-${tableRows}</table>
-<div class="note"><strong>Logic:</strong> Active services (Type=S, Status=Active) not updated in 12+ months.
-Suggested = current &times; cumulative Canadian CPI to ${CURRENT_YEAR}. Source: Statistics Canada.</div>
-</div></body></html>`;
-
-  try{
-    const resp=await fetch(`https://api.agentmail.to/v0/inboxes/${inbox}@wildroseautomations.ca/messages/send`,{
-      method:'POST',
-      headers:{'Authorization':'Bearer am_us_eb590201635e5a67541a0e4c6eb32c5d6b144eb5cf48a5ca7ce9bece7940c11f','Content-Type':'application/json'},
-      body:JSON.stringify({to:email,subject:'Clinic IQ: '+results.length+' services need price review — '+clinic,html})
-    });
-    if(resp.ok){
-      setStatus('Done! '+results.length+' services flagged &mdash; report sent to '+email,'success');
-    } else {
-      setStatus('Done! '+results.length+' flagged (email failed '+resp.status+' — check address)','success');
-    }
-  }catch(e){
-    setStatus('Done! '+results.length+' flagged (email error: '+e.message+')','success');
-  }
-  document.getElementById('btn').disabled=false;
-}
 </script>
 </body>
 </html>
