@@ -168,16 +168,17 @@ function cumInflation(fromYear) {
   return m;
 }
 
-// ── Known service keywords (to filter out inventory/drugs) ───────────────────
-const INV_KEYWORDS = ['tablet','capsule',' mg ',' mg,','mg/ml','ml/','per ml','/ml',
-  ' mcg',' iu ',' g ','shampoo','food','treats','collar','leash','toy','litter',
-  'vial','bottle','bag ','tube ','kit ','chip ','band ','bandage mat',
-  'hills ','royal canin','purina','medi-cal','science diet','insert ','disk ',
-  'slide ','reagent','sensor','strip ','suture','syringe','needle '];
+// ── Service detection: use unitmeas_desc column (most reliable) ──────────────
+// Services = [None] or blank unit. Inventory = ml, tablet, each, bottle, etc.
+const INV_UNITS = ['ml','mg','tablet','capsule','each','bottle','tube','bag','box',
+  'tub','jar','strip','vial','pack','sheet','roll','litre','liter','oz','lb','kg','g '];
 
-function looksLikeInventory(desc) {
-  const d = desc.toLowerCase();
-  return INV_KEYWORDS.some(k => d.includes(k));
+function isInventoryRow(row) {
+  const unit = (row['unitmeas_desc'] || row['unit of measure'] || row['unitmeas'] || '').trim().toLowerCase();
+  // If unit is [None], empty, or not a physical unit → it's a service
+  if (!unit || unit === '[none]' || unit === 'none') return false;
+  // If it has a real unit of measure → it's inventory/drug
+  return INV_UNITS.some(u => unit.startsWith(u)) || unit.length > 0;
 }
 
 // ── CSV parser (handles tab or comma delimited) ──────────────────────────────
@@ -260,13 +261,15 @@ function run() {
         let d;
         try { d = new Date(dateStr); if (isNaN(d)) continue; } catch { continue; }
 
-        if (!byId[id]) byId[id] = { id, desc, rows: [] };
+        // Track whether ANY row for this item has a real unit (= inventory)
+        if (!byId[id]) byId[id] = { id, desc, rows: [], hasUnit: false };
+        if (isInventoryRow(row)) byId[id].hasUnit = true;
         byId[id].rows.push({ price, date: d });
       }
 
       const results = [];
       for (const [id, item] of Object.entries(byId)) {
-        if (filterType === 'service' && looksLikeInventory(item.desc)) continue;
+        if (filterType === 'service' && item.hasUnit) continue;
 
         // Most recent row = last price change
         const sorted = item.rows.sort((a, b) => b.date - a.date);
