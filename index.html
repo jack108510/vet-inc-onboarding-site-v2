@@ -58,6 +58,11 @@ input[type=file]{display:none}
     <input class="clinic-input" id="clinicName" placeholder="e.g. Rosslyn Veterinary Clinic" />
   </div>
 
+  <div class="clinic-row">
+    <div class="label">Send Report To</div>
+    <input class="clinic-input" id="reportEmail" type="email" placeholder="clinic@email.com" />
+  </div>
+
   <div class="drops">
     <div class="drop" id="drop1" onclick="document.getElementById('f1').click()"
       ondragover="dv(event,this)" ondragleave="dl(this)" ondrop="df(event,'f1',this,'n1')">
@@ -84,7 +89,7 @@ input[type=file]{display:none}
   <div class="steps">
     <div class="step"><div class="step-num">1</div>Export Invoice Item Setup from Cornerstone: Reports → Invoice Item → Invoice Item Setup → Save as CSV</div>
     <div class="step"><div class="step-num">2</div>Export Invoice Item Sales: Reports → Invoice Item → Invoice Item Sales Information → set date range to last 5 years → Save as CSV</div>
-    <div class="step"><div class="step-num">3</div>Upload both files above and click Analyze — results will be emailed to Jack</div>
+    <div class="step"><div class="step-num">3</div>Enter the clinic email, upload both files, and click Analyze — report lists every service not reviewed in the past year</div>
   </div>
 </div>
 
@@ -126,6 +131,7 @@ async function run(){
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
         clinic_name:clinic,
+        email:document.getElementById('reportEmail').value.trim()||'wildejack1010@gmail.com',
         setup_csv:setupText,
         sales_csv:salesText
       })
@@ -141,7 +147,8 @@ async function run(){
     if(result.error){
       setStatus('❌ '+result.error,'error');
     } else if(result.success){
-      setStatus(`✅ Done! Report sent to wildejack1010@gmail.com — $${(result.uplift||0).toLocaleString()} annual uplift identified`,'success');
+      const toEmail=document.getElementById('reportEmail').value.trim()||'wildejack1010@gmail.com';
+      setStatus(`✅ Done! ${result.active_stale||0} services flagged for review. Report sent to ${toEmail}`,'success');
     } else {
       setStatus('⚠️ Completed but email status unknown. Check your inbox.','');
     }
