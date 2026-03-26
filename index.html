@@ -136,15 +136,20 @@ async function run() {
   setStatus('Sending to n8n...', 'loading');
 
   try {
+    const payload = JSON.stringify({
+      clinic_name: clinic,
+      email: email,
+      item_list_csv: files[1],
+      price_history_csv: files[2]
+    });
+
+    const sizeMB = (payload.length / 1024 / 1024).toFixed(1);
+    setStatus('Sending ' + sizeMB + ' MB to n8n...', 'loading');
+
     const resp = await fetch(N8N, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        clinic_name: clinic,
-        email: email,
-        item_list_csv: files[1],
-        price_history_csv: files[2]
-      })
+      body: payload
     });
 
     if (!resp.ok) throw new Error('Server error ' + resp.status + ': ' + (await resp.text()).slice(0,200));
