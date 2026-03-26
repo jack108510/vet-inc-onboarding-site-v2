@@ -119,22 +119,23 @@ function setStatus(msg,cls){
 
 async function run(){
   const clinic=document.getElementById('clinicName').value.trim()||'Unknown Clinic';
+  const email=document.getElementById('reportEmail').value.trim()||'wildejack1010@gmail.com';
   document.getElementById('btn').disabled=true;
-  setStatus('Reading CSV files...','loading');
+  setStatus('Uploading CSV files...','loading');
 
   try{
-    const [setupText,salesText]=await Promise.all([files.f1.text(),files.f2.text()]);
-    setStatus('Sending to analyzer...','loading');
+    // Send as multipart form data so n8n receives actual binary files
+    const form=new FormData();
+    form.append('clinic_name',clinic);
+    form.append('email',email);
+    form.append('setup_csv',files.f1,files.f1.name);
+    form.append('sales_csv',files.f2,files.f2.name);
+
+    setStatus('Analyzing...','loading');
 
     const resp=await fetch(N8N,{
       method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        clinic_name:clinic,
-        email:document.getElementById('reportEmail').value.trim()||'wildejack1010@gmail.com',
-        setup_csv:setupText,
-        sales_csv:salesText
-      })
+      body:form
     });
 
     if(!resp.ok){
