@@ -84,25 +84,18 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.015
 
   </div>
 
-  <div class="drops">
+  <div class="drops" style="grid-template-columns:1fr">
     <div class="drop" id="drop1" onclick="document.getElementById('f1').click()" ondragover="dv(event,this)" ondragleave="dl(this)" ondrop="dfn(event,'f1',this,'n1')">
-      <div class="drop-icon">&#x1F4CB;</div>
-      <div class="drop-title">Invoice Item List</div>
-      <div class="drop-hint">Reports &rarr; Invoice Item &rarr; Invoice Item List &rarr; Save to File (CSV)</div>
+      <div class="drop-icon">&#x1F4C5;</div>
+      <div class="drop-title">Price History CSV</div>
+      <div class="drop-hint">Reports &rarr; Invoice Item &rarr; Invoice Item Price Information &rarr; all dates &rarr; Save to File</div>
       <div class="drop-name" id="n1"></div>
       <input type="file" id="f1" accept=".csv,.txt" onchange="loadFile('f1','n1','drop1',1)"/>
-    </div>
-    <div class="drop" id="drop2" onclick="document.getElementById('f2').click()" ondragover="dv(event,this)" ondragleave="dl(this)" ondrop="dfn(event,'f2',this,'n2')">
-      <div class="drop-icon">&#x1F4C5;</div>
-      <div class="drop-title">Price History</div>
-      <div class="drop-hint">Reports &rarr; Invoice Item &rarr; Invoice Item Price Information &rarr; Save to File (CSV)</div>
-      <div class="drop-name" id="n2"></div>
-      <input type="file" id="f2" accept=".csv,.txt" onchange="loadFile('f2','n2','drop2',2)"/>
     </div>
   </div>
 
   <button class="btn" id="btn" onclick="run()" disabled>Analyze Prices</button>
-  <div class="status-box" id="status">Upload both CSV files to begin</div>
+  <div class="status-box" id="status">Upload the Price History CSV to begin</div>
 
   <div id="results">
     <div class="stats-row" id="statsRow"></div>
@@ -129,9 +122,8 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.015
   </div>
 
   <div class="steps">
-    <div class="step"><div class="sn">1</div><span><strong>Invoice Item List:</strong> Reports &rarr; Invoice Item &rarr; Invoice Item List &rarr; Type=Service, Status=Active &rarr; Save to File</span></div>
-    <div class="step"><div class="sn">2</div><span><strong>Price History:</strong> Reports &rarr; Invoice Item &rarr; Invoice Item Price Information &rarr; all dates &rarr; Save to File</span></div>
-    <div class="step"><div class="sn">3</div><span>Drop both files, click <strong>Analyze Prices</strong> &mdash; runs entirely in your browser, no data leaves your computer</span></div>
+    <div class="step"><div class="sn">1</div><span>In Cornerstone: <strong>Reports &rarr; Invoice Item &rarr; Invoice Item Price Information</strong> &rarr; set date range to all dates &rarr; Save to File (CSV)</span></div>
+    <div class="step"><div class="sn">2</div><span>Drop the file above and click <strong>Analyze Prices</strong> — runs entirely in your browser, nothing leaves your computer</span></div>
   </div>
 </div>
 
@@ -168,22 +160,22 @@ function colByName(row,...names){
 }
 
 // ── State ─────────────────────────────────────────────────────────────────────
-const files={1:null,2:null};
+const files={1:null};
 let allResults=[], activeFilter='all';
 
 function dv(e,el){e.preventDefault();el.classList.add('over');}
 function dl(el){el.classList.remove('over');}
-function dfn(e,fid,el,nid){e.preventDefault();dl(el);const f=e.dataTransfer.files[0];if(f)readFile(f,parseInt(fid.replace('f','')),nid,el);}
-function loadFile(fid,nid,did,num){const f=document.getElementById(fid).files[0];if(f)readFile(f,num,nid,document.getElementById(did));}
+function dfn(e,fid,el,nid){e.preventDefault();dl(el);const f=e.dataTransfer.files[0];if(f)readFile(f,1,nid,el);}
+function loadFile(fid,nid,did,num){const f=document.getElementById(fid).files[0];if(f)readFile(f,1,nid,document.getElementById(did));}
 function readFile(f,num,nid,el){
   const r=new FileReader();
-  r.onload=e=>{files[num]=e.target.result;document.getElementById(nid).textContent=f.name;el.classList.add('has-file');check();};
+  r.onload=e=>{files[1]=e.target.result;document.getElementById(nid).textContent=f.name;el.classList.add('has-file');check();};
   r.readAsText(f);
 }
 function check(){
-  const ready=files[1]&&files[2];
+  const ready=!!files[1];
   document.getElementById('btn').disabled=!ready;
-  if(ready)setStatus('Both files loaded — ready','success');
+  if(ready)setStatus('File loaded — ready to analyze','success');
 }
 function setStatus(msg,cls){
   const el=document.getElementById('status');
@@ -193,81 +185,61 @@ function setStatus(msg,cls){
 
 // ── Analysis (runs entirely in browser) ───────────────────────────────────────
 function run(){
-  if(!files[1]||!files[2])return;
+  if(!files[1])return;
   document.getElementById('btn').disabled=true;
   setStatus('Analyzing…','loading');
 
   setTimeout(()=>{
     try{
       const minYrs = parseInt(document.getElementById('minYears').value)||1;
-      const itemRows = parseCSV(files[1]);
-      const histRows = parseCSV(files[2]);
+      const histRows = parseCSV(files[1]);
 
-      if(!itemRows.length){setStatus('Could not parse Invoice Item List. Headers: '+(files[1].split('\n')[0].slice(0,80)),'error');document.getElementById('btn').disabled=false;return;}
-      if(!histRows.length){setStatus('Could not parse Price History','error');document.getElementById('btn').disabled=false;return;}
+      if(!histRows.length){setStatus('Could not parse file. First line: '+(files[1].split('\n')[0].slice(0,100)),'error');document.getElementById('btn').disabled=false;return;}
 
-      // Build active services map
-      // Cornerstone InvoiceItemSetup CSV column layout (0-indexed):
-      // 4=invoiceitemid, 5=description(item), 6=invoicedescription,
-      // 7=itemtype, 8=description(type), 10=quanitytunitprice, 14=status
-      const services={};
-      for(const row of itemRows){
-        const id=(row._cols[4]||'').trim();
-        const desc=(row._cols[5]||row._cols[6]||'').trim();
-        const type=(row._cols[7]||'').trim().toUpperCase();
-        const statusRaw=(row._cols[14]||'').trim();
-        const price=parseFloat(row._cols[10]||0);
-        // status: '1'=active, '0'=inactive (numeric in Cornerstone CSV)
-        const isActive=statusRaw==='1'||statusRaw.toLowerCase()==='active'||statusRaw==='';
-        const isService=!type||type==='S';
-        if(!id||!isService||!isActive||price<=0)continue;
-        services[id]={id,desc,price};
-      }
-
-      // Build last-changed map from price history
-      const lastChanged={};
+      // Group by item ID — for each item keep track of:
+      //   mostRecentRow: the row with the latest mod_date (= current price + description)
+      //   mostRecentDate: that date object
+      const items={};
       for(const row of histRows){
         const id=colByName(row,'invoiceitemid','item id','itemid').trim();
         const ds=colByName(row,'mod_date','moddate','date','pricechangedate','changed').trim();
         if(!id||!ds)continue;
-        // Cornerstone format: "M/D/YYYY HH:MM:SS:mmm" — last colon should be dot
         const dfix=ds.replace(/(\d{2}:\d{2}:\d{2}):(\d+)/,'$1.$2');
         const d=new Date(dfix);
         if(isNaN(d))continue;
-        if(!lastChanged[id]||d>lastChanged[id])lastChanged[id]=d;
+        if(!items[id]||d>items[id].date){
+          items[id]={date:d,row};
+        }
       }
 
-      const svcCount=Object.keys(services).length;
-      const matchedCount=Object.keys(services).filter(id=>lastChanged[id]).length;
-      if(!svcCount){const h=(itemRows[0]||{})._hdr||[];setStatus('0 active services found. Col[4]='+((itemRows[0]||{})._cols||[])[4]+' Col[7]='+((itemRows[0]||{})._cols||[])[7]+' Col[14]='+((itemRows[0]||{})._cols||[])[14],'error');document.getElementById('btn').disabled=false;return;}
       const today=new Date();
       const cutoff=new Date(today-minYrs*365*24*60*60*1000);
       const results=[];
 
-      for(const [id,svc] of Object.entries(services)){
-        const lc=lastChanged[id]||null;
-        if(lc&&lc>=cutoff)continue; // recently updated
-        const lcYear=lc?lc.getFullYear():null;
-        const yrs=lcYear?CURRENT_YEAR-lcYear:null;
-        let inf=null,sug=null,diff=null;
-        if(lcYear){
-          const m=cumInf(lcYear);
-          inf=Math.round((m-1)*1000)/10;
-          sug=Math.ceil(svc.price*m*100)/100;
-          diff=Math.round((sug-svc.price)*100)/100;
-        }
-        results.push({id,desc:svc.desc,price:svc.price,
-          lastChanged:lc?lc.toISOString().slice(0,10):'Never recorded',
-          lcYear,yrs,inf,sug,diff:diff||null});
+      for(const [id,item] of Object.entries(items)){
+        const {date,row}=item;
+        if(date>=cutoff)continue; // updated recently enough
+
+        const desc=(colByName(row,'description','invoicedescription')||id).trim();
+        const price=parseFloat(colByName(row,'quanitytunitprice','unitprice','price')||0);
+        if(price<=0)continue;
+
+        const lcYear=date.getFullYear();
+        const yrs=CURRENT_YEAR-lcYear;
+        const m=cumInf(lcYear);
+        const inf=Math.round((m-1)*1000)/10;
+        const sug=Math.ceil(price*m*100)/100;
+        const diff=Math.round((sug-price)*100)/100;
+
+        results.push({id,desc,price,
+          lastChanged:date.toISOString().slice(0,10),
+          lcYear,yrs,inf,sug,diff});
       }
 
-      results.sort((a,b)=>{
-        if(!a.yrs&&b.yrs)return-1;if(a.yrs&&!b.yrs)return 1;
-        return(b.yrs||0)-(a.yrs||0);
-      });
+      results.sort((a,b)=>(b.yrs||0)-(a.yrs||0));
       allResults=results;
 
-      setStatus('Done! '+results.length+' stale. Services: '+svcCount+', history matches: '+matchedCount+', no record: '+(svcCount-matchedCount),'success');
+      setStatus('Done — '+results.length+' services with prices stale '+minYrs+'+ year(s).','success');
       renderResults();
       document.getElementById('btn').disabled=false;
     }catch(e){
