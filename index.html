@@ -162,9 +162,9 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.015
 <script>
 const CPI={2005:2.2,2006:2.0,2007:2.1,2008:2.4,2009:0.3,2010:1.8,2011:2.9,
            2012:1.5,2013:0.9,2014:2.0,2015:1.1,2016:1.4,2017:1.6,2018:2.3,
-           2019:1.9,2020:0.7,2021:3.4,2022:6.8,2023:3.9,2024:2.7,2025:2.3};
+           2019:1.9,2020:0.7,2021:3.4,2022:6.8,2023:3.9,2024:2.7,2025:2.3,2026:2.1};
 const CURRENT_YEAR=2026;
-function cumInf(y){let m=1;for(let yr=y+1;yr<=CURRENT_YEAR;yr++)m*=1+(CPI[yr]||0.02)/100;return m;}
+function cumInf(y){let m=1;for(let yr=y+1;yr<=CURRENT_YEAR;yr++)m*=1+(CPI[yr]||2.0)/100;return m;}
 
 function splitCSVLine(line,d){
   const v=[];let c='',q=false;
