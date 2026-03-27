@@ -230,7 +230,9 @@ function run(){
         const id=colByName(row,'invoiceitemid','item id','itemid').trim();
         const ds=colByName(row,'mod_date','moddate','date','pricechangedate','changed').trim();
         if(!id||!ds)continue;
-        const d=new Date(ds);
+        // Cornerstone format: "M/D/YYYY HH:MM:SS:mmm" — last colon should be dot
+        const dfix=ds.replace(/(\d{2}:\d{2}:\d{2}):(\d+)/,'$1.$2');
+        const d=new Date(dfix);
         if(isNaN(d))continue;
         if(!lastChanged[id]||d>lastChanged[id])lastChanged[id]=d;
       }
