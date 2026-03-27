@@ -288,14 +288,16 @@ function run(){
       const svcCount=Object.keys(services).length;
       if(!svcCount){setStatus('0 active services found — check the Invoice Item List file','error');document.getElementById('btn').disabled=false;return;}
 
+      // Count sales matches BEFORE the loop so we can use it as a filter
+      const salesMatchCount=Object.keys(salesQty).length+Object.keys(salesRev).length;
+
       const today=new Date();
       const cutoff=new Date(today-minYrs*365*24*60*60*1000);
       const results=[];
 
       for(const [id,svc] of Object.entries(services)){
-        // Only include items that were sold in the last 365 days if sales file provided
-        const salesMatched=Object.keys(salesQty).length+Object.keys(salesRev).length>0;
-        if(hasSales&&salesMatched&&!(salesQty[id]>0)&&!(salesRev[id]>0))continue;
+        // Only filter by sales if the sales file actually matched something
+        if(hasSales&&salesMatchCount>0&&!(salesQty[id]>0)&&!(salesRev[id]>0))continue;
 
         const lc=lastChanged[id]||null;
         if(lc&&lc>=cutoff)continue;
@@ -333,11 +335,10 @@ function run(){
       });
       allResults=results;
 
-      const salesMatched=Object.keys(salesQty).length+Object.keys(salesRev).length;
-      if(hasSales&&salesMatched===0){
-        setStatus('Done — '+results.length+' flagged. ⚠️ Sales file loaded but 0 items matched — check column names. First row: '+Object.keys(salesRows[0]||{}).filter(k=>!k.startsWith('_')).join(', ').slice(0,120),'success');
+      if(hasSales&&salesMatchCount===0){
+        setStatus('Done — '+results.length+' flagged. ⚠️ Sales file loaded but 0 items matched — check column names. Headers: '+((salesRows[0]||{})._hdr||[]).join(', ').slice(0,150),'success');
       } else {
-        setStatus('Done — '+results.length+' services flagged'+(hasSales?' ('+salesMatched+' items matched from sales file)':''),'success');
+        setStatus('Done — '+results.length+' services flagged'+(hasSales?' ('+salesMatchCount+' items matched from sales file)':''),'success');
       }
       renderResults();
       document.getElementById('btn').disabled=false;
