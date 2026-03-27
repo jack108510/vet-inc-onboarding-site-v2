@@ -244,7 +244,7 @@ function run(){
         const type=(row._cols[7]||'').trim().toUpperCase();
         const statusRaw=(row._cols[14]||'').trim();
         const price=parseFloat(row._cols[10]||0);
-        const isActive=statusRaw==='1'||statusRaw.toLowerCase()==='active'||statusRaw==='';
+        const isActive=statusRaw==='1'||statusRaw.toLowerCase()==='active';
         const isService=!type||type==='S';
         if(!id||!isService||!isActive||price<=0)continue;
         services[id]={id,desc,price};
