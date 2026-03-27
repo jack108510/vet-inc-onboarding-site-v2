@@ -341,7 +341,11 @@ function run(){
       });
       allResults=results;
 
-      const matchMsg=hasSales?' ('+salesMatchCount+' items matched from sales file)':'';
+      // Debug: show sample IDs from both files to diagnose mismatches
+      const salesSample=Object.keys(salesQty).slice(0,5).join(', ');
+      const svcSample=Object.keys(services).slice(0,5).join(', ');
+      const salesRowCount=salesRows.length;
+      const matchMsg=hasSales?' | Sales rows: '+salesRowCount+' | Sales IDs e.g.: ['+salesSample+'] | Service IDs e.g.: ['+svcSample+'] | Matched: '+salesMatchCount:'';
       setStatus('Done — '+results.length+' services flagged'+matchMsg,'success');
       renderResults();
       document.getElementById('btn').disabled=false;
