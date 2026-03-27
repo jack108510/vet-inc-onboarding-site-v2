@@ -340,16 +340,8 @@ function run(){
       });
       allResults=results;
 
-      if(hasSales&&salesMatchCount<10){
-        // Show first data row column by column so we can see exactly what's in the file
-        const r0=salesRows[0]||{};
-        const hdrs=(r0._hdr||[]);
-        const vals=(r0._cols||[]);
-        const dump=hdrs.map((h,i)=>i+':"'+h+'"='+'"'+(vals[i]||'')+('"')).join(' | ').slice(0,300);
-        setStatus('⚠️ Only '+salesMatchCount+' sales matches. First row: '+dump,'error');
-      } else {
-        setStatus('Done — '+results.length+' services flagged'+(hasSales?' ('+salesMatchCount+' items matched)':''),'success');
-      }
+      const matchMsg=hasSales?' ('+salesMatchCount+' items matched from sales file)':'';
+      setStatus('Done — '+results.length+' services flagged'+matchMsg,'success');
       renderResults();
       document.getElementById('btn').disabled=false;
     }catch(e){
