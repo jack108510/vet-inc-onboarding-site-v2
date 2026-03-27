@@ -286,7 +286,16 @@ function run(){
       }
 
       const svcCount=Object.keys(services).length;
-      if(!svcCount){setStatus('0 active services found — check the Invoice Item List file','error');document.getElementById('btn').disabled=false;return;}
+      if(!svcCount){
+        const sample=itemRows[0]||{};
+        const hdr=(sample._hdr||[]).join(' | ').slice(0,200);
+        const c4=sample._cols?sample._cols[4]:'?';
+        const c7=sample._cols?sample._cols[7]:'?';
+        const c14=sample._cols?sample._cols[14]:'?';
+        const c10=sample._cols?sample._cols[10]:'?';
+        setStatus('0 services found. Col[4]='+c4+' Col[7]='+c7+' Col[10]='+c10+' Col[14]='+c14+' | Headers: '+hdr,'error');
+        document.getElementById('btn').disabled=false;return;
+      }
 
       // Count sales matches BEFORE the loop so we can use it as a filter
       const salesMatchCount=Object.keys(salesQty).length+Object.keys(salesRev).length;
