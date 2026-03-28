@@ -356,8 +356,6 @@ function selectPMS(pms, el) {
   selectedPMS = pms;
   document.querySelectorAll('.pms-option').forEach(o => o.classList.remove('selected'));
   el.classList.add('selected');
-  document.getElementById('btn-1').disabled = false;
-  // Update hints for step 2
   const hints = PMS_HINTS[pms];
   document.getElementById('hint1').textContent = hints.hint1;
   document.getElementById('hint2').textContent = hints.hint2;
@@ -365,7 +363,7 @@ function selectPMS(pms, el) {
   const pmsNames = {cornerstone:'Cornerstone',avimark:'AVImark',ezyvet:'ezyVet',other:'your PMS'};
   document.getElementById('upload-instructions').textContent =
     `Export these reports from ${pmsNames[pms]} and drop them below. Your data stays in your browser — nothing is sent anywhere.`;
-  setTimeout(() => goTo(2), 400);
+  setTimeout(() => goTo(2), 350);
 }
 
 // ── FILE HANDLING ─────────────────────────────────────────────────
