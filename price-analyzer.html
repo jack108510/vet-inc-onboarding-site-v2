@@ -573,14 +573,14 @@ function savePDF(){
 
 function exportCSV(){
   const clinic=(document.getElementById('clinic-name').value.trim()||'clinic').replace(/[^a-z0-9]/gi,'-').toLowerCase();
-  const nl='\n';
-  let csv='Item ID,Description,Current Price,Last Changed,Days Since,Years Since,Inflation %,Suggested Price,Per Unit Gap'+(hasSales?',Lost Revenue':'')+nl;
+  const rows=[['Item ID','Description','Current Price','Last Changed','Days Since','Years Since','Inflation %','Suggested Price','Per Unit Gap'].concat(hasSales?['Lost Revenue']:[])];
   for(const r of allResults){
-    csv+='"'+r.id+'","'+r.desc+'","$'+r.price.toFixed(2)+'","'+r.lastChanged+'","'+(r.daysSince||'')+'","'+(r.yrs||'')+'","'+(r.inf!=null?r.inf+'%':'')+
-         '","'+(r.sug!=null?'$'+r.sug.toFixed(2):'')+'",'+(r.diff!=null?'"$'+r.diff.toFixed(2)+'"':'""');
-    if(hasSales) csv+=',"'+(r.lostRev!=null?'$'+r.lostRev.toFixed(2):''"';
-    csv+=nl;
+    const row=[r.id,r.desc,'$'+r.price.toFixed(2),r.lastChanged,r.daysSince||'',r.yrs||'',r.inf!=null?r.inf+'%':'',r.sug!=null?'$'+r.sug.toFixed(2):'',r.diff!=null?'$'+r.diff.toFixed(2):''];
+    if(hasSales) row.push(r.lostRev!=null?'$'+r.lostRev.toFixed(2):'');
+    rows.push(row);
   }
+  const csv=rows.map(r=>r.map(v=>'"'+String(v||'').replace(/"/g,'""')+'"').join(',')).join('
+');
   const a=document.createElement('a');
   a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
   a.download='vet-solutions-'+clinic+'-'+new Date().toISOString().slice(0,10)+'.csv';
@@ -604,3 +604,4 @@ function restart(){
 </script>
 </body>
 </html>
+
