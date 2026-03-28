@@ -190,6 +190,11 @@ input[type=file]{display:none}
         <div class="pms-option-check">✓</div>
       </div>
     </div>
+    <button id="btn-pms-continue" onclick="if(selectedPMS)goTo(2)" style="
+      margin-top:20px;width:100%;background:linear-gradient(135deg,#2563eb,#60a5fa);
+      color:#fff;border:none;padding:13px;border-radius:10px;font-size:.95rem;
+      font-weight:700;cursor:pointer;font-family:inherit;opacity:0.4;transition:all .2s"
+      disabled>Continue →</button>
   </div>
 
   <!-- STEP 2: UPLOAD FILES -->
@@ -343,6 +348,8 @@ function selectPMS(pms, el) {
   const pmsNames = {cornerstone:'Cornerstone',avimark:'AVImark'};
   document.getElementById('upload-instructions').textContent =
     `Export these reports from ${pmsNames[pms]} and drop them below. Your data stays in your browser — nothing is sent anywhere.`;
+  const btn = document.getElementById('btn-pms-continue');
+  if(btn){ btn.disabled=false; btn.style.opacity='1'; }
   goTo(2);
 }
 
