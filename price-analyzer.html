@@ -200,9 +200,6 @@ input[type=file]{display:none}
         <div class="pms-option-check">✓</div>
       </div>
     </div>
-    <div class="btn-row">
-      <button class="btn-next" id="btn-1" disabled onclick="goTo(2)">Continue →</button>
-    </div>
   </div>
 
   <!-- STEP 2: UPLOAD FILES -->
@@ -234,11 +231,6 @@ input[type=file]{display:none}
       <div class="drop-filename" id="fn3"></div>
       <input type="file" id="f3" accept=".csv,.txt" onchange="loadFile('f3','fn3','dz3','b3',3)"/>
     </div>
-
-    <div class="btn-row">
-      <button class="btn-back" onclick="goTo(1)">← Back</button>
-      <button class="btn-next" id="btn-2" disabled onclick="goTo(3)">Continue →</button>
-    </div>
   </div>
 
   <!-- STEP 3: CLINIC NAME -->
@@ -246,11 +238,8 @@ input[type=file]{display:none}
     <div class="slide-label">Step 3 of 4</div>
     <div class="slide-title">What's your clinic name?</div>
     <div class="slide-sub">This will appear on your report summary.</div>
-    <input class="clinic-input" id="clinic-name" type="text" placeholder="River Valley Veterinary…" oninput="checkClinicName()"/>
-    <div class="btn-row">
-      <button class="btn-back" onclick="goTo(2)">← Back</button>
-      <button class="btn-next" id="btn-3" disabled onclick="analyze()">Analyze Prices →</button>
-    </div>
+    <input class="clinic-input" id="clinic-name" type="text" placeholder="River Valley Veterinary…" oninput="checkClinicName()" onkeydown="if(event.key==='Enter'&&this.value.trim().length>=2)analyze()"/>
+    <div style="font-size:.75rem;color:var(--muted);margin-top:6px">Press Enter to continue →</div>
   </div>
 
   <!-- STEP 4: ANALYZING -->
@@ -403,14 +392,11 @@ function readFile(f, num, fid) {
 }
 
 function checkUploads() {
-  document.getElementById('btn-2').disabled = !(files[1] && files[2]);
+  if(files[1] && files[2]) setTimeout(() => goTo(3), 400);
 }
 
 // ── CLINIC NAME ───────────────────────────────────────────────────
-function checkClinicName() {
-  const val = document.getElementById('clinic-name').value.trim();
-  document.getElementById('btn-3').disabled = val.length < 2;
-}
+function checkClinicName() {}
 
 // ── ANALYSIS ENGINE ───────────────────────────────────────────────
 const CPI = {2005:2.2,2006:2.0,2007:2.1,2008:2.4,2009:0.3,2010:1.8,2011:2.9,
@@ -577,9 +563,6 @@ function restart(){
   files[1]=files[2]=files[3]=null;
   allResults=[];hasSales=false;
   document.querySelectorAll('.pms-option').forEach(o=>o.classList.remove('selected'));
-  document.getElementById('btn-1').disabled=true;
-  document.getElementById('btn-2').disabled=true;
-  document.getElementById('btn-3').disabled=true;
   document.getElementById('clinic-name').value='';
   ['fn1','fn2','fn3'].forEach(id=>document.getElementById(id).textContent='');
   ['dz1','dz2','dz3'].forEach(id=>document.getElementById(id).classList.remove('loaded'));
