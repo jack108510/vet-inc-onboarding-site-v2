@@ -13,7 +13,7 @@ body{background:#eef4ff;color:#1e3a5f;font-family:-apple-system,BlinkMacSystemFo
 .logo-icon{width:42px;height:42px;background:linear-gradient(135deg,#2563eb,#60a5fa);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
 .logo-text{font-size:1.4rem;font-weight:800}.logo-text span{color:#2563eb}
 .subtitle{font-size:.9rem;color:#64748b}
-.top-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.top-row{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:14px;max-width:400px}
 .field-row{margin-bottom:0}
 .label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#64748b;margin-bottom:5px}
 .input{width:100%;background:#ffffff;border:1px solid #bfdbfe;color:#1e3a5f;padding:10px 13px;border-radius:9px;font-size:.85rem;outline:none;transition:border-color .2s}
@@ -79,14 +79,6 @@ tr:last-child td{border-bottom:none}tr:hover td{background:#f8faff}
 
   <div class="top-row">
     <div class="field-row"><div class="label">Clinic Name</div><input class="input" id="clinicName" placeholder="River Valley Veterinary…"/></div>
-    <div class="field-row"><div class="label">Min Years Stale</div>
-      <select class="input" id="minYears">
-        <option value="1" selected>1+ year (all stale)</option>
-        <option value="2">2+ years</option>
-        <option value="3">3+ years</option>
-        <option value="5">5+ years</option>
-      </select>
-    </div>
   </div>
 
   <div class="drops">
@@ -227,7 +219,7 @@ function run(){
   setStatus('Analyzing…','loading');
   setTimeout(()=>{
     try{
-      const minYrs=parseInt(document.getElementById('minYears').value)||1;
+      const minYrs=1;
       const itemRows=parseCSV(files[1]);
       const histRows=parseCSV(files[2]);
       const salesRows=files[3]?parseCSV(files[3]):[];
@@ -430,7 +422,7 @@ function renderTable(){
 
   document.getElementById('note').innerHTML=
     '<strong>Logic:</strong> Active services (Type=S, Status=Active) with prices not updated in '+
-    (document.getElementById('minYears').value||1)+' year(s)+. '+
+    (1)+' year(s)+. '+
     'Suggested price = current × cumulative Canadian CPI to '+CURRENT_YEAR+'. '+(hasSales?'Lost revenue = per-unit gap × qty sold in last 365 days. ':'')+'Source: Statistics Canada.';
 }
 
