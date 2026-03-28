@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>PMS Integration — Vet Solutions</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--blue:#2563eb;--blue-light:#60a5fa;--blue-dim:#eff6ff;--blue-border:#dbeafe;--navy:#1e3a5f;--muted:#64748b;--bg:#f0f6ff;--white:#fff;--purple:#7c3aed;--green:#16a34a;}
+body{background:var(--bg);color:var(--navy);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;min-height:100vh}
+
+nav{background:var(--white);border-bottom:1px solid var(--blue-border);padding:0 40px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 1px 12px rgba(37,99,235,.06)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo-icon{width:38px;height:38px;background:linear-gradient(135deg,var(--blue),var(--blue-light));border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(37,99,235,.25)}
+.nav-logo-text{font-size:1.15rem;font-weight:800;color:var(--navy)}.nav-logo-text span{color:var(--blue)}
+.nav-links{display:flex;gap:4px}
+.nav-link{text-decoration:none;color:var(--muted);font-size:.88rem;font-weight:500;padding:7px 15px;border-radius:8px;transition:all .15s}
+.nav-link:hover{background:var(--blue-dim);color:var(--blue)}
+.nav-link.active{color:var(--purple);background:rgba(124,58,237,.08)}
+.nav-cta{background:var(--blue);color:#fff!important;border-radius:8px}
+.nav-cta:hover{background:#1d4ed8!important}
+
+.page-header{background:linear-gradient(180deg,var(--white) 0%,var(--bg) 100%);border-bottom:1px solid var(--blue-border);padding:56px 24px 48px;text-align:center;position:relative;overflow:hidden}
+.page-header-glow{position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:600px;height:350px;background:radial-gradient(ellipse,rgba(124,58,237,.06) 0%,transparent 70%);pointer-events:none}
+.page-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--purple);margin-bottom:10px}
+.page-header h1{font-size:2.4rem;font-weight:900;color:var(--navy);margin-bottom:14px}
+.page-header p{font-size:.95rem;color:var(--muted);line-height:1.7;max-width:580px;margin:0 auto}
+
+.section{max-width:1000px;margin:0 auto;padding:56px 24px}
+.section-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:10px}
+.section-title{font-size:1.5rem;font-weight:900;color:var(--navy);margin-bottom:10px}
+.section-sub{font-size:.9rem;color:var(--muted);line-height:1.7;max-width:580px;margin-bottom:32px}
+
+/* WHAT WE OFFER */
+.offer-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:56px}
+.offer-card{background:var(--white);border:1px solid var(--blue-border);border-radius:14px;padding:26px;transition:all .2s}
+.offer-card:hover{border-color:rgba(124,58,237,.3);box-shadow:0 4px 20px rgba(124,58,237,.08)}
+.offer-icon{width:44px;height:44px;border-radius:11px;background:linear-gradient(135deg,var(--purple),#a78bfa);display:flex;align-items:center;justify-content:center;margin-bottom:16px;box-shadow:0 3px 10px rgba(124,58,237,.2)}
+.offer-title{font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:8px}
+.offer-desc{font-size:.8rem;color:var(--muted);line-height:1.65}
+
+/* HOW IT WORKS */
+.process-steps{display:flex;flex-direction:column;gap:0;margin-bottom:56px;position:relative}
+.process-step{display:grid;grid-template-columns:auto 1fr;gap:20px;padding:24px 0;position:relative}
+.process-step:not(:last-child)::after{content:'';position:absolute;left:19px;top:60px;bottom:0;width:2px;background:var(--blue-border)}
+.step-circle{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--purple),#a78bfa);color:#fff;font-size:.9rem;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 10px rgba(124,58,237,.2);position:relative;z-index:1}
+.step-body{padding-top:8px}
+.step-title{font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:6px}
+.step-desc{font-size:.82rem;color:var(--muted);line-height:1.65}
+
+/* PMS SYSTEMS */
+.pms-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:40px}
+.pms-card{background:var(--white);border:1px solid var(--blue-border);border-radius:12px;padding:20px;text-align:center}
+.pms-abbr{width:48px;height:48px;border-radius:12px;background:var(--blue-dim);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--blue);margin:0 auto 10px}
+.pms-name{font-size:.85rem;font-weight:700;color:var(--navy);margin-bottom:3px}
+.pms-status{font-size:.68rem;color:#94a3b8}
+
+/* CTA */
+.cta-block{background:linear-gradient(135deg,var(--purple),#6d28d9);border-radius:20px;padding:48px 40px;text-align:center;color:#fff}
+.cta-block h2{font-size:1.8rem;font-weight:900;margin-bottom:12px}
+.cta-block p{font-size:.92rem;opacity:.85;line-height:1.7;max-width:500px;margin:0 auto 28px}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--purple);padding:14px 28px;border-radius:10px;font-size:.95rem;font-weight:700;text-decoration:none;transition:all .2s}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.2)}
+
+footer{background:var(--navy);color:rgba(255,255,255,.5);padding:28px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:40px}
+.footer-logo{display:flex;align-items:center;gap:8px;text-decoration:none}
+.footer-logo-icon{width:30px;height:30px;background:linear-gradient(135deg,var(--blue),var(--blue-light));border-radius:7px;display:flex;align-items:center;justify-content:center}
+.footer-logo-text{font-size:.95rem;font-weight:700;color:#fff}.footer-logo-text span{color:var(--blue-light)}
+.footer-links{display:flex;gap:20px;font-size:.82rem}
+.footer-links a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .15s}
+.footer-links a:hover{color:#fff}
+.footer-copy{font-size:.75rem;color:rgba(255,255,255,.3);width:100%}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="nav-logo-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+    <div class="nav-logo-text">Vet <span>Solutions</span></div>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href="reports.html">Reports</a>
+    <a class="nav-link active" href="pms.html">PMS Integration</a>
+    <a class="nav-link nav-cta" href="index.html#contact">Contact</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-glow"></div>
+  <div class="page-label">PMS Integration</div>
+  <h1>Automated. Connected. Hands-Off.</h1>
+  <p>We connect directly to your Practice Management System and handle everything — from pulling your data to delivering polished reports on schedule, without you lifting a finger.</p>
+</div>
+
+<!-- WHAT WE OFFER -->
+<div class="section">
+  <div class="section-label">What's Included</div>
+  <div class="section-title">Everything You Need, Set Up For You</div>
+  <div class="section-sub">Our integration service handles the technical side completely. You get insights — we handle the connection, data syncing, and reporting pipeline.</div>
+
+  <div class="offer-grid">
+
+    <div class="offer-card">
+      <div class="offer-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+      </div>
+      <div class="offer-title">Automated Report Delivery</div>
+      <div class="offer-desc">Your reports run on a schedule you set — daily, weekly, or monthly. Results land in your inbox or dashboard automatically.</div>
+    </div>
+
+    <div class="offer-card">
+      <div class="offer-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+      </div>
+      <div class="offer-title">Direct PMS Connection</div>
+      <div class="offer-desc">We connect securely to your PMS so your data is always current. No manual exports, no CSV uploads, no data entry.</div>
+    </div>
+
+    <div class="offer-card">
+      <div class="offer-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
+      </div>
+      <div class="offer-title">All Reports Included</div>
+      <div class="offer-desc">Every report in our library runs automatically — inflation adjustments, revenue trends, client retention, and more as we build them.</div>
+    </div>
+
+    <div class="offer-card">
+      <div class="offer-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+      </div>
+      <div class="offer-title">Smart Alerts</div>
+      <div class="offer-desc">Get notified when something needs attention — a service hasn't been priced in 3 years, revenue dropped month-over-month, or inventory is running low.</div>
+    </div>
+
+    <div class="offer-card">
+      <div class="offer-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <div class="offer-title">Multi-Clinic Support</div>
+      <div class="offer-desc">Running more than one location? We handle data from multiple clinics in one place with combined and per-location reporting.</div>
+    </div>
+
+    <div class="offer-card">
+      <div class="offer-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="offer-title">Onboarding &amp; Support</div>
+      <div class="offer-desc">We handle the full setup and stay available for questions. You're not handed a manual — we walk you through everything.</div>
+    </div>
+
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="section-label">Process</div>
+  <div class="section-title">How Integration Works</div>
+  <div class="section-sub">From first contact to live reports — here's what to expect.</div>
+
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="step-circle">1</div>
+      <div class="step-body">
+        <div class="step-title">Tell Us About Your Clinic</div>
+        <div class="step-desc">Fill out the contact form with your PMS software and what you're looking to track. We'll reach out within 24 hours to discuss your setup.</div>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="step-circle">2</div>
+      <div class="step-body">
+        <div class="step-title">We Configure the Connection</div>
+        <div class="step-desc">Our team sets up a secure read-only connection to your PMS. We handle all the technical steps — you just need to approve the access.</div>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="step-circle">3</div>
+      <div class="step-body">
+        <div class="step-title">Reports Go Live</div>
+        <div class="step-desc">Within a few days your reports are running on schedule. We do a walkthrough to make sure everything looks right and you know how to read the results.</div>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="step-circle">4</div>
+      <div class="step-body">
+        <div class="step-title">Ongoing — Nothing for You to Do</div>
+        <div class="step-desc">Reports run automatically. We monitor the connection, push new reports as they're released, and are available whenever you have questions.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUPPORTED PMS -->
+  <div class="section-label">Supported Systems</div>
+  <div class="section-title" style="margin-bottom:16px">Works With Your PMS</div>
+  <div class="pms-grid">
+    <div class="pms-card"><div class="pms-abbr">CS</div><div class="pms-name">Cornerstone</div><div class="pms-status">Coming Soon</div></div>
+    <div class="pms-card"><div class="pms-abbr">AVI</div><div class="pms-name">AVImark</div><div class="pms-status">Coming Soon</div></div>
+    <div class="pms-card"><div class="pms-abbr">EZY</div><div class="pms-name">ezyVet</div><div class="pms-status">Coming Soon</div></div>
+    <div class="pms-card"><div class="pms-abbr">PRO</div><div class="pms-name">Provet Cloud</div><div class="pms-status">Coming Soon</div></div>
+    <div class="pms-card"><div class="pms-abbr">VTL</div><div class="pms-name">VetLink</div><div class="pms-status">Coming Soon</div></div>
+    <div class="pms-card"><div class="pms-abbr">IMP</div><div class="pms-name">ImproMed</div><div class="pms-status">Coming Soon</div></div>
+  </div>
+  <p style="font-size:.8rem;color:var(--muted)">Don't see yours? Contact us — if it exports data, we can likely work with it.</p>
+
+  <!-- CTA -->
+  <div class="cta-block" style="margin-top:48px">
+    <h2>Ready to Get Started?</h2>
+    <p>We're onboarding clinics for early access. Get fully automated reporting set up for your clinic — no technical work required on your end.</p>
+    <a class="cta-btn" href="index.html#contact">Request Early Access</a>
+  </div>
+
+</div>
+
+<footer>
+  <a class="footer-logo" href="index.html">
+    <div class="footer-logo-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+    <div class="footer-logo-text">Vet <span>Solutions</span></div>
+  </a>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="reports.html">Reports</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 Vet Solutions · Built by Wilde Automations</div>
+</footer>
+
+</body>
+</html>
