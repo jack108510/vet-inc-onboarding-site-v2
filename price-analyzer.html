@@ -206,7 +206,7 @@ input[type=file]{display:none}
   <div class="slide" id="slide-2">
     <div class="slide-label">Step 2 of 4</div>
     <div class="slide-title">Upload your reports</div>
-    <div class="slide-sub" id="upload-instructions">Export these reports from your PMS and drop them below. Your data stays in your browser — nothing is sent anywhere.</div>
+    <div class="slide-sub" id="upload-instructions">Export all three reports from your PMS and drop them below. Your data stays in your browser — nothing is sent anywhere.</div>
 
     <div class="drop-zone" id="dz1" onclick="document.getElementById('f1').click()" ondragover="dzOver(event,this)" ondragleave="dzLeave(this)" ondrop="dzDrop(event,'f1',this,1)">
       <span class="drop-badge badge-req" id="b1">Required</span>
@@ -225,9 +225,9 @@ input[type=file]{display:none}
     </div>
 
     <div class="drop-zone" id="dz3" onclick="document.getElementById('f3').click()" ondragover="dzOver(event,this)" ondragleave="dzLeave(this)" ondrop="dzDrop(event,'f3',this,3)">
-      <span class="drop-badge badge-opt" id="b3">Optional</span>
+      <span class="drop-badge badge-req" id="b3">Required</span>
       <div class="drop-title">Service Revenue Report</div>
-      <div class="drop-hint" id="hint3">Reports → Invoice Item → Service Revenue → last 365 days → Save to File (CSV) — adds lost revenue calculation</div>
+      <div class="drop-hint" id="hint3">Reports → Invoice Item → Service Revenue → last 365 days → Save to File (CSV)</div>
       <div class="drop-filename" id="fn3"></div>
       <input type="file" id="f3" accept=".csv,.txt" onchange="loadFile('f3','fn3','dz3','b3',3)"/>
     </div>
@@ -389,7 +389,7 @@ function readFile(f, num, fid) {
 }
 
 function checkUploads() {
-  if(files[1] && files[2]) setTimeout(() => goTo(3), 400);
+  if(files[1] && files[2] && files[3]) setTimeout(() => goTo(3), 400);
 }
 
 // ── CLINIC NAME ───────────────────────────────────────────────────
@@ -565,7 +565,7 @@ function restart(){
   ['dz1','dz2','dz3'].forEach(id=>document.getElementById(id).classList.remove('loaded'));
   document.getElementById('b1').textContent='Required';document.getElementById('b1').className='drop-badge badge-req';
   document.getElementById('b2').textContent='Required';document.getElementById('b2').className='drop-badge badge-req';
-  document.getElementById('b3').textContent='Optional';document.getElementById('b3').className='drop-badge badge-opt';
+  document.getElementById('b3').textContent='Required';document.getElementById('b3').className='drop-badge badge-req';
   document.getElementById('hero-lost-box').style.display='none';
   goTo(1);
 }
