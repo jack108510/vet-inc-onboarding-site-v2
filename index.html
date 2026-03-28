@@ -19,52 +19,52 @@ nav{background:#fff;border-bottom:1px solid #dbeafe;padding:0 32px;height:60px;d
 .nav-link.active{color:#2563eb;background:#eff6ff}
 
 /* HERO */
-.hero{text-align:center;padding:72px 20px 56px;max-width:700px;margin:0 auto}
+.hero{text-align:center;padding:68px 20px 52px;max-width:700px;margin:0 auto}
 .hero-badge{display:inline-block;background:#dbeafe;color:#2563eb;font-size:.72rem;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:18px;text-transform:uppercase;letter-spacing:.06em}
-.hero h1{font-size:2.6rem;font-weight:900;line-height:1.15;color:#1e3a5f;margin-bottom:14px}
+.hero h1{font-size:2.5rem;font-weight:900;line-height:1.15;color:#1e3a5f;margin-bottom:14px}
 .hero h1 span{color:#2563eb}
-.hero p{font-size:1rem;color:#64748b;line-height:1.65;max-width:520px;margin:0 auto 28px}
-.hero-btn{display:inline-block;background:linear-gradient(135deg,#2563eb,#60a5fa);color:#fff;text-decoration:none;padding:13px 28px;border-radius:10px;font-size:.95rem;font-weight:700;transition:all .2s}
-.hero-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(37,99,235,.3)}
+.hero p{font-size:1rem;color:#64748b;line-height:1.65;max-width:520px;margin:0 auto}
 
-/* TOOLS SECTION */
-.section{max-width:1100px;margin:0 auto;padding:0 20px 72px}
-.section-title{font-size:1.4rem;font-weight:800;color:#1e3a5f;margin-bottom:6px}
-.section-sub{font-size:.88rem;color:#64748b;margin-bottom:28px}
-.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+/* TWO PILLARS */
+.pillars{max-width:1100px;margin:0 auto;padding:0 20px 72px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:750px){.pillars{grid-template-columns:1fr}}
 
-/* TOOL CARD */
-.tool-card{background:#fff;border:1px solid #dbeafe;border-radius:14px;padding:24px;transition:all .2s;position:relative;overflow:hidden}
-.tool-card.live{cursor:pointer}
-.tool-card.live:hover{border-color:#2563eb;box-shadow:0 4px 20px rgba(37,99,235,.1);transform:translateY(-2px)}
-.tool-card.coming{opacity:.65}
-.tool-icon{width:46px;height:46px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px}
-.tool-card.live .tool-icon{background:linear-gradient(135deg,#2563eb,#60a5fa)}
-.tool-card.coming .tool-icon{background:#f0f6ff}
-.tool-card-badge{position:absolute;top:14px;right:14px;font-size:.62rem;font-weight:700;padding:3px 8px;border-radius:6px;text-transform:uppercase;letter-spacing:.05em}
+.pillar{background:#fff;border:1px solid #dbeafe;border-radius:16px;padding:28px;display:flex;flex-direction:column}
+.pillar-header{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+.pillar-icon{width:50px;height:50px;border-radius:12px;background:linear-gradient(135deg,#2563eb,#60a5fa);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+.pillar-icon.soft{background:linear-gradient(135deg,#7c3aed,#a78bfa)}
+.pillar-title{font-size:1.2rem;font-weight:800;color:#1e3a5f}
+.pillar-subtitle{font-size:.82rem;color:#64748b;margin-bottom:20px;line-height:1.5;padding-left:64px;margin-top:-4px}
+.pillar-divider{border:none;border-top:1px solid #dbeafe;margin-bottom:20px}
+
+/* REPORT CARDS */
+.report-card{border:1px solid #dbeafe;border-radius:11px;padding:16px 18px;margin-bottom:12px;transition:all .2s;position:relative}
+.report-card.live{cursor:pointer}
+.report-card.live:hover{border-color:#2563eb;background:#f8faff;transform:translateX(3px)}
+.report-card.coming{opacity:.55}
+.rc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.rc-name{font-size:.9rem;font-weight:700;color:#1e3a5f}
+.rc-badge{font-size:.58rem;font-weight:700;padding:2px 7px;border-radius:5px;text-transform:uppercase;letter-spacing:.05em}
 .badge-live{background:rgba(34,197,94,.12);color:#16a34a}
 .badge-soon{background:#f0f6ff;color:#94a3b8}
-.tool-name{font-size:1rem;font-weight:700;color:#1e3a5f;margin-bottom:6px}
-.tool-desc{font-size:.82rem;color:#64748b;line-height:1.55}
-.tool-link{display:inline-flex;align-items:center;gap:5px;margin-top:14px;color:#2563eb;font-size:.82rem;font-weight:600;text-decoration:none}
-.tool-link:hover{text-decoration:underline}
-.tool-lock{position:absolute;bottom:18px;right:18px;font-size:16px;opacity:.3}
+.rc-desc{font-size:.78rem;color:#64748b;line-height:1.5}
+.rc-link{display:inline-flex;align-items:center;gap:4px;margin-top:8px;color:#2563eb;font-size:.78rem;font-weight:600;text-decoration:none}
+.rc-link:hover{text-decoration:underline}
 
-/* STATS */
-.stats{background:#fff;border:1px solid #dbeafe;border-radius:14px;padding:28px 32px;display:flex;gap:40px;flex-wrap:wrap;margin-bottom:28px}
-.stat-item{text-align:center}
-.stat-num{font-size:1.8rem;font-weight:900;color:#2563eb}
-.stat-label{font-size:.75rem;color:#64748b;text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
+/* PMS GRID */
+.pms-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pms-card{border:1px solid #dbeafe;border-radius:11px;padding:14px;text-align:center;position:relative}
+.pms-card.live{cursor:pointer;transition:all .2s}
+.pms-card.live:hover{border-color:#7c3aed;background:#faf5ff}
+.pms-card.coming{opacity:.5}
+.pms-logo{font-size:1.6rem;margin-bottom:6px}
+.pms-name{font-size:.82rem;font-weight:700;color:#1e3a5f}
+.pms-status{font-size:.65rem;color:#94a3b8;margin-top:3px}
+.pms-status.live-status{color:#16a34a;font-weight:600}
 
 /* FOOTER */
 footer{background:#fff;border-top:1px solid #dbeafe;padding:24px 32px;text-align:center;font-size:.8rem;color:#94a3b8}
 footer a{color:#2563eb;text-decoration:none}footer a:hover{text-decoration:underline}
-
-@media(max-width:600px){
-  .hero h1{font-size:1.8rem}
-  nav{padding:0 16px}
-  .stats{gap:20px;padding:20px}
-}
 </style>
 </head>
 <body>
@@ -76,72 +76,132 @@ footer a{color:#2563eb;text-decoration:none}footer a:hover{text-decoration:under
   </a>
   <div class="nav-links">
     <a class="nav-link active" href="index.html">Home</a>
-    <a class="nav-link" href="#tools">Tools</a>
+    <a class="nav-link" href="mailto:wildeautomations@gmail.com">Contact</a>
   </div>
 </nav>
 
 <div class="hero">
   <div class="hero-badge">Built for Veterinary Clinics</div>
   <h1>Smart Tools for <span>Modern Clinics</span></h1>
-  <p>Vet Solutions gives your clinic the analytics and automation tools to run smarter — from pricing audits to staff scheduling, all in one place.</p>
-  <a class="hero-btn" href="price-analyzer.html">Try Price Analyzer →</a>
+  <p>Two powerful sides — automated report generation and deep PMS integration — so your clinic runs on data, not guesswork.</p>
 </div>
 
-<div class="section" id="tools">
-  <div class="section-title">Tools</div>
-  <div class="section-sub">Click any live tool to get started. More tools coming soon.</div>
+<div class="pillars">
 
-  <div class="tools-grid">
+  <!-- LEFT: REPORT GENERATION -->
+  <div class="pillar">
+    <div class="pillar-header">
+      <div class="pillar-icon">📊</div>
+      <div class="pillar-title">Report Generation</div>
+    </div>
+    <div class="pillar-subtitle">Upload your clinic data and get instant, actionable reports — no software install needed.</div>
+    <hr class="pillar-divider"/>
 
-    <div class="tool-card live" onclick="location.href='price-analyzer.html'">
-      <span class="tool-card-badge badge-live">Live</span>
-      <div class="tool-icon">📋</div>
-      <div class="tool-name">Price Analyzer</div>
-      <div class="tool-desc">Identify stale prices and calculate lost revenue using Canadian CPI data. Upload your invoice reports and get instant insights.</div>
-      <a class="tool-link" href="price-analyzer.html">Open tool →</a>
+    <div class="report-card live" onclick="location.href='price-analyzer.html'">
+      <div class="rc-top">
+        <div class="rc-name">💰 Inflation Adjustment Report</div>
+        <span class="rc-badge badge-live">Live</span>
+      </div>
+      <div class="rc-desc">Identify services with stale pricing and calculate how much revenue you've left on the table using Canadian CPI data.</div>
+      <a class="rc-link" href="price-analyzer.html">Open report →</a>
     </div>
 
-    <div class="tool-card coming">
-      <span class="tool-card-badge badge-soon">Coming Soon</span>
-      <div class="tool-icon">🧾</div>
-      <div class="tool-name">Invoice Generator</div>
-      <div class="tool-desc">Create and send professional invoices to clients in seconds. Templates built for veterinary services.</div>
-      <div class="tool-lock">🔒</div>
+    <div class="report-card coming">
+      <div class="rc-top">
+        <div class="rc-name">📈 Revenue Trend Report</div>
+        <span class="rc-badge badge-soon">Coming Soon</span>
+      </div>
+      <div class="rc-desc">Month-over-month and year-over-year revenue breakdowns by service category and provider.</div>
     </div>
 
-    <div class="tool-card coming">
-      <span class="tool-card-badge badge-soon">Coming Soon</span>
-      <div class="tool-icon">📅</div>
-      <div class="tool-name">Staff Scheduler</div>
-      <div class="tool-desc">Drag-and-drop scheduling for vets, techs, and front desk. Manage shifts, coverage gaps, and time-off requests.</div>
-      <div class="tool-lock">🔒</div>
+    <div class="report-card coming">
+      <div class="rc-top">
+        <div class="rc-name">🩺 Service Utilization Report</div>
+        <span class="rc-badge badge-soon">Coming Soon</span>
+      </div>
+      <div class="rc-desc">See which services are underused and which are your top performers. Spot gaps in your offering.</div>
     </div>
 
-    <div class="tool-card coming">
-      <span class="tool-card-badge badge-soon">Coming Soon</span>
-      <div class="tool-icon">📦</div>
-      <div class="tool-name">Inventory Tracker</div>
-      <div class="tool-desc">Track medications, supplies, and equipment. Get low-stock alerts before you run out of what matters.</div>
-      <div class="tool-lock">🔒</div>
+    <div class="report-card coming">
+      <div class="rc-top">
+        <div class="rc-name">👥 Client Retention Report</div>
+        <span class="rc-badge badge-soon">Coming Soon</span>
+      </div>
+      <div class="rc-desc">Track which clients are drifting away, how often patients return, and where you're losing recurring revenue.</div>
     </div>
 
-    <div class="tool-card coming">
-      <span class="tool-card-badge badge-soon">Coming Soon</span>
-      <div class="tool-icon">🔔</div>
-      <div class="tool-name">Client Reminder System</div>
-      <div class="tool-desc">Automated appointment reminders via email or SMS. Reduce no-shows and keep your schedule full.</div>
-      <div class="tool-lock">🔒</div>
-    </div>
-
-    <div class="tool-card coming">
-      <span class="tool-card-badge badge-soon">Coming Soon</span>
-      <div class="tool-icon">📊</div>
-      <div class="tool-name">Revenue Dashboard</div>
-      <div class="tool-desc">See your clinic's performance at a glance. Revenue trends, top services, and month-over-month growth.</div>
-      <div class="tool-lock">🔒</div>
+    <div class="report-card coming">
+      <div class="rc-top">
+        <div class="rc-name">💊 Inventory Cost Report</div>
+        <span class="rc-badge badge-soon">Coming Soon</span>
+      </div>
+      <div class="rc-desc">Analyze your top supply costs, expiry waste, and markup margins across medications and supplies.</div>
     </div>
 
   </div>
+
+  <!-- RIGHT: PMS INTEGRATION -->
+  <div class="pillar">
+    <div class="pillar-header">
+      <div class="pillar-icon soft">🔌</div>
+      <div class="pillar-title">PMS Integration</div>
+    </div>
+    <div class="pillar-subtitle">Connect directly to your Practice Management System — automate reports, sync data, and eliminate manual exports.</div>
+    <hr class="pillar-divider"/>
+
+    <div style="font-size:.78rem;color:#64748b;margin-bottom:16px;line-height:1.6">
+      Instead of exporting CSVs manually, Vet Solutions connects to your PMS and pulls data automatically — so your reports are always fresh.
+    </div>
+
+    <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;margin-bottom:10px">Supported Systems</div>
+    <div class="pms-grid">
+
+      <div class="pms-card coming">
+        <div class="pms-logo">🖥️</div>
+        <div class="pms-name">Cornerstone</div>
+        <div class="pms-status">Coming Soon</div>
+      </div>
+
+      <div class="pms-card coming">
+        <div class="pms-logo">⚕️</div>
+        <div class="pms-name">AVImark</div>
+        <div class="pms-status">Coming Soon</div>
+      </div>
+
+      <div class="pms-card coming">
+        <div class="pms-logo">🐾</div>
+        <div class="pms-name">ezyVet</div>
+        <div class="pms-status">Coming Soon</div>
+      </div>
+
+      <div class="pms-card coming">
+        <div class="pms-logo">📋</div>
+        <div class="pms-name">Provet Cloud</div>
+        <div class="pms-status">Coming Soon</div>
+      </div>
+
+      <div class="pms-card coming">
+        <div class="pms-logo">🔬</div>
+        <div class="pms-name">VetLink</div>
+        <div class="pms-status">Coming Soon</div>
+      </div>
+
+      <div class="pms-card coming">
+        <div class="pms-logo">💻</div>
+        <div class="pms-name">ImproMed</div>
+        <div class="pms-status">Coming Soon</div>
+      </div>
+
+    </div>
+
+    <div style="margin-top:20px;background:#f0f6ff;border:1px solid #dbeafe;border-radius:10px;padding:16px">
+      <div style="font-size:.82rem;font-weight:700;color:#2563eb;margin-bottom:6px">🚀 Want early access?</div>
+      <div style="font-size:.78rem;color:#64748b;line-height:1.55;margin-bottom:12px">We're onboarding clinics for PMS integration beta. Get automated reports without manual CSV exports.</div>
+      <a href="mailto:wildeautomations@gmail.com?subject=Vet Solutions PMS Integration Interest" style="display:inline-block;background:linear-gradient(135deg,#2563eb,#60a5fa);color:#fff;text-decoration:none;padding:9px 18px;border-radius:8px;font-size:.8rem;font-weight:700">Get Early Access →</a>
+    </div>
+
+  </div>
+
 </div>
 
 <footer>
