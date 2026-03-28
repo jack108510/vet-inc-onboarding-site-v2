@@ -3,441 +3,150 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Clinic IQ — Price Analyzer</title>
+<title>Vet Solutions — Smart Tools for Veterinary Clinics</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#eef4ff;color:#1e3a5f;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;min-height:100vh;padding:32px 20px}
-.container{width:100%;max-width:1200px;margin:0 auto}
-.header{text-align:center;margin-bottom:28px}
-.logo{display:inline-flex;align-items:center;gap:10px;margin-bottom:10px}
-.logo-icon{width:42px;height:42px;background:linear-gradient(135deg,#2563eb,#60a5fa);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
-.logo-text{font-size:1.4rem;font-weight:800}.logo-text span{color:#2563eb}
-.subtitle{font-size:.9rem;color:#64748b}
-.top-row{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:14px;max-width:400px}
-.field-row{margin-bottom:0}
-.label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#64748b;margin-bottom:5px}
-.input{width:100%;background:#ffffff;border:1px solid #bfdbfe;color:#1e3a5f;padding:10px 13px;border-radius:9px;font-size:.85rem;outline:none;transition:border-color .2s}
-.input:focus{border-color:#2563eb}
-.drops{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:14px}
-@media(max-width:700px){.drops{grid-template-columns:1fr}}
-.drop{border:2px dashed #bfdbfe;border-radius:12px;padding:20px 14px;text-align:center;cursor:pointer;transition:all .2s;background:#ffffff;position:relative}
-.drop:hover{border-color:#93c5fd}.drop.over{border-color:#2563eb;background:rgba(37,99,235,.05)}
-.drop.has-file{border-color:rgba(37,99,235,.5);background:rgba(37,99,235,.04)}
-.drop.optional{border-style:dashed;opacity:.8}
-.drop-badge{position:absolute;top:8px;right:10px;font-size:.6rem;font-weight:700;padding:2px 6px;border-radius:5px;background:#dbeafe;color:#64748b}
-.drop.has-file .drop-badge{background:rgba(34,197,94,.15);color:#16a34a}
-.drop-icon{font-size:1.6rem;margin-bottom:7px;opacity:.5}.drop.has-file .drop-icon{opacity:1}
-.drop-title{font-size:.75rem;font-weight:700;color:#334155;margin-bottom:3px}
-.drop-hint{font-size:.64rem;color:#94a3b8;line-height:1.4}
-.drop-name{font-size:.68rem;color:#2563eb;margin-top:5px;word-break:break-all}
-input[type=file]{display:none}
-.btn{width:100%;background:linear-gradient(135deg,#2563eb,#60a5fa);color:#fff;border:none;padding:13px;border-radius:10px;font-size:.95rem;font-weight:800;cursor:pointer;transition:all .2s;margin-bottom:12px}
-.btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 4px 18px rgba(37,99,235,.3)}
-.btn:disabled{background:#dbeafe;color:#94a3b8;cursor:not-allowed;transform:none;box-shadow:none}
-.status-box{padding:12px 16px;border-radius:9px;font-size:.83rem;text-align:center;background:#ffffff;border:1px solid #dbeafe;color:#64748b;min-height:44px;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:16px}
-.status-box.loading{color:#2563eb;border-color:rgba(37,99,235,.3)}
-.status-box.success{color:#16a34a;border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.05)}
-.status-box.error{color:#ef4444;border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.05)}
-.spinner{width:14px;height:14px;border:2px solid rgba(37,99,235,.2);border-top-color:#2563eb;border-radius:50%;animation:spin .8s linear infinite;flex-shrink:0}
-@keyframes spin{to{transform:rotate(360deg)}}
-#results{display:none;margin-top:8px}
-.stats-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-.stat{background:#ffffff;border:1px solid #dbeafe;border-radius:8px;padding:12px 16px;flex:1;min-width:110px;text-align:center}
-.sv{font-size:22px;font-weight:700;color:#2563eb}.sl{font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
-.sv.highlight{color:#16a34a}
-.hero{background:linear-gradient(135deg,rgba(37,99,235,.08),rgba(37,99,235,.03));border:1px solid rgba(37,99,235,.2);border-radius:10px;padding:16px 20px;margin-bottom:18px;text-align:center}
-.hero-num{font-size:2.2rem;font-weight:900;color:#2563eb}
-.hero-label{font-size:.78rem;color:#64748b;margin-top:3px}
-.toolbar{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;align-items:center}
-.fbtn{background:#ffffff;border:1px solid #dbeafe;color:#64748b;padding:5px 13px;border-radius:20px;cursor:pointer;font-size:11px;transition:all .15s}
-.fbtn:hover{border-color:#93c5fd;color:#334155}.fbtn.active{background:rgba(37,99,235,.1);border-color:#2563eb;color:#2563eb}
-.ebtn{background:#ffffff;border:1px solid #dbeafe;color:#64748b;padding:5px 13px;border-radius:7px;cursor:pointer;font-size:11px;margin-left:auto;transition:all .15s}
-.ebtn:hover{border-color:#2563eb;color:#2563eb}
-.table-wrap{overflow-x:auto;border-radius:9px;border:1px solid #dbeafe}
-table{width:100%;border-collapse:collapse;font-size:12px}
-th{background:#f0f6ff;padding:9px 11px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:#64748b;border-bottom:1px solid #dbeafe;white-space:nowrap}
-td{padding:8px 11px;border-bottom:1px solid #f0f6ff;vertical-align:middle;background:#fff}
-tr:last-child td{border-bottom:none}tr:hover td{background:#f8faff}
-.pill{display:inline-block;padding:2px 7px;border-radius:9px;font-size:10px;font-weight:600}
-.pr{background:rgba(239,68,68,.12);color:#ef4444}
-.pa{background:rgba(245,158,11,.12);color:#d97706}
-.pg{background:rgba(34,197,94,.12);color:#16a34a}
-.pn{background:rgba(99,102,241,.12);color:#6366f1}
-.lost{color:#16a34a;font-weight:700}
-.note{margin-top:14px;padding:12px 14px;background:#ffffff;border:1px solid #dbeafe;border-radius:8px;font-size:11px;color:#94a3b8;line-height:1.5}
-.steps{margin-top:20px;display:flex;flex-direction:column;gap:6px}
-.step{display:flex;align-items:flex-start;gap:8px;font-size:.72rem;color:#64748b;padding:7px 10px;border-radius:7px;background:#ffffff;border:1px solid #dbeafe}
-.sn{width:19px;height:19px;border-radius:50%;background:#dbeafe;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;flex-shrink:0;color:#2563eb;margin-top:1px}
+body{background:#eef4ff;color:#1e3a5f;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;min-height:100vh}
+
+/* NAV */
+nav{background:#fff;border-bottom:1px solid #dbeafe;padding:0 32px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo-icon{width:36px;height:36px;background:linear-gradient(135deg,#2563eb,#60a5fa);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.nav-logo-text{font-size:1.1rem;font-weight:800;color:#1e3a5f}.nav-logo-text span{color:#2563eb}
+.nav-links{display:flex;gap:6px}
+.nav-link{text-decoration:none;color:#64748b;font-size:.88rem;font-weight:500;padding:6px 14px;border-radius:7px;transition:all .15s}
+.nav-link:hover{background:#f0f6ff;color:#2563eb}
+.nav-link.active{color:#2563eb;background:#eff6ff}
+
+/* HERO */
+.hero{text-align:center;padding:72px 20px 56px;max-width:700px;margin:0 auto}
+.hero-badge{display:inline-block;background:#dbeafe;color:#2563eb;font-size:.72rem;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:18px;text-transform:uppercase;letter-spacing:.06em}
+.hero h1{font-size:2.6rem;font-weight:900;line-height:1.15;color:#1e3a5f;margin-bottom:14px}
+.hero h1 span{color:#2563eb}
+.hero p{font-size:1rem;color:#64748b;line-height:1.65;max-width:520px;margin:0 auto 28px}
+.hero-btn{display:inline-block;background:linear-gradient(135deg,#2563eb,#60a5fa);color:#fff;text-decoration:none;padding:13px 28px;border-radius:10px;font-size:.95rem;font-weight:700;transition:all .2s}
+.hero-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(37,99,235,.3)}
+
+/* TOOLS SECTION */
+.section{max-width:1100px;margin:0 auto;padding:0 20px 72px}
+.section-title{font-size:1.4rem;font-weight:800;color:#1e3a5f;margin-bottom:6px}
+.section-sub{font-size:.88rem;color:#64748b;margin-bottom:28px}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+
+/* TOOL CARD */
+.tool-card{background:#fff;border:1px solid #dbeafe;border-radius:14px;padding:24px;transition:all .2s;position:relative;overflow:hidden}
+.tool-card.live{cursor:pointer}
+.tool-card.live:hover{border-color:#2563eb;box-shadow:0 4px 20px rgba(37,99,235,.1);transform:translateY(-2px)}
+.tool-card.coming{opacity:.65}
+.tool-icon{width:46px;height:46px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px}
+.tool-card.live .tool-icon{background:linear-gradient(135deg,#2563eb,#60a5fa)}
+.tool-card.coming .tool-icon{background:#f0f6ff}
+.tool-card-badge{position:absolute;top:14px;right:14px;font-size:.62rem;font-weight:700;padding:3px 8px;border-radius:6px;text-transform:uppercase;letter-spacing:.05em}
+.badge-live{background:rgba(34,197,94,.12);color:#16a34a}
+.badge-soon{background:#f0f6ff;color:#94a3b8}
+.tool-name{font-size:1rem;font-weight:700;color:#1e3a5f;margin-bottom:6px}
+.tool-desc{font-size:.82rem;color:#64748b;line-height:1.55}
+.tool-link{display:inline-flex;align-items:center;gap:5px;margin-top:14px;color:#2563eb;font-size:.82rem;font-weight:600;text-decoration:none}
+.tool-link:hover{text-decoration:underline}
+.tool-lock{position:absolute;bottom:18px;right:18px;font-size:16px;opacity:.3}
+
+/* STATS */
+.stats{background:#fff;border:1px solid #dbeafe;border-radius:14px;padding:28px 32px;display:flex;gap:40px;flex-wrap:wrap;margin-bottom:28px}
+.stat-item{text-align:center}
+.stat-num{font-size:1.8rem;font-weight:900;color:#2563eb}
+.stat-label{font-size:.75rem;color:#64748b;text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
+
+/* FOOTER */
+footer{background:#fff;border-top:1px solid #dbeafe;padding:24px 32px;text-align:center;font-size:.8rem;color:#94a3b8}
+footer a{color:#2563eb;text-decoration:none}footer a:hover{text-decoration:underline}
+
+@media(max-width:600px){
+  .hero h1{font-size:1.8rem}
+  nav{padding:0 16px}
+  .stats{gap:20px;padding:20px}
+}
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="header">
-    <div class="logo"><div class="logo-icon">&#x1F3E5;</div><div class="logo-text">Clinic <span>IQ</span></div></div>
-    <div class="subtitle">Identify stale prices &amp; calculate lost revenue &mdash; Canadian CPI analysis</div>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="nav-logo-icon">🏥</div>
+    <div class="nav-logo-text">Vet <span>Solutions</span></div>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link active" href="index.html">Home</a>
+    <a class="nav-link" href="#tools">Tools</a>
   </div>
+</nav>
 
-  <div class="top-row">
-    <div class="field-row"><div class="label">Clinic Name</div><input class="input" id="clinicName" placeholder="River Valley Veterinary…"/></div>
-  </div>
+<div class="hero">
+  <div class="hero-badge">Built for Veterinary Clinics</div>
+  <h1>Smart Tools for <span>Modern Clinics</span></h1>
+  <p>Vet Solutions gives your clinic the analytics and automation tools to run smarter — from pricing audits to staff scheduling, all in one place.</p>
+  <a class="hero-btn" href="price-analyzer.html">Try Price Analyzer →</a>
+</div>
 
-  <div class="drops">
-    <div class="drop" id="drop1" onclick="document.getElementById('f1').click()" ondragover="dv(event,this)" ondragleave="dl(this)" ondrop="dfn(event,'f1',this,'n1',1)">
-      <div class="drop-badge" id="b1">Required</div>
-      <div class="drop-icon">&#x1F4CB;</div>
-      <div class="drop-title">Invoice Item List</div>
-      <div class="drop-hint">Reports → Invoice Item → Invoice Item List → Save to File (CSV)</div>
-      <div class="drop-name" id="n1"></div>
-      <input type="file" id="f1" accept=".csv,.txt" onchange="loadFile('f1','n1','drop1','b1',1)"/>
-    </div>
-    <div class="drop" id="drop2" onclick="document.getElementById('f2').click()" ondragover="dv(event,this)" ondragleave="dl(this)" ondrop="dfn(event,'f2',this,'n2',2)">
-      <div class="drop-badge" id="b2">Required</div>
-      <div class="drop-icon">&#x1F4C5;</div>
-      <div class="drop-title">Price History</div>
-      <div class="drop-hint">Reports → Invoice Item → Invoice Item Price Information → all dates → Save to File (CSV)</div>
-      <div class="drop-name" id="n2"></div>
-      <input type="file" id="f2" accept=".csv,.txt" onchange="loadFile('f2','n2','drop2','b2',2)"/>
-    </div>
-    <div class="drop optional" id="drop3" onclick="document.getElementById('f3').click()" ondragover="dv(event,this)" ondragleave="dl(this)" ondrop="dfn(event,'f3',this,'n3',3)">
-      <div class="drop-badge" id="b3">Optional</div>
-      <div class="drop-icon">&#x1F4CA;</div>
-      <div class="drop-title">Service Revenue Report</div>
-      <div class="drop-hint">Reports → Invoice Item → Service Revenue → last 365 days → Save to File (CSV)<br/>Adds lost revenue column</div>
-      <div class="drop-name" id="n3"></div>
-      <input type="file" id="f3" accept=".csv,.txt" onchange="loadFile('f3','n3','drop3','b3',3)"/>
-    </div>
-  </div>
+<div class="section" id="tools">
+  <div class="section-title">Tools</div>
+  <div class="section-sub">Click any live tool to get started. More tools coming soon.</div>
 
-  <button class="btn" id="btn" onclick="run()" disabled>Analyze Prices</button>
-  <div class="status-box" id="status">Upload the Invoice Item List and Price History to begin</div>
+  <div class="tools-grid">
 
-  <div id="results">
-    <div class="hero" id="heroBox" style="display:none">
-      <div class="hero-num" id="heroNum"></div>
-      <div class="hero-label">Estimated revenue left on the table in the last 12 months</div>
+    <div class="tool-card live" onclick="location.href='price-analyzer.html'">
+      <span class="tool-card-badge badge-live">Live</span>
+      <div class="tool-icon">📋</div>
+      <div class="tool-name">Price Analyzer</div>
+      <div class="tool-desc">Identify stale prices and calculate lost revenue using Canadian CPI data. Upload your invoice reports and get instant insights.</div>
+      <a class="tool-link" href="price-analyzer.html">Open tool →</a>
     </div>
-    <div class="stats-row" id="statsRow"></div>
-    <div class="toolbar">
-      <button class="fbtn active" onclick="setFilter('all',this)">All</button>
-      <button class="fbtn" onclick="setFilter('8',this)">8+ yrs</button>
-      <button class="fbtn" onclick="setFilter('5',this)">5–7 yrs</button>
-      <button class="fbtn" onclick="setFilter('2',this)">2–4 yrs</button>
-      <button class="fbtn" onclick="setFilter('1',this)">1 yr</button>
 
-      <button class="ebtn" onclick="exportCSV()">↓ Export CSV</button>
+    <div class="tool-card coming">
+      <span class="tool-card-badge badge-soon">Coming Soon</span>
+      <div class="tool-icon">🧾</div>
+      <div class="tool-name">Invoice Generator</div>
+      <div class="tool-desc">Create and send professional invoices to clients in seconds. Templates built for veterinary services.</div>
+      <div class="tool-lock">🔒</div>
     </div>
-    <div class="table-wrap">
-      <table>
-        <thead><tr id="thead">
-          <th>Service</th>
-          <th style="text-align:right">Current $</th>
-          <th>Last Changed</th>
-          <th>Age</th>
-          <th>Inflation</th>
-          <th>Suggested $</th>
-          <th>Per Unit Gap</th>
-        </tr></thead>
-        <tbody id="tbody"></tbody>
-      </table>
-    </div>
-    <div class="note" id="note"></div>
-  </div>
 
-  <div class="steps">
-    <div class="step"><div class="sn">1</div><span><strong>Invoice Item List:</strong> Reports → Invoice Item → Invoice Item List → Save to File</span></div>
-    <div class="step"><div class="sn">2</div><span><strong>Price History:</strong> Reports → Invoice Item → Invoice Item Price Information → set date range to all dates → Save to File</span></div>
-    <div class="step"><div class="sn">3</div><span><strong>Service Revenue Report (optional but powerful):</strong> Reports → Invoice Item → Service Revenue → last 365 days → Save to File — unlocks the lost revenue column</span></div>
-    <div class="step"><div class="sn">4</div><span>Drop the files above and click <strong>Analyze Prices</strong> — runs entirely in your browser, nothing leaves your computer</span></div>
+    <div class="tool-card coming">
+      <span class="tool-card-badge badge-soon">Coming Soon</span>
+      <div class="tool-icon">📅</div>
+      <div class="tool-name">Staff Scheduler</div>
+      <div class="tool-desc">Drag-and-drop scheduling for vets, techs, and front desk. Manage shifts, coverage gaps, and time-off requests.</div>
+      <div class="tool-lock">🔒</div>
+    </div>
+
+    <div class="tool-card coming">
+      <span class="tool-card-badge badge-soon">Coming Soon</span>
+      <div class="tool-icon">📦</div>
+      <div class="tool-name">Inventory Tracker</div>
+      <div class="tool-desc">Track medications, supplies, and equipment. Get low-stock alerts before you run out of what matters.</div>
+      <div class="tool-lock">🔒</div>
+    </div>
+
+    <div class="tool-card coming">
+      <span class="tool-card-badge badge-soon">Coming Soon</span>
+      <div class="tool-icon">🔔</div>
+      <div class="tool-name">Client Reminder System</div>
+      <div class="tool-desc">Automated appointment reminders via email or SMS. Reduce no-shows and keep your schedule full.</div>
+      <div class="tool-lock">🔒</div>
+    </div>
+
+    <div class="tool-card coming">
+      <span class="tool-card-badge badge-soon">Coming Soon</span>
+      <div class="tool-icon">📊</div>
+      <div class="tool-name">Revenue Dashboard</div>
+      <div class="tool-desc">See your clinic's performance at a glance. Revenue trends, top services, and month-over-month growth.</div>
+      <div class="tool-lock">🔒</div>
+    </div>
+
   </div>
 </div>
 
-<script>
-const CPI={2005:2.2,2006:2.0,2007:2.1,2008:2.4,2009:0.3,2010:1.8,2011:2.9,
-           2012:1.5,2013:0.9,2014:2.0,2015:1.1,2016:1.4,2017:1.6,2018:2.3,
-           2019:1.9,2020:0.7,2021:3.4,2022:6.8,2023:3.9,2024:2.7,2025:2.3,2026:2.1};
-const CURRENT_YEAR=2026;
-function cumInf(y){let m=1;for(let yr=y+1;yr<=CURRENT_YEAR;yr++)m*=1+(CPI[yr]||2.0)/100;return m;}
+<footer>
+  Built by <a href="https://wildeautomations.com" target="_blank">Wilde Automations</a> &nbsp;·&nbsp; © 2026 Vet Solutions
+</footer>
 
-function splitCSVLine(line,d){
-  const v=[];let c='',q=false;
-  for(const ch of line){if(ch==='"'){q=!q;}else if(ch===d&&!q){v.push(c.trim());c='';}else{c+=ch;}}
-  v.push(c.trim());
-  return v.map(s=>s.replace(/^["']|["']$/g,'').trim());
-}
-function parseCSV(text){
-  const lines=text.replace(/\r/g,'').trim().split('\n').filter(l=>l.trim());
-  if(lines.length<2)return[];
-  const d=lines[0].includes('\t')?'\t':',';
-  const hdr=splitCSVLine(lines[0],d).map(h=>h.toLowerCase().trim());
-  return lines.slice(1).map(line=>{
-    const v=splitCSVLine(line,d);
-    const o={};hdr.forEach((h,i)=>o[h]=(v[i]||''));
-    o._cols=v;o._hdr=hdr;
-    return o;
-  });
-}
-function col(row,...names){
-  for(const name of names){const i=row._hdr.indexOf(name.toLowerCase());if(i>=0)return(row._cols[i]||'').trim();}
-  return '';
-}
-
-const files={1:null,2:null,3:null};
-let allResults=[],activeFilter='all',hasSales=false;
-
-function dv(e,el){e.preventDefault();el.classList.add('over');}
-function dl(el){el.classList.remove('over');}
-function dfn(e,fid,el,nid,num){e.preventDefault();dl(el);const f=e.dataTransfer.files[0];if(f)readFile(f,num,nid,el,fid.replace('f','b'));}
-function loadFile(fid,nid,did,bid,num){const f=document.getElementById(fid).files[0];if(f)readFile(f,num,nid,document.getElementById(did),bid);}
-function readFile(f,num,nid,el,bid){
-  const r=new FileReader();
-  r.onload=e=>{
-    files[num]=e.target.result;
-    document.getElementById(nid).textContent=f.name;
-    el.classList.add('has-file');
-    document.getElementById(bid).textContent='✓ Loaded';
-    check();
-  };
-  r.readAsText(f);
-}
-function check(){
-  const ready=files[1]&&files[2];
-  document.getElementById('btn').disabled=!ready;
-  if(ready){
-    const msg=files[3]?'All 3 files loaded — ready to analyze':'2 files loaded — add Sales Report for lost revenue';
-    setStatus(msg,'success');
-  }
-}
-function setStatus(msg,cls){
-  const el=document.getElementById('status');
-  el.className='status-box '+(cls||'');
-  el.innerHTML=cls==='loading'?'<div class="spinner"></div><span>'+msg+'</span>':msg;
-}
-
-function run(){
-  if(!files[1]||!files[2])return;
-  document.getElementById('btn').disabled=true;
-  setStatus('Analyzing…','loading');
-  setTimeout(()=>{
-    try{
-      const minYrs=1;
-      const itemRows=parseCSV(files[1]);
-      const histRows=parseCSV(files[2]);
-      const salesRows=files[3]?parseCSV(files[3]):[];
-      hasSales=salesRows.length>0;
-
-      if(!itemRows.length){setStatus('Could not parse Invoice Item List','error');document.getElementById('btn').disabled=false;return;}
-      if(!histRows.length){setStatus('Could not parse Price History','error');document.getElementById('btn').disabled=false;return;}
-
-      // ── Active services from item list ──
-      const services={};
-      for(const row of itemRows){
-        const id=(row._cols[4]||'').trim();
-        const desc=(row._cols[5]||row._cols[6]||'').trim();
-        const type=(row._cols[7]||'').trim().toUpperCase();
-        const statusRaw=(row._cols[14]||'').trim();
-        const price=parseFloat(row._cols[10]||0);
-        const isActive=statusRaw==='1'||statusRaw.toLowerCase()==='active';
-        const isService=!type||type==='S';
-        if(!id||!isService||!isActive||price<=0)continue;
-        services[id]={id,desc,price};
-      }
-
-      // ── Last changed date from price history ──
-      const lastChanged={};
-      for(const row of histRows){
-        const id=col(row,'invoiceitemid','item id','itemid').trim();
-        const ds=col(row,'mod_date','moddate','date','pricechangedate','changed').trim();
-        if(!id||!ds)continue;
-        const dfix=ds.replace(/(\d{2}:\d{2}:\d{2}):(\d+)/,'$1.$2');
-        const d=new Date(dfix);
-        if(isNaN(d))continue;
-        if(!lastChanged[id]||d>lastChanged[id])lastChanged[id]=d;
-      }
-
-      // ── Sales quantities from service revenue report ──
-      // Supports both Invoice Item Sales (qty sold) and Service Revenue (quantity + sales revenue)
-      // Item ID may be standalone or combined with description as "1234 Some Description"
-      const salesQty={};
-      const salesRev={};
-      if(hasSales){
-        for(const row of salesRows){
-          // Cornerstone Service Revenue report: invid=item ID, qty=quantity, tot=total revenue
-          let id=col(row,'invid','invoice item id','invoiceitemid','item id','itemid').trim().toUpperCase();
-          if(!id)continue;
-          const qty=parseFloat(col(row,'qty','quantity','qty sold','qtysold')||0);
-          const rev=parseFloat(col(row,'tot','total','sales revenue','salesrevenue','revenue','total sales')||0);
-          if(qty>0)salesQty[id]=(salesQty[id]||0)+qty;
-          if(rev>0)salesRev[id]=(salesRev[id]||0)+rev;
-        }
-      }
-
-      const svcCount=Object.keys(services).length;
-      if(!svcCount){
-        const sample=itemRows[0]||{};
-        const hdr=(sample._hdr||[]).join(' | ').slice(0,200);
-        const c4=sample._cols?sample._cols[4]:'?';
-        const c7=sample._cols?sample._cols[7]:'?';
-        const c14=sample._cols?sample._cols[14]:'?';
-        const c10=sample._cols?sample._cols[10]:'?';
-        setStatus('0 services found. Col[4]='+c4+' Col[7]='+c7+' Col[10]='+c10+' Col[14]='+c14+' | Headers: '+hdr,'error');
-        document.getElementById('btn').disabled=false;return;
-      }
-
-      // Count sales matches BEFORE the loop so we can use it as a filter
-      const salesMatchCount=Object.keys(salesQty).length+Object.keys(salesRev).length;
-
-      const today=new Date();
-      const cutoff=new Date(today-minYrs*365*24*60*60*1000);
-      const results=[];
-
-      for(const [id,svc] of Object.entries(services)){
-        const uid=id.toUpperCase();
-        if(salesQty[id]===undefined&&salesQty[uid]!==undefined){salesQty[id]=salesQty[uid];}
-        if(salesRev[id]===undefined&&salesRev[uid]!==undefined){salesRev[id]=salesRev[uid];}
-        // If sales file loaded, skip items with no sales in the period
-        if(hasSales&&!(salesQty[id]>0)&&!(salesRev[id]>0))continue;
-
-        const lc=lastChanged[id]||null;
-        if(lc&&lc>=cutoff)continue;
-        const lcYear=lc?lc.getFullYear():null;
-        const yrs=lcYear?CURRENT_YEAR-lcYear:null;
-        let inf=null,sug=null,diff=null,lostRev=null;
-        if(lcYear){
-          const m=cumInf(lcYear);
-          inf=Math.round((m-1)*1000)/10;
-          sug=Math.ceil(svc.price*m*100)/100;
-          diff=Math.round((sug-svc.price)*100)/100;
-          if(hasSales&&(salesQty[id]>0||salesRev[id]>0)){
-            // If we have actual qty, use qty × gap; otherwise estimate from revenue ratio
-            if(salesQty[id]>0){
-              lostRev=Math.round(diff*salesQty[id]*100)/100;
-            } else if(salesRev[id]>0){
-              // revenue / current price ≈ qty sold
-              const impliedQty=salesRev[id]/svc.price;
-              lostRev=Math.round(diff*impliedQty*100)/100;
-            }
-          }
-        }
-        // Skip items with no price history record
-        if(!lc)continue;
-        const daysSince=Math.floor((today-lc)/(1000*60*60*24));
-        results.push({id,desc:svc.desc,price:svc.price,
-          lastChanged:lc.toISOString().slice(0,10),
-          lcYear,yrs,daysSince,inf,sug,diff:diff||null,
-          qty:salesQty[id]||null,
-          rev:salesRev[id]||null,
-          lostRev});
-      }
-
-      results.sort((a,b)=>{
-        if(hasSales&&b.lostRev!=null&&a.lostRev!=null)return b.lostRev-a.lostRev;
-        if(!a.yrs&&b.yrs)return-1;if(a.yrs&&!b.yrs)return 1;
-        return(b.yrs||0)-(a.yrs||0);
-      });
-      allResults=results;
-
-      // Debug: show sample IDs from both files to diagnose mismatches
-      const salesSample=Object.keys(salesQty).slice(0,5).join(', ');
-      const svcSample=Object.keys(services).slice(0,5).join(', ');
-      const salesRowCount=salesRows.length;
-      const matchMsg=hasSales?' | Sales rows: '+salesRowCount+' | Sales IDs e.g.: ['+salesSample+'] | Service IDs e.g.: ['+svcSample+'] | Matched: '+salesMatchCount:'';
-      setStatus('Done — '+results.length+' services flagged'+matchMsg,'success');
-      renderResults();
-      document.getElementById('btn').disabled=false;
-    }catch(e){
-      setStatus('Error: '+e.message,'error');
-      document.getElementById('btn').disabled=false;
-    }
-  },30);
-}
-
-function renderResults(){
-  const totalLost=allResults.reduce((s,r)=>s+(r.lostRev||0),0);
-  if(hasSales&&totalLost>0){
-    document.getElementById('heroNum').textContent='$'+totalLost.toLocaleString('en-CA',{minimumFractionDigits:2,maximumFractionDigits:2});
-    document.getElementById('heroBox').style.display='block';
-  } else {
-    document.getElementById('heroBox').style.display='none';
-  }
-
-  const r8=allResults.filter(r=>r.yrs>=8).length;
-  const r5=allResults.filter(r=>r.yrs>=5&&r.yrs<8).length;
-  const r2=allResults.filter(r=>r.yrs>=2&&r.yrs<5).length;
-  const r1=allResults.filter(r=>r.yrs===1).length;
-  const rn=allResults.filter(r=>!r.yrs).length;
-
-  document.getElementById('statsRow').innerHTML=`
-    <div class="stat"><div class="sv">${allResults.length}</div><div class="sl">Total Flagged</div></div>
-    <div class="stat"><div class="sv" style="color:#ef4444">${r8}</div><div class="sl">8+ Years</div></div>
-    <div class="stat"><div class="sv" style="color:#d97706">${r5}</div><div class="sl">5–7 Years</div></div>
-    <div class="stat"><div class="sv" style="color:#22c55e">${r2+r1}</div><div class="sl">1–4 Years</div></div>
-`;
-
-  // Update table header
-  document.getElementById('thead').innerHTML=`
-    <th>Service</th>
-    <th style="text-align:right">Current $</th>
-    <th>Last Changed</th>
-    <th style="text-align:right">Days Since</th>
-    <th>Age</th>
-    <th>Inflation</th>
-    <th>Suggested $</th>
-    <th>Per Unit Gap</th>
-    ${hasSales?'<th style="text-align:right">Qty / Revenue</th><th style="text-align:right;color:#16a34a">Lost Revenue</th>':''}`;
-
-  document.getElementById('results').style.display='block';
-  renderTable();
-}
-
-function setFilter(f,btn){
-  activeFilter=f;
-  document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  renderTable();
-}
-
-function renderTable(){
-  let rows=allResults;
-  if(activeFilter==='8')rows=rows.filter(r=>r.yrs>=8);
-  else if(activeFilter==='5')rows=rows.filter(r=>r.yrs>=5&&r.yrs<8);
-  else if(activeFilter==='2')rows=rows.filter(r=>r.yrs>=2&&r.yrs<5);
-  else if(activeFilter==='1')rows=rows.filter(r=>r.yrs===1);
-  else if(activeFilter==='0')rows=rows.filter(r=>!r.yrs);
-
-  function pc(y){if(!y)return 'pn';if(y>=8)return 'pr';if(y>=5)return 'pa';return 'pg';}
-  function pl(y){return y?y+'yr':'No record';}
-
-  document.getElementById('tbody').innerHTML=rows.map(r=>`<tr>
-    <td><strong style="color:#1e3a5f">${esc(r.desc)}</strong> <span style="color:#333;font-size:10px">${esc(r.id)}</span></td>
-    <td style="text-align:right;color:#2563eb">$${r.price.toFixed(2)}</td>
-    <td style="color:#555;font-size:11px">${r.lastChanged}</td>
-    <td style="text-align:right;color:#888;font-size:11px">${r.daysSince!=null?r.daysSince.toLocaleString():'—'}</td>
-    <td><span class="pill ${pc(r.yrs)}">${pl(r.yrs)}</span></td>
-    <td style="color:#d97706">${r.inf!=null?'+'+r.inf+'%':'—'}</td>
-    <td style="font-weight:700;color:#1e3a5f">${r.sug!=null?'$'+r.sug.toFixed(2):'—'}</td>
-    <td style="color:#16a34a;font-weight:600">${r.diff!=null?'+$'+r.diff.toFixed(2):'—'}</td>
-    ${hasSales?`<td style="text-align:right;color:#64748b">${r.qty!=null?r.qty.toLocaleString()+'u':r.rev!=null?'$'+r.rev.toLocaleString('en-CA',{minimumFractionDigits:0,maximumFractionDigits:0}):'—'}</td>
-    <td style="text-align:right" class="lost">${r.lostRev!=null?'+$'+r.lostRev.toLocaleString('en-CA',{minimumFractionDigits:2,maximumFractionDigits:2}):'—'}</td>`:''}
-  </tr>`).join('');
-
-  document.getElementById('note').innerHTML=
-    '<strong>Logic:</strong> Active services (Type=S, Status=Active) with prices not updated in '+
-    (1)+' year(s)+. '+
-    'Suggested price = current × cumulative Canadian CPI to '+CURRENT_YEAR+'. '+(hasSales?'Lost revenue = per-unit gap × qty sold in last 365 days. ':'')+'Source: Statistics Canada.';
-}
-
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-
-function exportCSV(){
-  let csv='Item ID,Description,Current Price,Last Changed,Days Since,Years Since,Inflation %,Suggested Price,Per Unit Gap'+(hasSales?',Qty Sold,Lost Revenue':'')+'\n';
-  for(const r of allResults)
-    csv+=`"${r.id}","${r.desc}","$${r.price.toFixed(2)}","${r.lastChanged}","${r.daysSince||''}","${r.yrs||''}","${r.inf!=null?r.inf+'%':''}","${r.sug!=null?'$'+r.sug.toFixed(2):''}","${r.diff!=null?'$'+r.diff.toFixed(2):''}"${hasSales?`,"${r.qty||''}","${r.lostRev!=null?'$'+r.lostRev.toFixed(2):''}"`:''}\n`;
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
-  a.download='clinic-iq-price-review-'+new Date().toISOString().slice(0,10)+'.csv';
-  a.click();
-}
-</script>
 </body>
 </html>
-
