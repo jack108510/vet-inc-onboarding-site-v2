@@ -428,9 +428,9 @@ function analyze() {
         const item = itemMap.get(invid);
         if (!item) continue;
         const totalQty = usage.qty;
-        const totalRevenue = usage.tot;
         if (totalQty < 10) continue; // base minimum filter
-        const avgActualCharge = totalRevenue / totalQty;
+        const totalRevenue = item.listedPrice * totalQty;
+        const avgActualCharge = item.listedPrice;
         const opportunityScore = totalQty * (item.listedPrice * 0.10);
         allItems.push({
           ...item,

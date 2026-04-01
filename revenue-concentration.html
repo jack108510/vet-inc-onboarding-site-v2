@@ -437,14 +437,14 @@ function analyze() {
       for (const [invid, usage] of usageMap) {
         const item = itemMap.get(invid);
         if (!item) continue;
-        const totalRevenue = usage.tot;
         const totalQty = usage.qty;
         if (totalQty <= 0) continue;
+        const totalRevenue = item.listedPrice * totalQty;
         allItems.push({
           ...item,
           totalRevenue,
           totalQty,
-          avgActualCharge: totalRevenue / totalQty,
+          avgActualCharge: item.listedPrice,
         });
       }
       if (allItems.length === 0) throw new Error('No matching items found between the two files. Please check that you exported the correct reports.');
