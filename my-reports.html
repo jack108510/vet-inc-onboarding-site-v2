@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>My Reports — Vet Solutions</title>
+<title>My Reports — Vet INC</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--blue:#2563eb;--blue-light:#60a5fa;--blue-dim:#eff6ff;--blue-border:#dbeafe;--navy:#1e3a5f;--muted:#64748b;--bg:#f0f6ff;--white:#fff;--green:#16a34a;--red:#ef4444;--amber:#d97706;}
@@ -101,7 +101,7 @@ tr:last-child td{border-bottom:none}tr:hover td{background:#f8faff}
 <nav>
   <a class="nav-logo" href="index.html">
     <div class="nav-logo-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
-    <div class="nav-logo-text">Vet <span>Solutions</span></div>
+    <div class="nav-logo-text">Vet <span>INC</span></div>
   </a>
   <div class="nav-actions">
     <a class="nav-link" href="price-analyzer.html">+ New Analysis</a>
@@ -209,7 +209,7 @@ function openReportById(id) {
 
 function renderDetail(r) {
   document.getElementById('print-title').textContent = r.clinic + ' — Inflation Adjustment Report';
-  document.getElementById('print-date-line').textContent = 'Generated ' + r.date + ' · Vet Solutions';
+  document.getElementById('print-date-line').textContent = 'Generated ' + r.date + ' · Vet INC';
 
   const totalLost = r.results.reduce((s, x) => s + (x.lostRev || 0), 0);
   const max8 = r.results.filter(x => x.yrs >= 8).length;
@@ -279,7 +279,7 @@ function exportCurrentCSV() {
   const csv = rows.map(row => row.map(v => '"'+String(v||'').replace(/"/g,'""')+'"').join(',')).join('\n');
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv'}));
-  a.download = 'vet-solutions-' + clinic + '-' + r.timestamp.slice(0,10) + '.csv';
+  a.download = 'vet-inc-' + clinic + '-' + r.timestamp.slice(0,10) + '.csv';
   a.click();
 }
 
