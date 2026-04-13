@@ -70,6 +70,13 @@ nav{background:var(--white);border-bottom:1px solid var(--blue-border);padding:0
 .badge-pill{background:var(--blue-dim);color:var(--blue);border:1px solid var(--blue-border);border-radius:999px;padding:6px 14px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
 .badge-pill.purple{color:var(--purple);border-color:#e9d5ff;background:#f5f3ff}
 .badge-pill.green{color:var(--green);border-color:#bbf7d0;background:#f0fdf4}
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:18px}
+.pillar-card{background:var(--white);border:1px solid var(--blue-border);border-radius:16px;padding:18px 16px;text-align:left;box-shadow:0 8px 22px rgba(37,99,235,.06)}
+.pillar-title{font-size:.9rem;font-weight:800;color:var(--navy);margin-bottom:6px}
+.pillar-desc{font-size:.85rem;color:var(--muted);line-height:1.6}
+.integration-card{background:var(--white);border:1px solid var(--blue-border);border-radius:18px;padding:22px;box-shadow:0 12px 30px rgba(37,99,235,.08);text-align:left}
+.integration-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:14px 0}
+.integration-step{background:var(--bg);border:1px solid var(--blue-border);border-radius:12px;padding:12px;font-size:.82rem;color:var(--muted)}
 body{overflow-x:hidden}
 
 /* DIFFERENCE STRIP */
@@ -153,10 +160,19 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:32px 40px;displ
     <span class="badge-pill green">Future Expansion</span>
   </div>
 
-  <div class="path-features" style="margin-top:8px;display:inline-flex;flex-direction:column;align-items:center;gap:10px">
-    <div class="path-feature"><div class="path-feature-dot"></div><span><b>Pricing intelligence:</b> small fee adjustments that compound into real revenue over time.</span></div>
-    <div class="path-feature"><div class="path-feature-dot"></div><span><b>Daily ops analysis:</b> detect over‑staffing, policy drift, and abnormal charges in real time.</span></div>
-    <div class="path-feature"><div class="path-feature-dot"></div><span><b>Future expansion:</b> smart inventory management, social/email marketing, in‑clinic efficiency tools, and more.</span></div>
+  <div class="pillars">
+    <div class="pillar-card">
+      <div class="pillar-title">Pricing Intelligence</div>
+      <div class="pillar-desc">Small, surgical fee adjustments that compound into meaningful revenue over time.</div>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-title">Daily Ops Analyzer</div>
+      <div class="pillar-desc">Flags over‑staffing, policy drift, and abnormal charges with daily variance checks.</div>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-title">Future Expansion</div>
+      <div class="pillar-desc">Smart inventory management, social/email marketing, in‑clinic efficiency tools, and more.</div>
+    </div>
   </div>
 </div>
 
@@ -173,14 +189,15 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:32px 40px;displ
 
 <!-- INTEGRATION -->
 <div class="integration-section">
-  <div class="path-card purple" style="cursor:default">
+  <div class="integration-card">
     <div class="path-label">1‑Hour Integration</div>
     <div class="path-title">One Script, Fully Live</div>
-    <div class="path-desc">Run a single script on the clinic computer. It installs the sync service + remote access, streams data to your schema, and brings the dashboard live within 1 hour.</div>
-    <div class="path-features">
-      <div class="path-feature"><div class="path-feature-dot"></div><span>Installs Windows service</span></div>
-      <div class="path-feature"><div class="path-feature-dot"></div><span>Sets up remote access</span></div>
-      <div class="path-feature"><div class="path-feature-dot"></div><span>Starts data sync automatically</span></div>
+    <div class="path-desc">We install, sync, and launch your dashboard in under an hour.</div>
+    <div class="integration-steps">
+      <div class="integration-step">Run a single script on the clinic PC</div>
+      <div class="integration-step">Service + secure remote access installed</div>
+      <div class="integration-step">Data streams into your private schema</div>
+      <div class="integration-step">Dashboard goes live within 60 minutes</div>
     </div>
     <div class="path-btn"><a class="demo-link" href="#contact">Get integrated →</a></div>
   </div>
