@@ -70,13 +70,16 @@ nav{background:var(--white);border-bottom:1px solid var(--blue-border);padding:0
 .badge-pill{background:var(--blue-dim);color:var(--blue);border:1px solid var(--blue-border);border-radius:999px;padding:6px 14px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
 .badge-pill.purple{color:var(--purple);border-color:#e9d5ff;background:#f5f3ff}
 .badge-pill.green{color:var(--green);border-color:#bbf7d0;background:#f0fdf4}
-.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:18px}
-.pillar-card{background:var(--white);border:1px solid var(--blue-border);border-radius:16px;padding:18px 16px;text-align:left;box-shadow:0 8px 22px rgba(37,99,235,.06)}
-.pillar-title{font-size:.9rem;font-weight:800;color:var(--navy);margin-bottom:6px}
-.pillar-desc{font-size:.85rem;color:var(--muted);line-height:1.6}
-.integration-card{background:var(--white);border:1px solid var(--blue-border);border-radius:18px;padding:22px;box-shadow:0 12px 30px rgba(37,99,235,.08);text-align:left}
-.integration-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:14px 0}
-.integration-step{background:var(--bg);border:1px solid var(--blue-border);border-radius:12px;padding:12px;font-size:.82rem;color:var(--muted)}
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:22px}
+.pillar-card{background:linear-gradient(180deg,#ffffff 0%,#f8fbff 100%);border:1px solid var(--blue-border);border-radius:18px;padding:20px;text-align:left;box-shadow:0 10px 26px rgba(37,99,235,.08)}
+.pillar-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--blue-dim);color:var(--blue);font-weight:900;margin-bottom:10px}
+.pillar-icon.purple{background:#f5f3ff;color:var(--purple)}
+.pillar-icon.green{background:#f0fdf4;color:var(--green)}
+.pillar-title{font-size:.95rem;font-weight:800;color:var(--navy);margin-bottom:6px}
+.pillar-desc{font-size:.86rem;color:var(--muted);line-height:1.6}
+.integration-card{background:linear-gradient(180deg,#ffffff 0%,#f8fbff 100%);border:1px solid var(--blue-border);border-radius:18px;padding:24px;box-shadow:0 12px 30px rgba(37,99,235,.10);text-align:left}
+.integration-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:16px 0}
+.integration-step{background:var(--white);border:1px solid var(--blue-border);border-radius:12px;padding:12px;font-size:.82rem;color:var(--muted)}
 body{overflow-x:hidden}
 
 /* DIFFERENCE STRIP */
@@ -162,14 +165,17 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:32px 40px;displ
 
   <div class="pillars">
     <div class="pillar-card">
+      <div class="pillar-icon">$</div>
       <div class="pillar-title">Pricing Intelligence</div>
       <div class="pillar-desc">Small, surgical fee adjustments that compound into meaningful revenue over time.</div>
     </div>
     <div class="pillar-card">
+      <div class="pillar-icon purple">⚙️</div>
       <div class="pillar-title">Daily Ops Analyzer</div>
       <div class="pillar-desc">Flags over‑staffing, policy drift, and abnormal charges with daily variance checks.</div>
     </div>
     <div class="pillar-card">
+      <div class="pillar-icon green">✨</div>
       <div class="pillar-title">Future Expansion</div>
       <div class="pillar-desc">Smart inventory management, social/email marketing, in‑clinic efficiency tools, and more.</div>
     </div>
