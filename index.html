@@ -61,6 +61,8 @@ nav{background:var(--white);border-bottom:1px solid var(--blue-border);padding:0
 .path-card.purple .path-btn{background:linear-gradient(135deg,var(--purple),#a78bfa);box-shadow:0 3px 10px rgba(124,58,237,.2)}
 .path-btn-arrow{transition:transform .2s}
 .path-card:hover .path-btn-arrow{transform:translateX(4px)}
+.demo-shot{width:100%;border-radius:12px;border:1px solid var(--blue-border);box-shadow:0 10px 30px rgba(15,23,42,.08);margin:12px 0}
+.demo-link{text-decoration:none;color:#fff}
 
 /* DIFFERENCE STRIP */
 .diff-strip{background:var(--white);border-top:1px solid var(--blue-border);border-bottom:1px solid var(--blue-border);padding:48px 24px;text-align:center}
@@ -135,8 +137,9 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:32px 40px;displ
   <div class="path-card" style="cursor:default">
     <div class="path-label">Live Demo</div>
     <div class="path-title">Try Vet INC</div>
-    <div class="path-desc">Open the demo dashboard with simulated clinic data.</div>
-    <div class="path-btn"><a href="https://jack108510.github.io/vet-inc-demo-v1.3/" target="_blank" style="color:#fff;text-decoration:none">Open Demo →</a></div>
+    <div class="path-desc">Explore the full dashboard experience with demo clinic data.</div>
+    <img class="demo-shot" src="assets/demo-screenshot.jpg" alt="Vet INC demo dashboard" />
+    <div class="path-btn"><a class="demo-link" href="https://jack108510.github.io/vet-inc-demo-v1.3/" target="_blank">Open Demo →</a></div>
   </div>
   <div class="path-card purple" style="cursor:default">
     <div class="path-label">1‑Hour Integration</div>
