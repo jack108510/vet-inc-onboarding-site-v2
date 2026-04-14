@@ -77,6 +77,9 @@ nav{background:var(--white);border-bottom:1px solid var(--blue-border);padding:0
 .pillar-kicker{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
 .pillar-title{font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:6px}
 .pillar-desc{font-size:.86rem;color:var(--muted);line-height:1.6}
+.pillar-points{margin-top:10px;display:grid;gap:6px}
+.pillar-point{display:flex;gap:8px;align-items:flex-start;font-size:.82rem;color:var(--muted)}
+.pillar-dot{width:6px;height:6px;border-radius:999px;background:var(--blue);margin-top:6px;flex-shrink:0}
 .integration-card{background:linear-gradient(180deg,#ffffff 0%,#f8fbff 100%);border:1px solid var(--blue-border);border-radius:18px;padding:24px;box-shadow:0 12px 30px rgba(37,99,235,.10);text-align:left}
 .integration-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:16px 0}
 .integration-step{background:var(--white);border:1px solid var(--blue-border);border-radius:12px;padding:12px;font-size:.82rem;color:var(--muted)}
@@ -164,16 +167,28 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:32px 40px;displ
         <div class="pillar-kicker">Pillar 01</div>
         <div class="pillar-title">Pricing Intelligence</div>
         <div class="pillar-desc">Small, surgical fee adjustments that compound into meaningful revenue over time.</div>
+        <div class="pillar-points">
+          <div class="pillar-point"><span class="pillar-dot"></span><span>Inflation adjustment + .99 recovery</span></div>
+          <div class="pillar-point"><span class="pillar-dot"></span><span>Micro‑margin campaigns</span></div>
+        </div>
       </div>
       <div class="pillar-card">
         <div class="pillar-kicker">Pillar 02</div>
         <div class="pillar-title">Daily Ops Analyzer</div>
         <div class="pillar-desc">Flags over‑staffing, policy drift, and abnormal charges with daily variance checks.</div>
+        <div class="pillar-points">
+          <div class="pillar-point"><span class="pillar-dot"></span><span>Revenue per hour alerts</span></div>
+          <div class="pillar-point"><span class="pillar-dot"></span><span>Policy drift detection</span></div>
+        </div>
       </div>
       <div class="pillar-card">
         <div class="pillar-kicker">Pillar 03</div>
         <div class="pillar-title">Future Expansion</div>
         <div class="pillar-desc">Smart inventory management, social/email marketing, in‑clinic efficiency tools, and more.</div>
+        <div class="pillar-points">
+          <div class="pillar-point"><span class="pillar-dot"></span><span>Inventory intelligence</span></div>
+          <div class="pillar-point"><span class="pillar-dot"></span><span>Marketing + efficiency modules</span></div>
+        </div>
       </div>
     </div>
   </div>
