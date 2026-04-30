@@ -9,6 +9,9 @@
 <meta name="robots" content="index, follow"/>
 <link rel="canonical" href="https://vetinc.ca/"/>
 
+<!-- Force HTTPS redirect -->
+<script>if(location.protocol==='http:'&&location.hostname!=='localhost')location.replace('https://'+location.hostname+location.pathname+location.search+location.hash)</script>
+
 <!-- Open Graph -->
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="Vet INC — Smart Revenue Tools for Veterinary Clinics"/>
@@ -187,6 +190,26 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:32px 40px;displ
       <div class="path-desc">Three pillars power the platform today — with more coming next.</div>
     </div>
 
+    <!-- Trust Stats -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin:24px auto;max-width:700px">
+      <div style="text-align:center;padding:20px 16px;background:var(--blue-dim);border-radius:14px;border:1px solid var(--blue-border)">
+        <div style="font-size:32px;font-weight:900;color:var(--blue)">3%</div>
+        <div style="font-size:.78rem;color:var(--muted);margin-top:4px">Average annual price drift per service code</div>
+      </div>
+      <div style="text-align:center;padding:20px 16px;background:#f0fdf4;border-radius:14px;border:1px solid #bbf7d0">
+        <div style="font-size:32px;font-weight:900;color:var(--green)">$0.51</div>
+        <div style="font-size:.78rem;color:var(--muted);margin-top:4px">Revenue lost per non-.99 price transaction</div>
+      </div>
+      <div style="text-align:center;padding:20px 16px;background:#f5f3ff;border-radius:14px;border:1px solid #e9d5ff">
+        <div style="font-size:32px;font-weight:900;color:var(--purple)">60min</div>
+        <div style="font-size:.78rem;color:var(--muted);margin-top:4px">From install to live dashboard</div>
+      </div>
+      <div style="text-align:center;padding:20px 16px;background:#fef3c7;border-radius:14px;border:1px solid #fde68a">
+        <div style="font-size:32px;font-weight:900;color:#d97706">24/7</div>
+        <div style="font-size:.78rem;color:var(--muted);margin-top:4px">Automated monitoring — never sleeps</div>
+      </div>
+    </div>
+
     <div class="pillars">
       <div class="pillar-card">
         <div class="pillar-kicker">Pillar 01</div>
@@ -305,6 +328,55 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:32px 40px;displ
         <div class="pillar-kicker">Recommend</div>
         <div class="pillar-title">Actionable Optimization</div>
         <div class="pillar-desc">Every recommendation comes with dollar impact. No vague suggestions — just "raise this code by $X to recover $Y/year" or "this expense category is 22% above your 6-month average." One-click to review, one click to act.</div>
+      </div>
+    </div>
+
+    <!-- Example Recommendations -->
+    <div style="margin-top:24px;text-align:left">
+      <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:12px;text-align:center">Example Brain Alerts</div>
+      <div style="display:grid;gap:10px;max-width:600px;margin:0 auto">
+        <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;background:var(--bg);border-radius:12px;border:1px solid var(--blue-border)">
+          <div style="font-size:18px;flex-shrink:0">💰</div>
+          <div><div style="font-size:.86rem;font-weight:700;color:var(--navy)">Price Drift Detected: Rabies Vaccine</div><div style="font-size:.8rem;color:var(--muted);margin-top:2px">Last price change was 18 months ago. CPI adjustment suggests +$2.40. Estimated annual recovery: <strong style="color:var(--green)">$864</strong></div></div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;background:var(--bg);border-radius:12px;border:1px solid var(--blue-border)">
+          <div style="font-size:18px;flex-shrink:0">📊</div>
+          <div><div style="font-size:.86rem;font-weight:700;color:var(--navy)">.99 Opportunity: 47 Service Codes</div><div style="font-size:.8rem;color:var(--muted);margin-top:2px">47 codes don't end in .99. Rounding up recovers an average of $0.51 per transaction. Estimated annual gain: <strong style="color:var(--green)">$3,200</strong></div></div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;background:var(--bg);border-radius:12px;border:1px solid var(--blue-border)">
+          <div style="font-size:18px;flex-shrink:0">⚠️</div>
+          <div><div style="font-size:.86rem;font-weight:700;color:var(--navy)">Expense Anomaly: Lab Supplies</div><div style="font-size:.8rem;color:var(--muted);margin-top:2px">Lab supply costs are 28% above your 6-month average. Possible supplier price increase or ordering pattern change.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECURITY TRUST -->
+<div class="integration-section" style="padding-top:0">
+  <div style="max-width:700px;margin:0 auto;text-align:center">
+    <div class="path-label" style="color:var(--green)">Secure by Design</div>
+    <h2 class="path-title" style="font-size:1.2rem">Your Data Stays Yours</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:16px">
+      <div style="padding:16px;background:var(--white);border:1px solid var(--blue-border);border-radius:12px">
+        <div style="font-size:20px;margin-bottom:6px">🔒</div>
+        <div style="font-size:.82rem;font-weight:700;color:var(--navy)">Encrypted</div>
+        <div style="font-size:.75rem;color:var(--muted)">All data encrypted in transit and at rest</div>
+      </div>
+      <div style="padding:16px;background:var(--white);border:1px solid var(--blue-border);border-radius:12px">
+        <div style="font-size:20px;margin-bottom:6px">🗄️</div>
+        <div style="font-size:.82rem;font-weight:700;color:var(--navy)">Private Schema</div>
+        <div style="font-size:.75rem;color:var(--muted)">Each clinic gets its own isolated database</div>
+      </div>
+      <div style="padding:16px;background:var(--white);border:1px solid var(--blue-border);border-radius:12px">
+        <div style="font-size:20px;margin-bottom:6px">🇨🇦</div>
+        <div style="font-size:.82rem;font-weight:700;color:var(--navy)">Canadian Hosted</div>
+        <div style="font-size:.75rem;color:var(--muted)">Data stored on Canadian servers</div>
+      </div>
+      <div style="padding:16px;background:var(--white);border:1px solid var(--blue-border);border-radius:12px">
+        <div style="font-size:20px;margin-bottom:6px">📋</div>
+        <div style="font-size:.82rem;font-weight:700;color:var(--navy)">No Data Sharing</div>
+        <div style="font-size:.75rem;color:var(--muted)">Your clinic data is never sold or shared</div>
       </div>
     </div>
   </div>
