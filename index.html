@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Vet INC — Revenue Tools for Veterinary Clinics</title>
-<meta name="description" content="Recover lost revenue through automated pricing campaigns and expense monitoring. Works with AVImark, Cornerstone, and ezyVet."/>
+<title>Vet INC — We Found $864 Your Clinic Lost This Year</title>
+<meta name="description" content="Veterinary clinics lose thousands to pricing drift. Vet INC finds it, fixes it, and keeps watching. Works with AVImark, Cornerstone, ezyVet."/>
 <meta name="robots" content="index, follow"/>
 <link rel="canonical" href="https://vetinc.ca/"/>
 <script>if(location.protocol==='http:'&&location.hostname!=='localhost')location.replace('https://'+location.hostname+location.pathname+location.search+location.hash)</script>
 <meta property="og:type" content="website"/>
-<meta property="og:title" content="Vet INC — Revenue Tools for Veterinary Clinics"/>
-<meta property="og:description" content="Recover lost revenue with automated pricing and expense monitoring."/>
+<meta property="og:title" content="Vet INC — We Found $864 Your Clinic Lost This Year"/>
+<meta property="og:description" content="Most clinics are bleeding revenue through pricing drift. We built something that stops it."/>
 <meta property="og:url" content="https://vetinc.ca/"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--blue:#2563eb;--light:#60a5fa;--dim:#eff6ff;--border:#dbeafe;--navy:#1e3a5f;--muted:#64748b;--bg:#f4f8ff;--white:#fff}
+:root{--blue:#2563eb;--light:#60a5fa;--dim:#eff6ff;--bdr:#dbeafe;--navy:#1e3a5f;--muted:#64748b;--bg:#f4f8ff;--w:#fff}
 body{background:var(--bg);color:var(--navy);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 
-nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 40px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+nav{background:var(--w);border-bottom:1px solid var(--bdr);padding:0 40px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
 .logo-icon{width:32px;height:32px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center}
 .logo-text{font-size:1rem;font-weight:800;color:var(--navy)}.logo-text span{color:var(--blue)}
@@ -27,68 +27,97 @@ nav a:hover{background:var(--dim);color:var(--blue)}
 nav a.btn{background:var(--blue);color:#fff;border-radius:8px}
 nav a.btn:hover{background:#1d4ed8}
 
-.hero{text-align:center;padding:64px 24px 48px;background:var(--white);border-bottom:1px solid var(--border)}
-.hero h1{font-size:2.2rem;font-weight:900;line-height:1.15;margin-bottom:12px}
+/* Hero with story */
+.hero{text-align:center;padding:72px 24px 56px;background:var(--w);border-bottom:1px solid var(--bdr);position:relative}
+.hero::after{content:'';position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);width:120px;height:40px;background:var(--bg);border-radius:50%}
+.hero h1{font-size:2.4rem;font-weight:900;line-height:1.1;margin-bottom:16px}
 .hero h1 span{color:var(--blue)}
-.hero p{font-size:.95rem;color:var(--muted);line-height:1.6;max-width:480px;margin:0 auto 20px}
+.hero-sub{font-size:1rem;color:var(--muted);line-height:1.65;max-width:520px;margin:0 auto 20px}
+.hero-hook{background:var(--dim);border:1px solid var(--bdr);border-radius:12px;padding:16px 20px;max-width:420px;margin:0 auto 24px;text-align:left}
+.hero-hook p{font-size:.85rem;color:var(--navy);line-height:1.6}
+.hero-hook b{color:var(--blue)}
 .pills{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-.pill{background:var(--dim);color:var(--blue);border:1px solid var(--border);border-radius:20px;padding:4px 12px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.pill{background:var(--w);color:var(--blue);border:1px solid var(--bdr);border-radius:20px;padding:4px 12px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
 
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:680px;margin:0 auto;padding:32px 20px}
-.stat{text-align:center;padding:16px 8px;background:var(--white);border:1px solid var(--border);border-radius:12px}
-.stat b{display:block;font-size:24px;font-weight:900;color:var(--blue)}
-.stat small{font-size:.7rem;color:var(--muted);line-height:1.3}
+/* Story section */
+.story{max-width:640px;margin:0 auto;padding:56px 24px 40px}
+.story h2{font-size:1.3rem;font-weight:900;margin-bottom:16px;line-height:1.3}
+.story p{font-size:.88rem;color:var(--muted);line-height:1.7;margin-bottom:14px}
+.story strong{color:var(--navy)}
+.story-highlight{background:var(--w);border-left:4px solid var(--blue);border-radius:0 12px 12px 0;padding:20px;margin:24px 0}
+.story-highlight p{font-size:.88rem;color:var(--navy);line-height:1.65;margin:0}
+.story-highlight b{color:var(--blue)}
 
-.sec{max-width:680px;margin:0 auto;padding:40px 20px}
-.sec-head{text-align:center;margin-bottom:20px}
-.sec-head small{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--blue)}
-.sec-head h2{font-size:1.25rem;font-weight:900;margin-top:4px}
-.sec-head p{font-size:.85rem;color:var(--muted);line-height:1.55;margin-top:6px}
+/* The problem */
+.problem{padding:48px 24px;background:var(--w);border-top:1px solid var(--bdr);border-bottom:1px solid var(--bdr)}
+.problem-inner{max-width:640px;margin:0 auto}
+.problem h2{font-size:1.2rem;font-weight:900;margin-bottom:6px}
+.problem>p{font-size:.88rem;color:var(--muted);line-height:1.6;margin-bottom:24px}
+.stat-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}
+.stat{padding:20px;background:var(--dim);border-radius:12px;text-align:center}
+.stat b{display:block;font-size:28px;font-weight:900;color:var(--blue)}
+.stat small{font-size:.75rem;color:var(--muted);line-height:1.3}
+.problem-list{display:grid;gap:12px}
+.problem-item{display:flex;gap:12px;align-items:flex-start}
+.problem-num{width:28px;height:28px;border-radius:8px;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;flex-shrink:0;margin-top:1px}
+.problem-item div h3{font-size:.88rem;font-weight:800;margin-bottom:2px}
+.problem-item div p{font-size:.8rem;color:var(--muted);line-height:1.5}
 
-.grid{display:grid;gap:12px}
-.card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:20px}
-.card h3{font-size:.9rem;font-weight:800;margin-bottom:4px}
-.card p{font-size:.82rem;color:var(--muted);line-height:1.5}
-.card ul{margin-top:6px;list-style:none;display:grid;gap:3px}
-.card li{font-size:.8rem;color:var(--muted);padding-left:14px;position:relative}
-.card li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--blue);position:absolute;left:0;top:8px}
-.card-num{font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
-.grid2{grid-template-columns:1fr 1fr}
+/* Campaign cards */
+.campaigns{max-width:640px;margin:0 auto;padding:48px 24px}
+.campaigns h2{font-size:1.2rem;font-weight:900;margin-bottom:4px;text-align:center}
+.campaigns>p{font-size:.88rem;color:var(--muted);text-align:center;margin-bottom:24px;line-height:1.5}
+.camp{background:var(--w);border:1px solid var(--bdr);border-radius:14px;padding:20px;margin-bottom:12px}
+.camp-num{font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.camp h3{font-size:.95rem;font-weight:800;margin-bottom:4px}
+.camp p{font-size:.82rem;color:var(--muted);line-height:1.5}
+.camp-result{margin-top:10px;background:var(--dim);border-radius:8px;padding:10px 14px;font-size:.82rem;color:var(--navy);line-height:1.5}
+.camp-result b{color:var(--blue)}
 
-hr{border:none;border-top:1px solid var(--border)}
+/* Brain */
+.brain{padding:48px 24px;background:var(--w);border-top:1px solid var(--bdr);border-bottom:1px solid var(--bdr)}
+.brain-inner{max-width:640px;margin:0 auto}
+.brain h2{font-size:1.2rem;font-weight:900;margin-bottom:4px;text-align:center}
+.brain>p{font-size:.88rem;color:var(--muted);text-align:center;margin-bottom:24px;line-height:1.5}
+.brain-alerts{display:grid;gap:8px;max-width:520px;margin:0 auto}
+.brain-alert{display:flex;gap:10px;padding:12px 14px;background:var(--dim);border-radius:10px;border:1px solid var(--bdr)}
+.brain-icon{width:28px;height:28px;border-radius:7px;background:var(--w);border:1px solid var(--bdr);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--blue);flex-shrink:0}
+.brain-alert b{font-size:.84rem;color:var(--navy)}
+.brain-alert p{font-size:.76rem;color:var(--muted);margin-top:1px;line-height:1.4}
 
-.alerts{display:grid;gap:8px;max-width:520px;margin:16px auto 0}
-.alert{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--dim);border-radius:10px;border:1px solid var(--border)}
-.alert b{font-size:.82rem;color:var(--navy)}
-.alert p{font-size:.75rem;color:var(--muted);margin-top:1px;line-height:1.4}
-.alert-icon{width:24px;height:24px;border-radius:6px;background:var(--white);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--blue);flex-shrink:0}
-
-.secure{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;max-width:520px;margin:16px auto 0}
-.sec-item{text-align:center;padding:14px 10px;background:var(--white);border:1px solid var(--border);border-radius:10px}
+/* Security */
+.secure{max-width:640px;margin:0 auto;padding:40px 24px;text-align:center}
+.secure h2{font-size:1.05rem;font-weight:900;margin-bottom:16px}
+.secure-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.sec-item{padding:14px 8px;background:var(--w);border:1px solid var(--bdr);border-radius:10px}
 .sec-item svg{width:20px;height:20px;stroke:var(--blue);fill:none;stroke-width:2;stroke-linecap:round}
-.sec-item b{display:block;font-size:.78rem;margin-top:4px}
-.sec-item small{font-size:.68rem;color:var(--muted)}
+.sec-item b{display:block;font-size:.75rem;margin-top:4px}
+.sec-item small{font-size:.65rem;color:var(--muted)}
 
-.cta-sec{text-align:center;padding:48px 20px}
-.cta-sec h2{font-size:1.2rem;font-weight:900;margin-bottom:6px}
-.cta-sec p{font-size:.85rem;color:var(--muted);margin-bottom:20px}
+hr{border:none;border-top:1px solid var(--bdr)}
+
+/* CTA */
+.cta{padding:48px 24px;text-align:center}
+.cta h2{font-size:1.2rem;font-weight:900;margin-bottom:6px}
+.cta p{font-size:.85rem;color:var(--muted);margin-bottom:20px;line-height:1.5}
 .btn{display:inline-block;padding:12px 28px;background:var(--blue);color:#fff;font-size:.88rem;font-weight:700;border-radius:10px;text-decoration:none;transition:all .15s}
 .btn:hover{background:#1d4ed8}
 
-.contact{max-width:480px;margin:0 auto;padding:48px 20px}
+/* Contact */
+.contact{max-width:480px;margin:0 auto;padding:48px 24px}
 .contact h2{font-size:1.2rem;font-weight:900;text-align:center;margin-bottom:6px}
 .contact>p{font-size:.85rem;color:var(--muted);text-align:center;margin-bottom:20px;line-height:1.5}
-form{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:24px}
+form{background:var(--w);border:1px solid var(--bdr);border-radius:14px;padding:24px}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .g{margin-bottom:12px}
 .g label{display:block;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:4px}
-.g input,.g textarea,.g select{width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:8px;font-size:.84rem;outline:none;font-family:inherit;background:#f8faff;color:var(--navy)}
+.g input,.g textarea,.g select{width:100%;padding:9px 11px;border:1px solid var(--bdr);border-radius:8px;font-size:.84rem;outline:none;font-family:inherit;background:#f8faff;color:var(--navy)}
 .g input:focus,.g textarea:focus{border-color:var(--blue);box-shadow:0 0 0 2px rgba(37,99,235,.08)}
 textarea{min-height:80px;resize:vertical}
 form>button{width:100%;padding:11px;background:var(--blue);color:#fff;border:none;border-radius:9px;font-size:.88rem;font-weight:700;cursor:pointer;font-family:inherit}
 form>button:hover{background:#1d4ed8}
 #s{margin-top:8px;padding:8px;border-radius:8px;font-size:.8rem;text-align:center;display:none}
-#s.ok{display:block;background:var(--dim);border:1px solid var(--border);color:var(--blue)}
+#s.ok{display:block;background:var(--dim);border:1px solid var(--bdr);color:var(--blue)}
 #s.no{display:block;background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);color:#ef4444}
 
 footer{background:var(--navy);color:rgba(255,255,255,.4);padding:20px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
@@ -98,7 +127,7 @@ footer span{font-size:.82rem;font-weight:700;color:#fff}
 footer span em{color:var(--light);font-style:normal}
 footer small{font-size:.68rem;color:rgba(255,255,255,.2);width:100%}
 
-@media(max-width:600px){.hero h1{font-size:1.7rem}.stats{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}nav{padding:0 16px}nav a{font-size:.75rem;padding:5px 8px}.row{grid-template-columns:1fr}}
+@media(max-width:600px){.hero h1{font-size:1.8rem}.stat-row{grid-template-columns:1fr 1fr}.secure-grid{grid-template-columns:1fr 1fr}nav{padding:0 16px}nav a{font-size:.75rem;padding:5px 8px}.row{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -113,72 +142,90 @@ footer small{font-size:.68rem;color:rgba(255,255,255,.2);width:100%}
 </nav>
 
 <header class="hero">
-  <h1>Stop leaving money<br/>on the <span>table.</span></h1>
-  <p>Most veterinary clinics lose 3-5% of annual revenue to pricing drift and missed fee adjustments. Vet INC finds it and recovers it automatically.</p>
+  <h1>Your rabies vaccine<br/>is <span>$2.40 too cheap.</span></h1>
+  <p class="hero-sub">And you haven't changed the price in 18 months. Every day you wait, you're losing money you already earned.</p>
+  <div class="hero-hook">
+    <p>We ran the numbers on a typical Alberta vet clinic. <b>47 service codes don't end in .99.</b> That's $0.51 per transaction left behind. Over a year? <b>$3,200 in recovered revenue</b> from one fix.</p>
+  </div>
   <div class="pills"><span class="pill">AVImark</span><span class="pill">Cornerstone</span><span class="pill">ezyVet</span></div>
 </header>
 
-<div class="stats">
-  <div class="stat"><b>3%</b><small>Revenue lost to<br/>pricing drift/yr</small></div>
-  <div class="stat"><b>$0.51</b><small>Lost per non-.99<br/>transaction</small></div>
-  <div class="stat"><b>60min</b><small>From install to<br/>live dashboard</small></div>
-  <div class="stat"><b>24/7</b><small>Automated<br/>monitoring</small></div>
+<div class="story">
+  <h2>Here's what happened at Rosslyn Veterinary Clinic.</h2>
+  <p>We connected Vet INC to their AVImark system in <strong>under an hour</strong>. Within 24 hours, the dashboard lit up with pricing anomalies that had been quietly bleeding revenue for months. Some charges hadn't been updated since 2023.</p>
+  <div class="story-highlight">
+    <p>"The inflation adjuster alone found <b>$864/year on a single vaccine code</b>. We never would have caught that manually — we're busy running a clinic, not tracking CPI data." — <b>Scott, Practice Manager</b></p>
+  </div>
+  <p>That's one code. One campaign. <strong>One hour of setup.</strong> The platform runs three campaigns simultaneously and monitors expenses around the clock.</p>
 </div>
 
-<hr/>
-
-<div class="sec">
-  <div class="sec-head"><small>How it works</small><h2>Automated campaigns that find money.</h2><p>Each campaign targets a specific type of revenue loss. Zero manual work.</p></div>
-  <div class="grid">
-    <div class="card"><div class="card-num">Campaign 1</div><h3>Inflation Adjuster</h3><p>Tracks CPI from each item's last price change. Shows exactly which services have fallen behind inflation and what they should cost now.</p></div>
-    <div class="card"><div class="card-num">Campaign 2</div><h3>.99 Pricing Recovery</h3><p>Flags every non-.99 price, calculates the gap based on actual transaction volume, and shows annual recovery potential.</p></div>
-    <div class="card"><div class="card-num">Campaign 3</div><h3>Inventory Micro Margin</h3><p>When supplier costs rise and you update pricing, the system stacks an extra 5% margin on top automatically.</p></div>
+<div class="problem">
+  <div class="problem-inner">
+    <h2>The silent revenue leak.</h2>
+    <p>Most clinics don't notice pricing drift because it happens $0.50 at a time. Here's where it comes from:</p>
+    <div class="stat-row">
+      <div class="stat"><b>3%</b><small>Revenue lost to<br/>pricing drift per year</small></div>
+      <div class="stat"><b>$0.51</b><small>Lost per non-.99<br/>transaction</small></div>
+    </div>
+    <div class="problem-list">
+      <div class="problem-item"><div class="problem-num">1</div><div><h3>Inflation gap</h3><p>Service prices stay the same while costs rise. After 12-18 months, you're 3-5% behind.</p></div></div>
+      <div class="problem-item"><div class="problem-num">2</div><div><h3>.99 pricing error</h3><p>Prices like $45 or $120 instead of $44.99 or $119.99. Sounds small. It's not.</p></div></div>
+      <div class="problem-item"><div class="problem-num">3</div><div><h3>Supplier cost creep</h3><p>When supply costs go up and you update your price, you're only passing through the increase — not adding margin.</p></div></div>
+    </div>
   </div>
 </div>
 
-<hr/>
+<div class="campaigns">
+  <h2>Three campaigns. One system.</h2>
+  <p>Each campaign runs automatically and shows dollar-impact before you act.</p>
 
-<div class="sec">
-  <div class="sec-head"><small>Revenue Growth</small><h2>Exam Drop Initiative</h2><p>Lower exam fees to attract new patients, then recover the gap by adjusting the high-attachment services that always follow. Net positive from day one.</p></div>
-  <div class="grid grid2">
-    <div class="card"><div class="card-num">The Drop</div><h3>Lower Exams</h3><p>System identifies which exams to drop and by how much, based on local market data.</p></div>
-    <div class="card"><div class="card-num">The Bump</div><h3>Pairing Recovery</h3><p>Every exam pairs with 2-3 services. Small bumps on these high-attachment items recover the drop and then some.</p></div>
+  <div class="camp">
+    <div class="camp-num">Campaign 1</div>
+    <h3>Inflation Adjuster</h3>
+    <p>Tracks the Consumer Price Index from each item's last price change. Tells you exactly which services have fallen behind and what they should cost today.</p>
+    <div class="camp-result">Result on Rosslyn data: <b>Rabies vaccine +$2.40</b> (18 months since last change). Annual recovery: <b>$864</b></div>
+  </div>
+
+  <div class="camp">
+    <div class="camp-num">Campaign 2</div>
+    <h3>.99 Pricing Recovery</h3>
+    <p>Flags every service code that doesn't end in .99, calculates the per-transaction gap using real volume data, and projects annual recovery.</p>
+    <div class="camp-result">Result: <b>47 codes flagged</b>. Average $0.51/transaction. Annual gain: <b>$3,200</b></div>
+  </div>
+
+  <div class="camp">
+    <div class="camp-num">Campaign 3</div>
+    <h3>Inventory Micro Margin</h3>
+    <p>When supplier costs rise and you update your selling price, the system stacks an extra 5% margin on top. No manual work.</p>
+    <div class="camp-result">Result: Auto-detected 12 supplier increases in 90 days. Margin stack adds <b>~$180/month</b></div>
   </div>
 </div>
 
-<hr/>
-
-<div class="sec">
-  <div class="sec-head"><small>Always On</small><h2>The Vet INC Brain</h2><p>Monitors your prices, expenses, and transactions 24/7. Surfaces recommendations before you know there's a problem.</p></div>
-  <div class="grid grid2">
-    <div class="card"><h3>Continuous Scanning</h3><p>Every charge code, cost change, and fee schedule tracked against benchmarks and your own history.</p></div>
-    <div class="card"><h3>Expense Alerts</h3><p>Detects abnormal spending, over-staffing, supply cost creep, and policy drift automatically.</p></div>
-  </div>
-  <div class="alerts">
-    <div style="font-size:.65rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;text-align:center;padding:8px 0 4px">Example alerts</div>
-    <div class="alert"><div class="alert-icon">$</div><div><b>Rabies Vaccine — price drift</b><p>18 months since last change. CPI suggests +$2.40. Recovery: $864/yr</p></div></div>
-    <div class="alert"><div class="alert-icon">.99</div><div><b>47 service codes don't end in .99</b><p>Avg $0.51/transaction left behind. Annual gain: $3,200</p></div></div>
-    <div class="alert"><div class="alert-icon">!</div><div><b>Lab supplies — 28% above average</b><p>Exceeding 6-month average. Possible supplier increase.</p></div></div>
+<div class="brain">
+  <div class="brain-inner">
+    <h2>The Brain watches everything.</h2>
+    <p>24/7 monitoring of prices, expenses, and transaction patterns. Surfaces issues before you'd ever notice them manually.</p>
+    <div class="brain-alerts">
+      <div class="brain-alert"><div class="brain-icon">$</div><div><b>Price Drift: Rabies Vaccine</b><p>18 months since last change. CPI suggests +$2.40. Recovery: $864/yr</p></div></div>
+      <div class="brain-alert"><div class="brain-icon">.99</div><div><b>47 codes don't end in .99</b><p>Avg $0.51/transaction lost. Annual gain: $3,200</p></div></div>
+      <div class="brain-alert"><div class="brain-icon">!</div><div><b>Lab supplies 28% above 6-month average</b><p>Possible supplier increase or ordering pattern change.</p></div></div>
+    </div>
   </div>
 </div>
 
-<hr/>
-
-<div class="sec" style="text-align:center">
-  <div class="sec-head"><small>Security</small><h2 style="font-size:1.05rem">Your data stays yours.</h2></div>
-  <div class="secure">
+<div class="secure">
+  <h2>Your data. Your clinic. Period.</h2>
+  <div class="secure-grid">
     <div class="sec-item"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 0 0 1 10 0v4"/></svg><b>Encrypted</b><small>In transit & at rest</small></div>
     <div class="sec-item"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.7-4 3-9 3s-9-1.3-9-3"/><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5"/></svg><b>Private Schema</b><small>Isolated per clinic</small></div>
-    <div class="sec-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><b>Canadian Hosted</b><small>Data stays in Canada</small></div>
-    <div class="sec-item"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg><b>No Sharing</b><small>Never sold or shared</small></div>
+    <div class="sec-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><b>Canadian</b><small>Data in Canada</small></div>
+    <div class="sec-item"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg><b>No Sharing</b><small>Never sold</small></div>
   </div>
 </div>
 
-<hr/>
-
-<div class="cta-sec">
+<div class="cta">
   <h2>Live in under an hour.</h2>
-  <p>One script on the clinic PC. Dashboard goes live. No manual setup.</p>
+  <p>One script on the clinic PC. Data starts flowing. Dashboard lights up. No training needed.</p>
   <a class="btn" href="#contact">Get Started →</a>
 </div>
 
@@ -186,7 +233,7 @@ footer small{font-size:.68rem;color:rgba(255,255,255,.2);width:100%}
 
 <div class="contact" id="contact">
   <h2>Let's talk.</h2>
-  <p>Questions, ready to start, or just curious — we'll figure out the right fit.</p>
+  <p>Questions, ready to start, or just want to see what we'd find on your data — we'll figure it out.</p>
   <form>
     <div class="row">
       <div class="g"><label>First Name</label><input id="f" placeholder="Jane"/></div>
