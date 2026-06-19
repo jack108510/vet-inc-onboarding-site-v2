@@ -184,38 +184,38 @@ h2{font-size:1.5rem;font-weight:800;line-height:1.2;margin-bottom:8px}
   <!-- Step 1: Strategy -->
   <div class="card show" id="s1">
     <div class="step-tag"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>Strategy</div>
-    <h2>How aggressive do you want to be with pricing?</h2>
-    <p class="sub">This sets the overall philosophy. You can fine-tune specific services in the next step.</p>
+    <h2>How aggressively do you want to grow pricing?</h2>
+    <p class="sub">Choose a quarterly target. Canadian CPI runs ~0.5–0.75%/quarter — use that as your baseline reference.</p>
     <div class="strat-grid">
-      <div class="strat" id="strat-inflation" onclick="pickStrat('inflation')">
+      <div class="strat" id="strat-conservative" onclick="pickStrat('conservative')">
         <div class="strat-icon" style="background:rgba(16,185,129,.1)">🌿</div>
         <div class="strat-body">
-          <div class="strat-name">Match inflation only</div>
-          <div class="strat-desc">Prices stay aligned with Canada CPI. Steady, defensible increases that clients expect.</div>
-          <span class="strat-tag tag-conservative">Conservative</span>
+          <div class="strat-name">Conservative <span style="font-weight:400;color:rgba(255,255,255,.4);font-size:.82em">— 0.5–0.7% / quarter</span></div>
+          <div class="strat-desc">Tracks inflation. Prices stay defensible and predictable — clients barely notice. ~2–2.8% annually.</div>
+          <span class="strat-tag tag-conservative">Matches CPI</span>
         </div>
       </div>
-      <div class="strat" id="strat-balanced" onclick="pickStrat('balanced')">
-        <div class="strat-icon" style="background:rgba(37,99,235,.12)">⚖️</div>
+      <div class="strat" id="strat-ambitious" onclick="pickStrat('ambitious')">
+        <div class="strat-icon" style="background:rgba(37,99,235,.12)">📊</div>
         <div class="strat-body">
-          <div class="strat-name">Inflation + recover lost margin</div>
-          <div class="strat-desc">CPI-based increases plus recover margin eroded by supplier cost increases over the past few years.</div>
-          <span class="strat-tag tag-balanced">Balanced</span>
+          <div class="strat-name">Ambitious <span style="font-weight:400;color:rgba(255,255,255,.4);font-size:.82em">— 0.8–1.2% / quarter</span></div>
+          <div class="strat-desc">Slightly ahead of inflation — recovers some margin without big jumps. ~3.2–4.8% annually.</div>
+          <span class="strat-tag tag-balanced">Above inflation</span>
         </div>
       </div>
-      <div class="strat" id="strat-growth" onclick="pickStrat('growth')">
+      <div class="strat" id="strat-aggressive" onclick="pickStrat('aggressive')">
         <div class="strat-icon" style="background:rgba(245,158,11,.1)">📈</div>
         <div class="strat-body">
-          <div class="strat-name">Maximize revenue recovery</div>
-          <div class="strat-desc">Full campaign suite — stale prices, .99 rounding, and inventory margins. Maximum recovery, reviewed with you before anything changes.</div>
-          <span class="strat-tag tag-growth">Growth-focused</span>
+          <div class="strat-name">Aggressive <span style="font-weight:400;color:rgba(255,255,255,.4);font-size:.82em">— 1.5%+ / quarter</span></div>
+          <div class="strat-desc">Full margin recovery. Targets stale prices, .99 rounding, and inventory gaps. ~6%+ annually — reviewed before anything applies.</div>
+          <span class="strat-tag tag-growth">Max recovery</span>
         </div>
       </div>
       <div class="strat" id="strat-custom" onclick="pickStrat('custom')">
         <div class="strat-icon" style="background:rgba(255,255,255,.06)">🎛️</div>
         <div class="strat-body">
           <div class="strat-name">Custom target</div>
-          <div class="strat-desc">Set a specific increase percentage per period. Predictable, budgetable, easy to communicate to staff.</div>
+          <div class="strat-desc">Enter your own number. Predictable, budgetable, easy to communicate to staff.</div>
           <span class="strat-tag tag-custom">Custom</span>
         </div>
       </div>
@@ -473,9 +473,9 @@ function toggleGoal(el, key){
 }
 
 const STRAT_LABELS = {
-  inflation:'Match inflation (CPI)',
-  balanced:'Inflation + margin recovery',
-  growth:'Maximize revenue recovery',
+  conservative:'Conservative (0.5–0.7% / quarter)',
+  ambitious:'Ambitious (0.8–1.2% / quarter)',
+  aggressive:'Aggressive (1.5%+ / quarter)',
   custom:'Custom rate',
 };
 const APPR_LABELS = {
