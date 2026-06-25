@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Q2 2026 Fee Schedule Report — Rosslyn Veterinary Hospital</title>
+<title>Quarterly Report — Copilot Mode</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -16,35 +16,35 @@
   --bg:#f8fafc;--white:#fff;--line:#e2e8f0;
 }
 body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.5}
-
 .report{max-width:800px;margin:0 auto;padding:32px 24px}
 
-/* Header */
-.header{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:32px;margin-bottom:20px}
-.header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
-.header-logo{font-size:1.3rem;font-weight:800;color:var(--ink);letter-spacing:-.5px}
+.copilot-banner{background:linear-gradient(135deg,var(--blue),var(--blue-light));border-radius:14px;padding:20px;color:#fff;margin-bottom:20px}
+.copilot-banner h2{font-size:1.1rem;font-weight:700;margin-bottom:4px}
+.copilot-banner p{font-size:.82rem;opacity:.85}
+.copilot-mode-tag{display:inline-block;background:rgba(255,255,255,.2);padding:3px 10px;border-radius:20px;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+
+.header{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:28px;margin-bottom:20px}
+.header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.header-logo{font-size:1.2rem;font-weight:800;letter-spacing:-.5px}
 .header-logo span{color:var(--blue)}
 .header-badge{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--green);background:var(--green-bg);padding:5px 12px;border-radius:20px;border:1px solid #bbf7d0}
-.header h1{font-size:1.6rem;font-weight:800;letter-spacing:-.5px;margin-bottom:6px}
-.header-meta{font-size:.82rem;color:var(--dim)}
+.header h1{font-size:1.5rem;font-weight:800;letter-spacing:-.5px;margin-bottom:4px}
+.header-meta{font-size:.8rem;color:var(--dim)}
 .header-meta span{margin-right:16px}
 
-/* Summary Cards */
 .summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px}
 @media(max-width:600px){.summary-grid{grid-template-columns:repeat(2,1fr)}}
 .summary-card{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:16px}
 .summary-label{font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--dimmer);margin-bottom:6px}
-.summary-value{font-size:1.5rem;font-weight:800;letter-spacing:-.5px}
+.summary-value{font-size:1.4rem;font-weight:800;letter-spacing:-.5px}
 .summary-value.green{color:var(--green)}
 .summary-value.blue{color:var(--blue)}
 .summary-sub{font-size:.7rem;color:var(--dim);margin-top:2px}
 
-/* Section */
 .section{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:24px;margin-bottom:20px}
 .section-title{font-size:1.05rem;font-weight:700;margin-bottom:4px}
 .section-desc{font-size:.8rem;color:var(--dim);margin-bottom:16px}
 
-/* Changes Table */
 .table{width:100%;border-collapse:collapse;font-size:.82rem}
 .table th{text-align:left;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--dimmer);padding:8px 10px;border-bottom:2px solid var(--line)}
 .table th.num{text-align:right}
@@ -52,7 +52,6 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--i
 .table td.num{text-align:right;font-variant-numeric:tabular-nums}
 .table tr:last-child td{border-bottom:none}
 .code{font-family:'SF Mono',Monaco,monospace;font-size:.78rem;font-weight:600;color:var(--ink2)}
-.desc{font-size:.82rem;color:var(--ink2)}
 .price-old{color:var(--dim);text-decoration:line-through;font-size:.78rem}
 .price-new{font-weight:700;color:var(--ink)}
 .change-pct{font-size:.75rem;font-weight:600;padding:2px 7px;border-radius:5px}
@@ -60,17 +59,13 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--i
 .change-down{background:var(--red-bg);color:var(--red)}
 .impact{font-weight:700;color:var(--green)}
 
-/* Buttons row */
 .action-row{display:flex;gap:8px;margin-top:16px}
 .btn{padding:9px 20px;border-radius:8px;font-size:.82rem;font-weight:600;border:none;cursor:pointer;font-family:inherit;transition:.15s}
-.btn-approve{background:var(--green);color:#fff}
-.btn-approve:hover{background:#15803d}
-.btn-reject{background:var(--white);color:var(--dim);border:1px solid var(--line)}
-.btn-reject:hover{background:var(--bg);color:var(--ink2)}
 .btn-approve-all{background:var(--ink);color:#fff}
 .btn-approve-all:hover{background:var(--blue)}
+.btn-reject{background:var(--white);color:var(--dim);border:1px solid var(--line)}
+.btn-reject:hover{background:var(--bg);color:var(--ink2)}
 
-/* Results Section */
 .result-row{display:grid;grid-template-columns:1fr auto;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
 .result-row:last-child{border:none}
 .result-label{font-size:.85rem;color:var(--ink2)}
@@ -78,74 +73,131 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--i
 .result-value.up{color:var(--green)}
 .result-value.flat{color:var(--dim)}
 
-/* Alert */
 .alert{border-radius:10px;padding:16px;margin-bottom:16px;font-size:.85rem}
 .alert-warn{background:var(--amber-bg);border:1px solid #fde68a;color:#92400e}
 
-/* Footer */
 .footer{text-align:center;padding:24px 0;font-size:.75rem;color:var(--dimmer)}
 .footer a{color:var(--blue);text-decoration:none}
-
-/* Copilot banner */
-.copilot-banner{background:linear-gradient(135deg,var(--blue),var(--blue-light));border-radius:14px;padding:20px;color:#fff;margin-bottom:20px}
-.copilot-banner h2{font-size:1.1rem;font-weight:700;margin-bottom:4px}
-.copilot-banner p{font-size:.82rem;opacity:.85}
-.copilot-mode-tag{display:inline-block;background:rgba(255,255,255,.2);padding:3px 10px;border-radius:20px;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
 </style>
 </head>
 <body>
-<div class="report">
+<div class="report" id="app"></div>
 
-<!-- Copilot Banner -->
+<script>
+// ══════════════════════════════════════════════════════════════
+// DATA — Swap this object, report updates automatically
+// ══════════════════════════════════════════════════════════════
+const DATA = {
+  mode: "copilot",
+  clinic: {
+    name: "Rosslyn Veterinary Hospital",
+    location: "Edmonton, AB",
+    pms: "AVImark",
+    quarter: "Q2 2026",
+    period: "Quarter ending June 30, 2026"
+  },
+  summary: {
+    activeCodes: 247,
+    activeSub: "231 services · 16 Rx",
+    flagged: 18,
+    flaggedSub: "7.3% of total",
+    opportunity: "+$18,400",
+    opportunitySub: "estimated annual",
+    avgDaysSince: 412,
+    avgDaysSub: "↓ from 847 last quarter"
+  },
+  // Suggested changes — sorted by impact (desc)
+  suggestedChanges: [
+    { code: "EX001", desc: "Comprehensive Physical Exam",       current: 68.00,  suggested: 78.00,  annualImpact: 4200, lastChanged: "412 days ago", checked: true },
+    { code: "VX005", desc: "Rabies Vaccine — 1yr",              current: 32.00,  suggested: 36.00,  annualImpact: 3100, lastChanged: "389 days ago", checked: true },
+    { code: "DX012", desc: "Digital Radiograph — Single View",  current: 95.00,  suggested: 110.00, annualImpact: 2800, lastChanged: "501 days ago", checked: true },
+    { code: "LB003", desc: "CBC + Chemistry Panel",             current: 120.00, suggested: 132.00, annualImpact: 2400, lastChanged: "356 days ago", checked: true },
+    { code: "SX001", desc: "Feline Neuter",                     current: 245.00, suggested: 268.00, annualImpact: 1900, lastChanged: "298 days ago", checked: true },
+    { code: "VX012", desc: "DHPP Vaccine",                      current: 28.00,  suggested: 32.00,  annualImpact: 1600, lastChanged: "445 days ago", checked: true },
+    { code: "EX015", desc: "Recheck Examination",               current: 45.00,  suggested: 52.00,  annualImpact: 1200, lastChanged: "267 days ago", checked: false },
+    { code: "MD008", desc: "Ear Cytology",                      current: 38.00,  suggested: 44.00,  annualImpact: 900,  lastChanged: "530 days ago", checked: false },
+  ],
+  // Last quarter results
+  lastQuarter: {
+    revenueChange: "+8.2%",
+    visitVolume: "No change ✓",
+    codesPerformedWell: "11 of 12",
+    codesAdjustedBack: 1,
+    netCaptured: "+$12,840"
+  },
+  // Watching list — not changing yet
+  watching: [
+    { code: "SX022", desc: "Declaw (front only)",       current: 180.00, suggested: 210.00, reason: "Usage down 40% YoY — may be phasing out" },
+    { code: "MD015", desc: "OFA Hip Radiograph",        current: 220.00, suggested: 245.00, reason: "Only 3 visits in 90 days — low sample" },
+    { code: "RX045", desc: "Apoquel 16mg (30 ct)",      current: 85.00,  suggested: 92.00,  reason: "Clients sensitive to Rx price increases — watching" },
+  ],
+  // Optional alert
+  alert: {
+    text: "12 codes haven't been updated in 2+ years. Combined estimated revenue drain: ~$8,400/year. Consider a broader review next quarter."
+  }
+};
+
+// ══════════════════════════════════════════════════════════════
+// RENDER — don't touch below unless changing layout
+// ══════════════════════════════════════════════════════════════
+
+function fmt(n) { return '$' + n.toFixed(2); }
+function pct(oldP, newP) { 
+  const v = ((newP - oldP) / oldP * 100); 
+  const cls = v > 0 ? 'change-up' : 'change-down';
+  return `<span class="change-pct ${cls}">${v > 0 ? '+' : ''}${v.toFixed(1)}%</span>`;
+}
+
+const d = DATA;
+const c = d.clinic;
+const s = d.summary;
+
+let html = `
 <div class="copilot-banner">
   <div class="copilot-mode-tag">🚗 Copilot Mode — Interactive Review</div>
-  <h2>Your Q2 fee schedule review is ready</h2>
+  <h2>Your ${c.quarter} fee schedule review is ready</h2>
   <p>Review the suggested changes below. Approve what looks right, reject what doesn't. Takes about 5 minutes.</p>
 </div>
 
-<!-- Header -->
 <div class="header">
   <div class="header-top">
     <div class="header-logo">Vet <span>INC</span></div>
-    <div class="header-badge">Q2 2026 Review</div>
+    <div class="header-badge">${c.quarter} Review</div>
   </div>
-  <h1>Rosslyn Veterinary Hospital</h1>
+  <h1>${c.name}</h1>
   <div class="header-meta">
-    <span>📍 Edmonton, AB</span>
-    <span>📅 Quarter ending June 30, 2026</span>
-    <span>🔑 PMS: AVImark</span>
+    <span>📍 ${c.location}</span>
+    <span>📅 ${c.period}</span>
+    <span>🔑 PMS: ${c.pms}</span>
   </div>
 </div>
 
-<!-- Summary Cards -->
 <div class="summary-grid">
   <div class="summary-card">
     <div class="summary-label">Active Codes</div>
-    <div class="summary-value">247</div>
-    <div class="summary-sub">231 services · 16 Rx</div>
+    <div class="summary-value">${s.activeCodes}</div>
+    <div class="summary-sub">${s.activeSub}</div>
   </div>
   <div class="summary-card">
     <div class="summary-label">Flagged for Review</div>
-    <div class="summary-value blue">18</div>
-    <div class="summary-sub">7.3% of total</div>
+    <div class="summary-value blue">${s.flagged}</div>
+    <div class="summary-sub">${s.flaggedSub}</div>
   </div>
   <div class="summary-card">
     <div class="summary-label">Revenue Opportunity</div>
-    <div class="summary-value green">+$18,400</div>
-    <div class="summary-sub">estimated annual</div>
+    <div class="summary-value green">${s.opportunity}</div>
+    <div class="summary-sub">${s.opportunitySub}</div>
   </div>
   <div class="summary-card">
     <div class="summary-label">Avg Days Since Update</div>
-    <div class="summary-value">412</div>
-    <div class="summary-sub">↑ from 847 last quarter</div>
+    <div class="summary-value">${s.avgDaysSince}</div>
+    <div class="summary-sub">${s.avgDaysSub}</div>
   </div>
 </div>
 
-<!-- Suggested Changes -->
 <div class="section">
   <div class="section-title">Suggested Changes</div>
   <div class="section-desc">These codes have drifted below market rates. Sorted by estimated revenue impact.</div>
-  
   <table class="table">
     <thead>
       <tr>
@@ -159,179 +211,90 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--i
       </tr>
     </thead>
     <tbody>
+`;
+
+d.suggestedChanges.forEach(item => {
+  const checkedAttr = item.checked ? 'checked' : '';
+  const totalImpact = (item.suggested - item.current) * (item.annualImpact / (item.suggested - item.current));
+  html += `
       <tr>
-        <td><span class="code">EX001</span></td>
-        <td><span class="desc">Comprehensive Physical Exam</span></td>
-        <td class="num"><span class="price-old">$68.00</span></td>
-        <td class="num"><span class="price-new">$78.00</span></td>
-        <td class="num"><span class="change-pct change-up">+14.7%</span></td>
-        <td class="num"><span class="impact">+$4,200</span></td>
-        <td><input type="checkbox" checked/></td>
-      </tr>
-      <tr>
-        <td><span class="code">VX005</span></td>
-        <td><span class="desc">Rabies Vaccine — 1yr</span></td>
-        <td class="num"><span class="price-old">$32.00</span></td>
-        <td class="num"><span class="price-new">$36.00</span></td>
-        <td class="num"><span class="change-pct change-up">+12.5%</span></td>
-        <td class="num"><span class="impact">+$3,100</span></td>
-        <td><input type="checkbox" checked/></td>
-      </tr>
-      <tr>
-        <td><span class="code">DX012</span></td>
-        <td><span class="desc">Digital Radiograph — Single View</span></td>
-        <td class="num"><span class="price-old">$95.00</span></td>
-        <td class="num"><span class="price-new">$110.00</span></td>
-        <td class="num"><span class="change-pct change-up">+15.8%</span></td>
-        <td class="num"><span class="impact">+$2,800</span></td>
-        <td><input type="checkbox" checked/></td>
-      </tr>
-      <tr>
-        <td><span class="code">LB003</span></td>
-        <td><span class="desc">CBC + Chemistry Panel</span></td>
-        <td class="num"><span class="price-old">$120.00</span></td>
-        <td class="num"><span class="price-new">$132.00</span></td>
-        <td class="num"><span class="change-pct change-up">+10.0%</span></td>
-        <td class="num"><span class="impact">+$2,400</span></td>
-        <td><input type="checkbox" checked/></td>
-      </tr>
-      <tr>
-        <td><span class="code">SX001</span></td>
-        <td><span class="desc">Feline Neuter</span></td>
-        <td class="num"><span class="price-old">$245.00</span></td>
-        <td class="num"><span class="price-new">$268.00</span></td>
-        <td class="num"><span class="change-pct change-up">+9.4%</span></td>
-        <td class="num"><span class="impact">+$1,900</span></td>
-        <td><input type="checkbox" checked/></td>
-      </tr>
-      <tr>
-        <td><span class="code">VX012</span></td>
-        <td><span class="desc">DHPP Vaccine</span></td>
-        <td class="num"><span class="price-old">$28.00</span></td>
-        <td class="num"><span class="price-new">$32.00</span></td>
-        <td class="num"><span class="change-pct change-up">+14.3%</span></td>
-        <td class="num"><span class="impact">+$1,600</span></td>
-        <td><input type="checkbox" checked/></td>
-      </tr>
-      <tr>
-        <td><span class="code">EX015</span></td>
-        <td><span class="desc">Recheck Examination</span></td>
-        <td class="num"><span class="price-old">$45.00</span></td>
-        <td class="num"><span class="price-new">$52.00</span></td>
-        <td class="num"><span class="change-pct change-up">+15.6%</span></td>
-        <td class="num"><span class="impact">+$1,200</span></td>
-        <td><input type="checkbox"/></td>
-      </tr>
-      <tr>
-        <td><span class="code">MD008</span></td>
-        <td><span class="desc">Ear Cytology</span></td>
-        <td class="num"><span class="price-old">$38.00</span></td>
-        <td class="num"><span class="price-new">$44.00</span></td>
-        <td class="num"><span class="change-pct change-up">+15.8%</span></td>
-        <td class="num"><span class="impact">+$900</span></td>
-        <td><input type="checkbox"/></td>
-      </tr>
+        <td><span class="code">${item.code}</span></td>
+        <td>${item.desc}</td>
+        <td class="num"><span class="price-old">${fmt(item.current)}</span></td>
+        <td class="num"><span class="price-new">${fmt(item.suggested)}</span></td>
+        <td class="num">${pct(item.current, item.suggested)}</td>
+        <td class="num"><span class="impact">+$${item.annualImpact.toLocaleString()}</span></td>
+        <td><input type="checkbox" data-impact="${item.annualImpact}" ${checkedAttr}/></td>
+      </tr>`;
+});
+
+// Calculate total of checked items
+const checkedTotal = d.suggestedChanges.filter(i => i.checked).reduce((sum, i) => sum + i.annualImpact, 0);
+
+html += `
     </tbody>
   </table>
-
   <div class="action-row">
-    <button class="btn btn-approve-all">Approve 6 Selected (+$15,300)</button>
+    <button class="btn btn-approve-all" id="approveBtn">Approve ${d.suggestedChanges.filter(i=>i.checked).length} Selected (+$${checkedTotal.toLocaleString()})</button>
     <button class="btn btn-reject">Reject Selected</button>
   </div>
 </div>
 
-<!-- Last Quarter Results -->
 <div class="section">
   <div class="section-title">Last Quarter's Results</div>
-  <div class="section-desc">How the changes from Q1 2026 performed over the past 90 days.</div>
-  
-  <div class="result-row">
-    <div class="result-label">Revenue on changed codes (Q1 changes)</div>
-    <div class="result-value up">+8.2%</div>
-  </div>
-  <div class="result-row">
-    <div class="result-label">Visit volume on changed codes</div>
-    <div class="result-value flat">No change ✓</div>
-  </div>
-  <div class="result-row">
-    <div class="result-label">Codes that performed well</div>
-    <div class="result-value">11 of 12</div>
-  </div>
-  <div class="result-row">
-    <div class="result-label">Codes adjusted back (overpriced)</div>
-    <div class="result-value">1</div>
-  </div>
-  <div class="result-row">
-    <div class="result-label">Net revenue captured from Q1 changes</div>
-    <div class="result-value up">+$12,840</div>
-  </div>
+  <div class="section-desc">How the changes from last quarter performed over the past 90 days.</div>
+  <div class="result-row"><div class="result-label">Revenue on changed codes</div><div class="result-value up">${d.lastQuarter.revenueChange}</div></div>
+  <div class="result-row"><div class="result-label">Visit volume on changed codes</div><div class="result-value flat">${d.lastQuarter.visitVolume}</div></div>
+  <div class="result-row"><div class="result-label">Codes that performed well</div><div class="result-value">${d.lastQuarter.codesPerformedWell}</div></div>
+  <div class="result-row"><div class="result-label">Codes adjusted back (overpriced)</div><div class="result-value">${d.lastQuarter.codesAdjustedBack}</div></div>
+  <div class="result-row"><div class="result-label">Net revenue captured</div><div class="result-value up">${d.lastQuarter.netCaptured}</div></div>
 </div>
 
-<!-- Watching List -->
 <div class="section">
   <div class="section-title">Watching — No Action Needed Yet</div>
-  <div class="section-desc">These codes looked underpriced but usage is declining. Holding off for now.</div>
-  
+  <div class="section-desc">These codes looked underpriced but we're holding off.</div>
   <table class="table">
-    <thead>
-      <tr>
-        <th>Code</th>
-        <th>Description</th>
-        <th class="num">Current</th>
-        <th class="num">Suggested</th>
-        <th>Reason for Holding</th>
-      </tr>
-    </thead>
+    <thead><tr><th>Code</th><th>Description</th><th class="num">Current</th><th class="num">Suggested</th><th>Reason for Holding</th></tr></thead>
     <tbody>
+`;
+
+d.watching.forEach(item => {
+  html += `
       <tr>
-        <td><span class="code">SX022</span></td>
-        <td><span class="desc">Declaw (front only)</span></td>
-        <td class="num">$180.00</td>
-        <td class="num">$210.00</td>
-        <td style="font-size:.8rem;color:var(--dim)">Usage down 40% YoY — may be phasing out</td>
-      </tr>
-      <tr>
-        <td><span class="code">MD015</span></td>
-        <td><span class="desc">OFA Hip Radiograph</span></td>
-        <td class="num">$220.00</td>
-        <td class="num">$245.00</td>
-        <td style="font-size:.8rem;color:var(--dim)">Only 3 visits in 90 days — low sample</td>
-      </tr>
-      <tr>
-        <td><span class="code">RX045</span></td>
-        <td><span class="desc">Apoquel 16mg (30 ct)</span></td>
-        <td class="num">$85.00</td>
-        <td class="num">$92.00</td>
-        <td style="font-size:.8rem;color:var(--dim)">Clients sensitive to Rx price increases — watching</td>
-      </tr>
+        <td><span class="code">${item.code}</span></td>
+        <td>${item.desc}</td>
+        <td class="num">${fmt(item.current)}</td>
+        <td class="num">${fmt(item.suggested)}</td>
+        <td style="font-size:.8rem;color:var(--dim)">${item.reason}</td>
+      </tr>`;
+});
+
+html += `
     </tbody>
   </table>
 </div>
+`;
 
-<!-- Alert -->
-<div class="alert alert-warn">
-  <strong>⚠️ 12 codes haven't been updated in 2+ years.</strong> Combined estimated revenue drain: ~$8,400/year. Consider a broader review next quarter.
-</div>
+if (d.alert) {
+  html += `<div class="alert alert-warn"><strong>⚠️ ${d.alert.text}</strong></div>`;
+}
 
-<!-- Footer -->
+html += `
 <div class="footer">
-  <p>Generated by Vet INC · June 24, 2026 · <a href="#">Download as PDF</a> · <a href="#">Email to clinic</a></p>
+  <p>Generated by Vet INC · ${new Date().toLocaleDateString('en-CA',{year:'numeric',month:'long',day:'numeric'})} · <a href="#">Download as PDF</a> · <a href="#">Email to clinic</a></p>
   <p style="margin-top:6px">Questions? jack@vetinc.ca · 780-904-3599</p>
 </div>
+`;
 
-</div>
+document.getElementById('app').innerHTML = html;
 
-<script>
-// Toggle checkboxes
-document.querySelectorAll('input[type="checkbox"]').forEach(cb=>{
-  cb.addEventListener('change',()=>{
-    const checked=document.querySelectorAll('input[type="checkbox"]:checked').length;
-    const btn=document.querySelector('.btn-approve-all');
-    if(checked>0){
-      btn.textContent=`Approve ${checked} Selected`;
-    }else{
-      btn.textContent='Approve Selected';
-    }
+// Checkbox interactivity
+document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+  cb.addEventListener('change', () => {
+    const checked = [...document.querySelectorAll('input[type="checkbox"]:checked')];
+    const total = checked.reduce((sum, el) => sum + parseInt(el.dataset.impact), 0);
+    const btn = document.getElementById('approveBtn');
+    btn.textContent = `Approve ${checked.length} Selected (+$${total.toLocaleString()})`;
   });
 });
 </script>
